@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1021127134207",
+    "project_id": "hostelmaintenance-5235b",
+    "storage_bucket": "hostelmaintenance-5235b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021127134207:android:8b4905a7c737dd3df275ca",
+        "android_client_info": {
+          "package_name": "com.example.hostelmaintenance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021127134207-eoiunvcvq6jjbu2vomiijjpdqfc0hikb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hostelmaintenance",
+            "certificate_hash": "9f3483f66c033835b16f89d6ccc67c5d28ff2207"
+          }
+        },
+        {
+          "client_id": "1021127134207-hcgv7qu7jrdo5e2e2nagnec28grc1equ.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClA4eFcPWURH6rzuG3yxxYm-45GH1tpdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021127134207-hcgv7qu7jrdo5e2e2nagnec28grc1equ.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
