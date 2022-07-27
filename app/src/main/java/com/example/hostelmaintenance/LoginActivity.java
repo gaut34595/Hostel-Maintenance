@@ -25,6 +25,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText email,password;
     public Button login;
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         signup=findViewById(R.id.login_tv3);
         email=findViewById(R.id.ed_user_name);
         password=findViewById(R.id.ed_password);
