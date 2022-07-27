@@ -15,12 +15,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
     private TextView tv1;
     private Button register;
     private EditText email,username,password;
     private FirebaseAuth auth;
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,7 @@ public class SignupActivity extends AppCompatActivity {
         password= findViewById(R.id.text_input_password);
         register=findViewById(R.id.button_register);
         auth=FirebaseAuth.getInstance();
+        databaseReference=FirebaseDatabase.getInstance().getReference("Student");
 
         tv1.setOnClickListener(e->{
             Intent i = new Intent(this, LoginActivity.class);
@@ -40,6 +44,7 @@ public class SignupActivity extends AppCompatActivity {
         register.setOnClickListener(e->{
             String textemail=email.getText().toString();
             String textpassword = password.getText().toString();
+            String textusername = username.getText().toString();
 
             if(TextUtils.isEmpty(textemail)|| TextUtils.isEmpty(textpassword)){
                 Toast.makeText(this, "Empty Credentials", Toast.LENGTH_SHORT).show();
@@ -47,27 +52,29 @@ public class SignupActivity extends AppCompatActivity {
             else if(textpassword.length()<6){
 
                 Toast.makeText(this, "Password to Short", Toast.LENGTH_SHORT).show();
-            }else{
-                registerUser(textemail,textpassword);
+            }else {
+                auth.createUserWithEmailAndPassword(textemail,textpassword)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    StudentInformation info = new StudentInformation(textemail,textusername);
+                                    FirebaseDatabase.getInstance().getReference("Student")
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                                                    startActivity(i);
+                                                }
+                                            });
+                                }
+                            }
+                        });
             }
         });
 
 
-    }
-
-    private void registerUser(String textemail, String textpassword) {
-            auth.createUserWithEmailAndPassword(textemail,textpassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);
-                    }
-                    else{
-                        Toast.makeText(SignupActivity.this, "Registering User Failed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
     }
 }
