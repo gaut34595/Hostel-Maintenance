@@ -5,12 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/black"
     tools:context=".SplashActivity">
+<pl.droidsonroids.gif.GifImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:adjustViewBounds="false"
+    android:src="@drawable/gif_splash"/>
 
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:foregroundGravity="clip_horizontal|center"
-        app:srcCompat="@drawable/icon_download" />
+
+
 
 </RelativeLayout>
