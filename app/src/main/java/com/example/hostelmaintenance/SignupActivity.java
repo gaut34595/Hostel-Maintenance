@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,6 +24,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button register;
     private EditText email,username,password;
     private FirebaseAuth auth;
+
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class SignupActivity extends AppCompatActivity {
         password= findViewById(R.id.text_input_password);
         register=findViewById(R.id.button_register);
         auth=FirebaseAuth.getInstance();
-        databaseReference=FirebaseDatabase.getInstance().getReference("Student");
+        databaseReference=FirebaseDatabase.getInstance().getReference("Students");
 
         tv1.setOnClickListener(e->{
             Intent i = new Intent(this, LoginActivity.class);
@@ -59,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
                                     StudentInformation info = new StudentInformation(textemail,textusername);
-                                    FirebaseDatabase.getInstance().getReference("Student")
+                                    FirebaseDatabase.getInstance().getReference("Students")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                             .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override

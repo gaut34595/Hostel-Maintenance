@@ -10,4 +10,26 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_electricity_bill">ElectricityBillActivity</string>
+
+    <string-array name="hostel">
+        <item>New Boys Hostel</item>
+        <item>Girls Hostel</item>
+        <item>Medical Hostel</item>
+
+    </string-array>
+    <string-array name="Complaint_type">
+        <item>Electrician</item>
+        <item>Plumber</item>
+        <item>Carpenter</item>
+        <item>House-Keeping</item>
+        <item>Others</item>
+
+    </string-array>
+    <string-array name="block">
+        <item>Block A</item>
+        <item>Block B</item>
+        <item>Block C</item>
+
+
+    </string-array>
 </resources>

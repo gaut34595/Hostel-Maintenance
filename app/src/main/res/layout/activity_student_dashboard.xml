@@ -99,7 +99,7 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Register Complaint"
+            android:text="Complaint"
             android:textColor="@color/white"
             android:textSize="20dp" />
 
@@ -128,6 +128,45 @@
             android:scaleType="fitCenter"
             android:src="@drawable/outings"
             android:textSize="15sp" />
+        <ImageButton
+            android:id="@+id/mess"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:paddingStart="30dp"
+            android:paddingTop="35dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="25dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_mess_color"
+            android:textSize="15sp" />
+
+
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="Outing(Sunday)"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="Mess Menu"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+
 
         <ImageButton
             android:id="@+id/elec_bill"
@@ -143,44 +182,6 @@
             android:src="@drawable/electricity_bill"
             android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="10dp"
-            android:clickable="false"
-            android:gravity="center"
-            android:text="Outing"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="10dp"
-            android:clickable="false"
-            android:gravity="center"
-            android:text="Get Electricity Bill"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-        <ImageButton
-            android:id="@+id/mess"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/white"
-            android:paddingStart="30dp"
-            android:paddingTop="35dp"
-            android:paddingEnd="30dp"
-            android:paddingBottom="25dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/icon_mess_color"
-            android:textSize="15sp" />
-
         <ImageButton
             android:id="@+id/emergency"
             android:layout_width="150dp"
@@ -194,17 +195,18 @@
             android:scaleType="fitCenter"
             android:src="@drawable/siren"
             android:textSize="15sp" />
-
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Mess Menu"
+            android:text="Get Electricity Bill"
             android:textColor="@color/white"
             android:textSize="20dp" />
+
 
         <TextView
             android:layout_width="200dp"

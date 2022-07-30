@@ -14,6 +14,12 @@
         android:theme="@style/Theme.HostelMaintenance"
         tools:targetApi="31">
         <activity
+            android:name=".ComplaintStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ComplaintRegistrationActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -52,9 +58,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
