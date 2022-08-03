@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7C4DFF"
-    tools:context=".ComplaintStatusActivity">
+    tools:context=".ComplaintCheckHostelActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rec1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/recycler"/>
+
 </LinearLayout>

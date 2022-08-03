@@ -55,44 +55,117 @@
             </RelativeLayout>
 
             <EditText
-            android:id="@+id/complain_username"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Name"
-            android:layout_below="@+id/rlview1"
-            android:inputType="textPersonName"
-            android:padding="5dp"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+                android:id="@+id/complain_username"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/rlview1"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
             <EditText
                 android:id="@+id/complain_title"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="Complain Title"
                 android:layout_below="@+id/complain_username"
+                android:hint="Complain Title"
                 android:inputType="textPersonName"
                 android:padding="5dp"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
+
             <EditText
-                android:id="@+id/room_no"
+                android:id="@+id/complain_roomNo"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="Room No"
                 android:layout_below="@+id/complain_title"
+                android:hint="Room No"
                 android:inputType="textPersonName"
                 android:padding="5dp"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
-                <Button
-                    android:id="@+id/compl_submit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Submit"
-                    android:layout_below="@+id/room_no"
-                    android:gravity="center"/>
+
+            <Spinner
+                android:id="@+id/add_complaint_hostel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/complain_roomNo"
+                android:layout_gravity="center"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="13dp"
+                android:layout_marginBottom="13dp"
+                android:entries="@array/hostel">
+
+            </Spinner>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignEnd="@id/add_complaint_hostel"
+                android:layout_alignStart="@id/add_complaint_hostel"
+                android:layout_below="@id/add_complaint_hostel"
+                android:layout_marginTop="2dp"
+                android:background="#c5c5c5"
+                />
+
+
+            <Spinner
+                android:id="@+id/add_complaint_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_complaint_hostel"
+                android:layout_gravity="center"
+                android:layout_margin="13dp"
+                android:entries="@array/Complaint_type"
+                >
+
+            </Spinner>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignEnd="@id/add_complaint_hostel"
+                android:layout_alignStart="@id/add_complaint_hostel"
+                android:layout_below="@id/add_complaint_type"
+                android:layout_marginTop="2dp"
+                android:background="#c5c5c5"
+                />
+
+            <EditText
+                android:id="@+id/complain_description"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_bg_edit"
+                android:layout_below="@+id/add_complaint_type"
+                android:hint="Complain Description"
+                android:inputType="textMultiLine"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@drawable/bg_input_cursor"
+                android:textSize="18sp" />
+
+
+            <Button
+                android:id="@+id/complain_submit"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_below="@id/complain_description"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bt_shape"
+                android:gravity="center"
+                android:stateListAnimator="@drawable/state_list_animator_z"
+                android:text="Submit"
+                android:textColor="@color/light_black">
+
+            </Button>
 
         </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 
 

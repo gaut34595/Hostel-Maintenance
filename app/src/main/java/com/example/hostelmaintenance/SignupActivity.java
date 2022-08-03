@@ -18,12 +18,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class SignupActivity extends AppCompatActivity {
     private TextView tv1;
     private Button register;
     private EditText email,username,password;
     private FirebaseAuth auth;
+    private FirebaseFirestore fStore;
 
     DatabaseReference databaseReference;
     @Override
@@ -36,6 +41,7 @@ public class SignupActivity extends AppCompatActivity {
         password= findViewById(R.id.text_input_password);
         register=findViewById(R.id.button_register);
         auth=FirebaseAuth.getInstance();
+        fStore=FirebaseFirestore.getInstance();
         databaseReference=FirebaseDatabase.getInstance().getReference("Students");
 
         tv1.setOnClickListener(e->{
@@ -47,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
             String textemail=email.getText().toString();
             String textpassword = password.getText().toString();
             String textusername = username.getText().toString();
+            String text_isUser = "1";
 
             if(TextUtils.isEmpty(textemail)|| TextUtils.isEmpty(textpassword)){
                 Toast.makeText(this, "Empty Credentials", Toast.LENGTH_SHORT).show();
@@ -60,17 +67,16 @@ public class SignupActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    StudentInformation info = new StudentInformation(textemail,textusername);
-                                    FirebaseDatabase.getInstance().getReference("Students")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                                                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-                                                    startActivity(i);
-                                                }
-                                            });
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    HashMap<String ,Object> signup_map = new HashMap<>();
+                                    signup_map.put("email",textemail);
+                                    signup_map.put("username",textusername);
+                                    signup_map.put("is_User",text_isUser);
+                                    DocumentReference df  = fStore.collection("Users").document(user.getUid());
+                                    df.set(signup_map);
+                                    Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                                    startActivity(i);
                                 }
                             }
                         });

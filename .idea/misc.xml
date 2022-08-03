@@ -3,17 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/bg_input_cursor.xml" value="0.1895" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/gradient_view.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/selector_bg_edit.xml" value="0.1075" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/selector_login_button.xml" value="0.2075" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/state_list_animator_z.xml" value="0.1895" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/textview_selector.xml" value="0.1075" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complain_check_hostel.xml" value="0.2" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint.xml" value="0.325" />
-        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint_registration.xml" value="0.33" />
-        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint_status.xml" value="0.2" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint_check_hostel.xml" value="0.1" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint_registration.xml" value="0.1" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint_status.xml" value="0.25" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaints_check.xml" value="0.2" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_electricity_bill.xml" value="0.25" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hostel_admin_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hostel_warden_dashboard.xml" value="0.25" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_mess.xml" value="0.1859375" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_signup.xml" value="0.2" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_student_dashboard.xml" value="0.2" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/complain_status_sample_row.xml" value="0.25" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/customlayout_complaint.xml" value="0.1" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/data_comp_row.xml" value="0.25" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/list_itemd.xml" value="0.1" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/menu/menu_search_item.xml" value="0.18" />
         <entry key="..\:/Users/JAIN/flutter_proj/HostelMaintenance/app/src/main/res/drawable/button_login.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/HostelMaintenance/app/src/main/res/drawable/color_login_tv.xml" value="0.1125" />
         <entry key="..\:/Users/JAIN/flutter_proj/HostelMaintenance/app/src/main/res/drawable/gradient_view.xml" value="0.1125" />

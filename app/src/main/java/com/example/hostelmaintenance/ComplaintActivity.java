@@ -21,11 +21,11 @@ ImageButton complaint_reg,complaint_status;
         vpg.setAdapter(vpga);
 
         complaint_reg.setOnClickListener(e->{
-            Intent i = new Intent(this,ComplaintRegistrationActivity.class);
+            Intent i = new Intent(this, ComplaintRegistrationActivity.class);
             startActivity(i);
         });
         complaint_status.setOnClickListener(e->{
-            Intent i = new Intent(this,ComplaintStatusActivity.class);
+            Intent i = new Intent(this, ComplaintStatusActivity.class);
             startActivity(i);
         });
 

@@ -2,18 +2,21 @@ package com.example.hostelmaintenance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Calendar;
+
 public class StudentDashboard extends AppCompatActivity {
     ImageButton ib1,ib2,ib3,ib4,ib5,ib6;
     private Button logout;
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +29,17 @@ public class StudentDashboard extends AppCompatActivity {
         ib6=findViewById(R.id.emergency);
         logout=findViewById(R.id.LogoutBtn);
 
+        Calendar cal = Calendar.getInstance();
+        final int day = cal.get(Calendar.DAY_OF_WEEK);
+        if(day!=Calendar.SUNDAY){
+            ib3.setEnabled(false);
+            ib3.setBackgroundColor(R.color.green);
+        }
 
 
         // for image buttons
         ib1.setOnClickListener(e->{
-            Intent i = new Intent(this,ComplaintActivity.class);
+            Intent i = new Intent(this, ComplaintActivity.class);
             startActivity(i);
         });
         ib2.setOnClickListener(e->{
@@ -60,7 +69,7 @@ public class StudentDashboard extends AppCompatActivity {
         logout.setOnClickListener(e->{
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);
         });
 

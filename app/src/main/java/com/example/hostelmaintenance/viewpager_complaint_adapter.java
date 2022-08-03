@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.hostelmaintenance.R;
+
 public class viewpager_complaint_adapter extends PagerAdapter {
     private Context context;
     private LayoutInflater lf;

@@ -2,98 +2,90 @@ package com.example.hostelmaintenance;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class ComplaintStatusActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseAuth auth;
-    private ListView listView;
-    DatabaseReference mRef;
-    TextView tv;
+    RecyclerView rvlist;
+    MyAdap dataAdapter;
+
+    ArrayList<GetComplaintData> complainlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint_status);
-        listView=findViewById(R.id.lv1);
         auth=FirebaseAuth.getInstance();
         user =auth.getCurrentUser();
-        tv=findViewById(R.id.text11);
+        String email= user.getEmail();
+        complainlist = new ArrayList<>();
+        dataAdapter= new MyAdap(this,complainlist);
+        rvlist=findViewById(R.id.rec1);
+        rvlist.setHasFixedSize(true);
+        rvlist.setLayoutManager(new LinearLayoutManager(this));
+        rvlist.setAdapter(dataAdapter);
 
-        ArrayList<String> list = new ArrayList<>();
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.list_itemd,list);
-        listView.setAdapter(adapter);
-        Log.d(">>>>>>",  "inside if");
-
-        mRef= FirebaseDatabase.getInstance().getReference();
-        mRef.child("Maintenance").child("Complaints").push().addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Map map = (Map)snapshot.getValue();
-                tv.setText(map.get("Name").toString()+ "");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-//        mRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//               Map map = (Map)snapshot.getValue();
-//               Log.d("---->",map.get("Email").toString());
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        if(FirebaseDatabase.getInstance().getReference().child("Maintenance").child("Complaints").child("Email").equals(user.getEmail())) {
-//            Log.d(">>>>>>",  "inside if");
-//            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Maintenance").child("Complaints");
-//            reference.addValueEventListener(new ValueEventListener() {
+//            db=FirebaseFirestore.getInstance();
+//            documentReference=db.collection("Maintenance").document();
+//            db.collection("Maintenance").addSnapshotListener(new EventListener<QuerySnapshot>() {
 //                @Override
-//                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-//                    list.clear();
-//                    Log.d(">>>>>>", datasnapshot.exists() + "");
-//                    for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-//                        democ1 info = snapshot.getValue(democ1.class);
-//                        String txt_n = info.getName() + ":" + info.getRoom_No();
-//                        Log.d(">>>>>", txt_n);
-//                        list.add(txt_n);
-//
-//                    }
-//                    adapter.notifyDataSetChanged();
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//                    Log.d(">>>>>", error.toString());
-//
+//                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                     for(DocumentSnapshot ds : value){
+//                         String first= ds.getString("Name");
+//                         Log.d("-------->>>>",first);
+//                     }
 //                }
 //            });
-//        }
-//        else{
-//            Log.d(">>>>>","Something wrong");
-//        }
+////
+//        FirebaseFirestore.getInstance().collection("Maintenance").whereEqualTo("Email",email)
+//                .get().addOnCompleteListener((Task<QuerySnapshot> task) -> {
+//                    if(task.isSuccessful()){
+//                        Log.d(">>>>>>>>>","Inside Maintenance");
+//                        for (QueryDocumentSnapshot doc : task.getResult()){
+//                            Log.d("------>>>>>>>>>>", doc.getId() + ">>" + doc.getData());
+//                            String txt_n = doc.getString("Email");
+//                            ArrayAdapter<String> adapter= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_selectable_list_item);
+//                            adapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                });
+//        FirebaseFirestore.getInstance().collection("Maintenance").whereEqualTo("Email",email)
+//                .get().addOnCompleteListener(task -> {
+//                   if(task.isSuccessful()){
+//                       for(DocumentSnapshot ds: task.getResult()){
+////                           String first = ds.getString("Room_No  ");
+////                           Log.d("--->>>>>>>",first);
+//                           GetComplaintData getComplaintData= ds.getData(GetComplaintData.class);
+//                       }
+//                   }
+//                });
+
+        FirebaseFirestore.getInstance().collection("Complaints").whereEqualTo("Email",email)
+                .get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        for(DocumentChange ds: task.getResult().getDocumentChanges()){
+                           GetComplaintData getComplaintData = ds.getDocument().toObject(GetComplaintData.class);
+                           complainlist.add(getComplaintData);
+                           dataAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
     }
 }

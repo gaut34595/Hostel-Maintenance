@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_backgroundmain"
     android:orientation="vertical"
-    tools:context=".StudentDashboard">
+    tools:context=".HostelWardenDashboard">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -43,9 +43,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Student Dashboard"
+        android:text="Hostel Warden Dashboard"
         android:textColor="@color/white"
-        android:textSize="35dp"
+        android:textSize="32dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,9 +66,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <ImageButton
-            android:id="@+id/complaint"
+            android:id="@+id/view_complaints"
             android:layout_width="150dp"
             android:layout_height="120dp"
+            android:layout_row="0"
+            android:layout_column="0"
             android:layout_gravity="center"
             android:backgroundTint="@color/white"
             android:paddingStart="30dp"
@@ -79,7 +82,7 @@
             android:textSize="15sp" />
 
         <ImageButton
-            android:id="@+id/leave"
+            android:id="@+id/verify_leaves"
             android:layout_width="150dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
@@ -100,9 +103,10 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Complaint"
+            android:text="View Complaints"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="200dp"
@@ -112,12 +116,13 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Hostel Leave"
+            android:text="Verified Leaves"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/outing"
+            android:id="@+id/hostel_stats"
             android:layout_width="150dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
@@ -127,10 +132,10 @@
             android:paddingEnd="10dp"
             android:paddingBottom="25dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/outings"
+            android:src="@drawable/stats"
             android:textSize="15sp" />
         <ImageButton
-            android:id="@+id/mess"
+            android:id="@+id/staff_details"
             android:layout_width="150dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
@@ -140,9 +145,8 @@
             android:paddingEnd="30dp"
             android:paddingBottom="25dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_mess_color"
+            android:src="@drawable/staff"
             android:textSize="15sp" />
-
 
 
         <TextView
@@ -153,24 +157,28 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Outing(Sunday)"
+            android:text="Hostel Stats"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Mess Menu"
+            android:text="Staff Details"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
 
         <ImageButton
-            android:id="@+id/elec_bill"
+            android:id="@+id/elec_bill_stats"
             android:layout_width="150dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
@@ -184,7 +192,7 @@
             android:textSize="15sp" />
 
         <ImageButton
-            android:id="@+id/emergency"
+            android:id="@+id/student_directory"
             android:layout_width="150dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
@@ -194,8 +202,9 @@
             android:paddingEnd="30dp"
             android:paddingBottom="25dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/siren"
+            android:src="@drawable/directory"
             android:textSize="15sp" />
+
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -204,9 +213,10 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Get Electricity Bill"
+            android:text="Electricity Bill Stats"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
         <TextView
@@ -214,11 +224,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+
             android:clickable="false"
             android:gravity="center"
-            android:text="Emergency"
+            android:text="Student Directory"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
     </GridLayout>
 
     <androidx.constraintlayout.widget.Guideline

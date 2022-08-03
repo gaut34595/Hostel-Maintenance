@@ -1,7 +1,5 @@
 package com.example.hostelmaintenance;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,18 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 
@@ -34,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private  FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
+    private FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         password=findViewById(R.id.ed_password);
         login=findViewById(R.id.button_login);
         auth=FirebaseAuth.getInstance();
+        fStore=FirebaseFirestore.getInstance();
 
         // For Signup
         signup.setOnClickListener(e->{
@@ -67,21 +62,32 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                checkUserAccessLevel(authResult.getUser().getUid());
+            }
+        });
+    }
 
-                    Toast.makeText(LoginActivity.this, "User Logged In Successfully", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getApplicationContext(),StudentDashboard.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    private void checkUserAccessLevel(String uid) {
+        DocumentReference dr= fStore.collection("Users").document(uid);
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                Log.d("-------->>>.",documentSnapshot.getData());
+           if(documentSnapshot.getString("is_User") != null){
+               Intent i = new Intent(getApplicationContext(), StudentDashboard.class);
+               startActivity(i);
+               finish();
+           }
+                if(documentSnapshot.getString("is_Admin") != null){
+                    Intent i = new Intent(getApplicationContext(), HostelWardenDashboard.class);
                     startActivity(i);
                     finish();
                 }
-                else{
-                    Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
     }

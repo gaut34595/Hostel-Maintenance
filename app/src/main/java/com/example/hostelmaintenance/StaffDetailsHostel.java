@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.hostelmaintenance.R;
 
-public class LeaveActivity extends AppCompatActivity {
+public class StaffDetailsHostel extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leave);
+        setContentView(R.layout.activity_staff_details_hostel);
     }
 }
