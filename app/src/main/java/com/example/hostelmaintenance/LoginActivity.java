@@ -2,6 +2,7 @@ package com.example.hostelmaintenance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private  FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
     private FirebaseFirestore fStore;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         password=findViewById(R.id.ed_password);
         login=findViewById(R.id.button_login);
         auth=FirebaseAuth.getInstance();
+         currentUser = auth.getCurrentUser();
         fStore=FirebaseFirestore.getInstance();
 
         // For Signup
@@ -48,6 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         login.setOnClickListener(e->{
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Logging in....");
+            progressDialog.show();
             String text_email = email.getText().toString();
             String text_password = password.getText().toString();
             if(TextUtils.isEmpty(text_email) || TextUtils.isEmpty(text_password)){

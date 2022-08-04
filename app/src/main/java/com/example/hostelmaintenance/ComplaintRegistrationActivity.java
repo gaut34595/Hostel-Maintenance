@@ -47,7 +47,7 @@ public class ComplaintRegistrationActivity extends AppCompatActivity {
         user =auth.getCurrentUser();
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm:ss",Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm:ss a",Locale.getDefault());
 
 
 //        register_comp.setOnClickListener(e->{
@@ -80,7 +80,7 @@ public class ComplaintRegistrationActivity extends AppCompatActivity {
         register_comp.setOnClickListener(e->{
             progressDialog = new ProgressDialog(this);
             progressDialog.setCancelable(false);
-            progressDialog.setMessage("Fetching Data...");
+            progressDialog.setMessage("Submitting Complaint...");
             String user_email = user.getEmail();
             String user_name = name.getText().toString();
             String comp_title = title.getText().toString();
@@ -90,7 +90,6 @@ public class ComplaintRegistrationActivity extends AppCompatActivity {
             String compl_type = comp_type.getSelectedItem().toString();
             String comp_date = dateFormat.format(date);
             String time = timeFormat.format(date);
-
             int comp_status =0;
 
             FirebaseFirestore db= FirebaseFirestore.getInstance();

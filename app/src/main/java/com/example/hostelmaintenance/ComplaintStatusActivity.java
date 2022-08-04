@@ -1,21 +1,16 @@
 package com.example.hostelmaintenance;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -23,7 +18,9 @@ public class ComplaintStatusActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseAuth auth;
     RecyclerView rvlist;
-    MyAdap dataAdapter;
+    DataAdapter dataAdapter;
+    ProgressDialog progressDialog;
+
 
     ArrayList<GetComplaintData> complainlist;
 
@@ -31,11 +28,15 @@ public class ComplaintStatusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint_status);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching Data...");
+        progressDialog.show();
         auth=FirebaseAuth.getInstance();
         user =auth.getCurrentUser();
         String email= user.getEmail();
         complainlist = new ArrayList<>();
-        dataAdapter= new MyAdap(this,complainlist);
+        dataAdapter= new DataAdapter(this,complainlist);
         rvlist=findViewById(R.id.rec1);
         rvlist.setHasFixedSize(true);
         rvlist.setLayoutManager(new LinearLayoutManager(this));
@@ -83,6 +84,9 @@ public class ComplaintStatusActivity extends AppCompatActivity {
                            GetComplaintData getComplaintData = ds.getDocument().toObject(GetComplaintData.class);
                            complainlist.add(getComplaintData);
                            dataAdapter.notifyDataSetChanged();
+                            if (progressDialog.isShowing()) {
+                                progressDialog.dismiss();
+                            }
                         }
                     }
                 });

@@ -2,6 +2,8 @@ package com.example.hostelmaintenance;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,9 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             TextView comp_title;
             TextView comp_date;
             TextView comp_status;
+            TextView comp_roomNo;
+            TextView comp_time;
+
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
@@ -35,6 +40,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             comp_title= mView.findViewById(R.id.status_complain_title);
             comp_date = mView.findViewById(R.id.status_complain_date);
             comp_status=mView.findViewById(R.id.status_complain);
+            comp_roomNo=mView.findViewById(R.id.status_roomNo);
+            comp_time=mView.findViewById(R.id.comp_time);
         }
     }
     @NonNull
@@ -44,13 +51,15 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
         return new ViewHolder(view);
     }
-
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.comp_type.setText(getComplaintDataList.get(position).getComplaint_Type());
         holder.comp_title.setText(getComplaintDataList.get(position).getComplaint_Title());
         holder.comp_date.setText(getComplaintDataList.get(position).getComplaint_Date());
+        holder.comp_roomNo.setText(getComplaintDataList.get(position).getRoom_No());
+        holder.comp_time.setText(getComplaintDataList.get(position).getComplaint_Time());
+
 
         if(getComplaintDataList.get(position).getComplaint_Status()==0) {
             holder.comp_status.setText("Pending");
@@ -62,6 +71,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
+
         return getComplaintDataList.size();
     }
 }

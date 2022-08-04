@@ -41,6 +41,8 @@ public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements
         holder.comp_type.setText(complArrayList.get(position).getComplaint_Type());
         holder.comp_date.setText(complArrayList.get(position).getComplaint_Date());
         holder.comp_title.setText(complArrayList.get(position).getComplaint_Title());
+        holder.comp_roomNo.setText(complArrayList.get(position).getRoom_No());
+        holder.comp_time.setText(complArrayList.get(position).getComplaint_Time());
         if(complArrayList.get(position).getComplaint_Status()==0) {
             holder.comp_status.setText("Pending");
         }else{
@@ -93,6 +95,8 @@ public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements
         TextView comp_title;
         TextView comp_date;
         TextView comp_status;
+        TextView comp_roomNo;
+        TextView comp_time;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,6 +105,8 @@ public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements
             comp_title= mView.findViewById(R.id.status_complain_title);
             comp_date = mView.findViewById(R.id.status_complain_date);
             comp_status=mView.findViewById(R.id.status_complain);
+            comp_roomNo=mView.findViewById(R.id.status_roomNo);
+            comp_time = mView.findViewById(R.id.comp_time);
         }
     }
 }

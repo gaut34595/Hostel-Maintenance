@@ -23,10 +23,12 @@ ImageButton complaint_reg,complaint_status;
         complaint_reg.setOnClickListener(e->{
             Intent i = new Intent(this, ComplaintRegistrationActivity.class);
             startActivity(i);
+            finish();
         });
         complaint_status.setOnClickListener(e->{
             Intent i = new Intent(this, ComplaintStatusActivity.class);
             startActivity(i);
+            finish();
         });
 
     }

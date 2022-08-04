@@ -14,186 +14,224 @@
         android:id="@+id/register_back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/login_background"
-        />
+        android:src="@drawable/login_background" />
 
 
     <ImageView
         android:id="@+id/register_logo"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:alpha="1"
         android:contentDescription="Register"
-        android:src="@drawable/paper_plane"
-        />
+        android:src="@drawable/paper_plane" />
 
-    <RelativeLayout
-        android:id="@+id/form_login"
+    <EditText
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/register_logo"
-        android:alpha="0.8"
-        android:padding="30dp"
-        >
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#30ffffff"
+        android:inputType="textEmailAddress"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="20dp"
+        android:hint="Email"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+    <EditText
+        android:id="@+id/password"
+        android:layout_below="@id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#30ffffff"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/ic_baseline_vpn_key_24"
+        android:textColorHint="@color/white"
+        android:drawablePadding="20dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"/>
 
-        <ImageView
-            android:id="@+id/registerImageView1"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="30dp"
-            android:contentDescription="Register"
-            android:src="@drawable/icon_email"
-            app:tint="#ffffff" />
+    <EditText
+        android:id="@+id/std_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
+        android:drawablePadding="20dp"
+        android:hint="Student Name"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
+    <EditText
+        android:id="@+id/father_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/std_name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_people_24"
+        android:drawablePadding="20dp"
+        android:hint="Father's Name"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
-        <EditText
-            android:id="@+id/register_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/registerImageView1"
-            android:layout_alignTop="@id/registerImageView1"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/registerImageView1"
-            android:background="@null"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:typeface="serif"
-            />
+    <EditText
+        android:id="@+id/enrollment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/father_name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_assured_workload_24"
+        android:drawablePadding="20dp"
+        android:hint="Enrollment No"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/register_email"
-            android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            />
+    <EditText
+        android:id="@+id/stud_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enrollment"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_book_24"
+        android:drawablePadding="20dp"
+        android:hint="Course"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+    <EditText
+        android:id="@+id/std_finger"
+        android:layout_below="@id/stud_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#30ffffff"
+        android:hint="Finger No"
+        android:drawableLeft="@drawable/ic_baseline_fingerprint_24"
+        android:textColorHint="@color/white"
+        android:drawablePadding="20dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"/>
 
-        <ImageView
-            android:id="@+id/registerImageView2"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_below="@id/registerImageView1"
-            android:layout_marginBottom="30dp"
-            android:src="@drawable/user_icon"
-            app:tint="#ffffff" />
+    <EditText
+        android:id="@+id/room_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/std_finger"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_room_24"
+        android:drawablePadding="20dp"
+        android:hint="Room No"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
-        <EditText
-            android:id="@+id/register_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/registerImageView2"
-            android:layout_alignTop="@id/registerImageView2"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/registerImageView2"
-            android:background="@null"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:typeface="serif"
-            />
+    <EditText
+        android:id="@+id/std_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/room_no"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_phone_24"
+        android:drawablePadding="20dp"
+        android:hint="Contact No"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/register_username"
-            android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            />
-        <ImageView
-            android:id="@+id/registerImageView3"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_below="@id/registerImageView2"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/password_icon"
-            app:tint="#ffffff" />
+    <EditText
+        android:id="@+id/std_father"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/std_contact"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_contact_emergency_24"
+        android:drawablePadding="20dp"
+        android:hint="Father's Contact No"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
-        <EditText
-            android:id="@+id/text_input_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/registerImageView3"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:hint="Password"
-            android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/registerImageView2"
-            android:background="@null"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:typeface="serif"
-            >
-
-
-        </EditText>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/registerImageView3"
-            android:layout_marginTop="5dp"
-            android:background="#FFFFFF"
-            />
-
-
-    </RelativeLayout>
     <Button
-        android:id="@+id/button_register"
+        android:id="@+id/button_signup"
+        style="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/form_login"
-        android:layout_marginEnd="30dp"
+        android:layout_below="@id/std_father"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/button_login"
         android:text="Register"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFF"
-        style="?android:attr/selectableItemBackground"
-        />
+        android:textColor="#FFFFFF" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/button_signup"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/button_register"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="center_horizontal"
-        >
+        android:layout_marginBottom="25dp"
+        android:gravity="center_horizontal">
+
         <TextView
             android:id="@+id/register_already_have_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:text="Already have an account?"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#FFFFFF"
             android:textStyle="normal"
-            android:typeface="serif"
-            />
+            android:typeface="serif" />
+
         <TextView
             android:id="@+id/register_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
             android:layout_marginStart="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_toEndOf="@id/register_already_have_account"
             android:clickable="true"
             android:elevation="30dp"
@@ -202,12 +240,12 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@drawable/color_login_tv"
             android:textStyle="bold"
-            android:typeface="serif"
-            />
+            android:typeface="serif" />
 
 
     </RelativeLayout>
 
-
 </RelativeLayout>
+
+
 
