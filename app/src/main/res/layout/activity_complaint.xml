@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/dot_active_screen2"
     android:orientation="vertical"
-    tools:context=".ComplaintActivity">
+    tools:context=".Student.ComplaintActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/myviewpager"

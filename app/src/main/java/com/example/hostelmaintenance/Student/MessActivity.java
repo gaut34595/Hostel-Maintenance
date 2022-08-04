@@ -1,14 +1,16 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.Student;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class LeaveStatusActivity extends AppCompatActivity {
+import com.example.hostelmaintenance.R;
+
+public class MessActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leave_status);
+        setContentView(R.layout.activity_mess);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.Student;
 
 import android.content.Context;
 import android.view.LayoutInflater;

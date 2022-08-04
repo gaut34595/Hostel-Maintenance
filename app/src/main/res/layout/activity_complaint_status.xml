@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/teal_700"
     android:orientation="vertical"
-    tools:context=".ComplaintStatusActivity">
+    tools:context=".Student.ComplaintStatusActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec1"

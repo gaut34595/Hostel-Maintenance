@@ -14,10 +14,10 @@
         android:theme="@style/Theme.HostelMaintenance"
         tools:targetApi="31">
         <activity
-            android:name=".LeaveStatusActivity"
+            android:name=".Student.LeaveStatusActivity"
             android:exported="false" />
         <activity
-            android:name=".LeaveRegistrationActivity"
+            android:name=".Student.LeaveRegistrationActivity"
             android:exported="false" />
         <activity
             android:name=".ComplaintCheckHostelActivity"
@@ -41,13 +41,13 @@
             android:name=".HostelWardenDashboard"
             android:exported="false" />
         <activity
-            android:name=".ComplaintStatusActivity"
+            android:name=".Student.ComplaintStatusActivity"
             android:exported="false" />
         <activity
-            android:name=".ComplaintRegistrationActivity"
+            android:name=".Student.ComplaintRegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".Main.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,35 +56,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignupActivity"
+            android:name=".Main.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".OutingActivity"
+            android:name=".Student.OutingActivity"
             android:exported="false"
             android:label="@string/title_activity_outing"
             android:theme="@style/Theme.HostelMaintenance.NoActionBar" />
         <activity
-            android:name=".ElectricityBillActivity"
+            android:name=".Student.ElectricityBillActivity"
             android:exported="false"
             android:label="@string/title_activity_electricity_bill"
             android:theme="@style/Theme.HostelMaintenance.NoActionBar" />
         <activity
-            android:name=".EmergencyActivity"
+            android:name=".Student.EmergencyActivity"
             android:exported="false" />
         <activity
-            android:name=".MessActivity"
+            android:name=".Student.MessActivity"
             android:exported="false" />
         <activity
-            android:name=".LeaveActivity"
+            android:name=".Student.LeaveActivity"
             android:exported="false" />
         <activity
-            android:name=".ComplaintActivity"
+            android:name=".Student.ComplaintActivity"
             android:exported="false" />
         <activity
-            android:name=".StudentDashboard"
+            android:name=".Student.StudentDashboard"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Main.LoginActivity"
             android:exported="false" />
     </application>
 
