@@ -7,58 +7,72 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ComplaintCheckHostelActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    MyAdap dataAdap;
-    ArrayList<GetComplaintData> complaintList;
+public class HOD_Granted_Leaves extends AppCompatActivity implements LeaveVerifyAdapter.OnLeaveListener{
+    RecyclerView recyclerView3;
+    LeaveVerifyAdapter leaveGrantAdapter;
+    ArrayList<GetLeaveData> grantlist;
     ProgressDialog progressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complaint_check_hostel);
+        setContentView(R.layout.activity_hod_granted_leaves);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
-        complaintList = new ArrayList<>();
-        recyclerView = findViewById(R.id.recycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        grantlist= new ArrayList<>();
+        int num = 1;
+        recyclerView3 = findViewById(R.id.recyclercheck3);
+        recyclerView3.setHasFixedSize(true);
+        recyclerView3.setLayoutManager(new LinearLayoutManager(this));
 
-
-        FirebaseFirestore.getInstance().collection("Complaints").orderBy("Complaint_Status", Query.Direction.ASCENDING).get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HOD",num)
+                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for(DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()){
+                            GetLeaveData getdata = ds.getDocument().toObject(GetLeaveData.class);
+                            getdata.setId(ds.getDocument().getId());
+                            grantlist.add(getdata);
 
-                        for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
-                            GetComplaintData get = ds.getDocument().toObject(GetComplaintData.class);
-                            complaintList.add(get);
-                            dataAdap = new MyAdap(getApplicationContext(),complaintList);
-                            recyclerView.setAdapter(dataAdap);
-                            dataAdap.notifyDataSetChanged();
-                            if (progressDialog.isShowing()) {
+                            leaveGrantAdapter = new LeaveVerifyAdapter(getApplicationContext(),grantlist,HOD_Granted_Leaves.this);
+                            recyclerView3.setAdapter(leaveGrantAdapter);
+                            leaveGrantAdapter.notifyDataSetChanged();
+                            if(progressDialog.isShowing()){
                                 progressDialog.dismiss();
                             }
+
                         }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if(progressDialog.isShowing()){
+                            progressDialog.dismiss();
+                        }
+                        Log.d(">>>>>>>>>",e.getMessage());
+
                     }
                 });
     }
+
     @Override
+    public void OnLeaveClick(int position) {
+
+    }
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search_item,menu);
         MenuItem menuItem = menu.findItem(R.id.searchaction);
@@ -73,11 +87,11 @@ public class ComplaintCheckHostelActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                dataAdap.getFilter().filter(s);
+                leaveGrantAdapter.getFilter().filter(s);
                 return false;
             }
         });
         return super.onCreateOptionsMenu(menu);
-    }
 
+    }
 }

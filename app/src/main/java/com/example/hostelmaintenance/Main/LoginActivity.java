@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hostelmaintenance.Course_Coordinator_Dashboard;
+import com.example.hostelmaintenance.HOD_Dashboard_Activity;
 import com.example.hostelmaintenance.HostelWardenDashboard;
 import com.example.hostelmaintenance.R;
 import com.example.hostelmaintenance.Student.StudentDashboard;
@@ -62,6 +64,9 @@ public class LoginActivity extends AppCompatActivity {
             String text_password = password.getText().toString();
             if(TextUtils.isEmpty(text_email) || TextUtils.isEmpty(text_password)){
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
             }
             else{
                 //login
@@ -82,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkUserAccessLevel(String uid) {
+        String num = "1";
         DocumentReference dr= fStore.collection("Users").document(uid);
         dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -92,8 +98,18 @@ public class LoginActivity extends AppCompatActivity {
                startActivity(i);
                finish();
            }
-                if(documentSnapshot.getString("is_Admin") != null){
-                    Intent i = new Intent(getApplicationContext(), HostelWardenDashboard.class);
+            if(documentSnapshot.getString("is_Program_Coordinator") != null){
+                    Intent i = new Intent(getApplicationContext(), Course_Coordinator_Dashboard.class);
+                    startActivity(i);
+                    finish();
+                }
+              if(documentSnapshot.getString("is_Hostel_Admin") != null){
+                    Intent i = new Intent(LoginActivity.this, HostelWardenDashboard.class);
+                    startActivity(i);
+                    finish();
+                }
+                if(documentSnapshot.getString("is_HOD") != null){
+                    Intent i = new Intent(LoginActivity.this, HOD_Dashboard_Activity.class);
                     startActivity(i);
                     finish();
                 }

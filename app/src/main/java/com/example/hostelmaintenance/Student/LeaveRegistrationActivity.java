@@ -39,6 +39,7 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
             noofdays,reason,add_leave;
     String student_email,student_enroll,std_name,std_cont,std_course,std_room,std_finger,std_father,
             leave_f,leave_t,fat_cont,no_of_days,leave_reason,leave_add;
+
     int IsVerifiedbyCC,IsVerifiedbyHOD,IsVerifiedbyHW;
     EditText leaveFrom,leaveTo;
     Button submit;
@@ -114,10 +115,10 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                         map.put("Student_Course",std_course);
                         map.put("Room_No",std_room);
                         map.put("Finger_No",std_finger);
-                        map.put("Father's_Name",std_father);
+                        map.put("Father_Name",std_father);
                         map.put("Leave_From",leave_f);
                         map.put("Leave_to",leave_t);
-                        map.put("Father's_Contact",fat_cont);
+                        map.put("Father_Contact",fat_cont);
                         map.put("No_of_Days",no_of_days);
                         map.put("Leave_Reason",leave_reason);
                         map.put("Leave_Address",leave_add);

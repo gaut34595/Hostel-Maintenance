@@ -1,5 +1,6 @@
 package com.example.hostelmaintenance.Student;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 
 import com.example.hostelmaintenance.GetComplaintData;
 import com.example.hostelmaintenance.R;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -79,16 +81,28 @@ public class ComplaintStatusActivity extends AppCompatActivity {
 //                   }
 //                });
 
-        FirebaseFirestore.getInstance().collection("Complaints").whereEqualTo("Email",email)
+        FirebaseFirestore.getInstance().collection("Complaints")
+                .whereEqualTo("Email",email)
                 .get().addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         for(DocumentChange ds: task.getResult().getDocumentChanges()){
-                           GetComplaintData getComplaintData = ds.getDocument().toObject(GetComplaintData.class);
+                           GetComplaintData getComplaintData = ds.getDocument().
+                                   toObject(GetComplaintData.class);
                            complainlist.add(getComplaintData);
                            dataAdapter.notifyDataSetChanged();
                             if (progressDialog.isShowing()) {
                                 progressDialog.dismiss();
                             }
+                        }
+                    }
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
                         }
                     }
                 });

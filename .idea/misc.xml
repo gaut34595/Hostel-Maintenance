@@ -18,6 +18,10 @@
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/selector_login_button.xml" value="0.2075" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/state_list_animator_z.xml" value="0.1895" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/textview_selector.xml" value="0.1075" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_cc_college_stats.xml" value="0.12409420289855072" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_cc_final_verification.xml" value="0.25" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_cc_processed_verification.xml" value="0.12409420289855072" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_cc_verify_leave.xml" value="0.25" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complain_check_hostel.xml" value="0.2" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint_check_hostel.xml" value="0.1" />
@@ -25,7 +29,13 @@
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint_status.xml" value="0.25" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaint_status_detail.xml" value="0.25" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_complaints_check.xml" value="0.2" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_course_coordinator_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_electricity_bill.xml" value="0.25" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hod_dashboard.xml" value="0.22" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hod_final_verification.xml" value="0.25" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hod_grant_leave.xml" value="0.1" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hod_granted_leaves.xml" value="0.1" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hod_stats.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hostel_admin_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hostel_stats.xml" value="0.2" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_hostel_warden_dashboard.xml" value="0.25" />
@@ -39,7 +49,8 @@
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/activity_student_dashboard.xml" value="0.2" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/complain_status_sample_row.xml" value="0.25" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/customlayout_complaint.xml" value="0.1" />
-        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/data_comp_row.xml" value="0.25" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/data_comp_row.xml" value="0.1" />
+        <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/leave_comp_row.xml" value="0.22" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/layout/list_itemd.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/menu/menu_search_item.xml" value="0.18" />
         <entry key="..\:/Users/JAIN/flutter_proj/HostelMaintenance/app/src/main/res/drawable/button_login.xml" value="0.1" />
@@ -65,5 +76,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22" />
+      </ProjectState>
+    </option>
   </component>
 </project>

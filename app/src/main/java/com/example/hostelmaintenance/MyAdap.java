@@ -59,6 +59,7 @@ public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements
 
     @Override
     public Filter getFilter() {
+
         return complaintfilter;
     }
     private final Filter complaintfilter = new Filter() {

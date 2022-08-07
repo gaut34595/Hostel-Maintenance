@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
+import com.example.hostelmaintenance.Course_Coordinator_Dashboard;
+import com.example.hostelmaintenance.HOD_Dashboard_Activity;
 import com.example.hostelmaintenance.HostelWardenDashboard;
 import com.example.hostelmaintenance.R;
 import com.example.hostelmaintenance.Student.StudentDashboard;
@@ -29,6 +31,7 @@ public class SplashActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         auth= FirebaseAuth.getInstance();
         fStore= FirebaseFirestore.getInstance();
+        String num = "1";
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -39,13 +42,22 @@ public class SplashActivity extends AppCompatActivity {
                     df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if(documentSnapshot.getString("is_User") != null){
+                            if(documentSnapshot.getString("is_User") != null ){
                                 Intent i = new Intent(getApplicationContext(), StudentDashboard.class);
                                 startActivity(i);
                                 finish();
+                            }if(documentSnapshot.getString("is_Program_Coordinator") != null){
+                                Intent i = new Intent(getApplicationContext(), Course_Coordinator_Dashboard.class);
+                                startActivity(i);
+                                finish();
                             }
-                            if(documentSnapshot.getString("is_Admin") != null){
-                                Intent i = new Intent(getApplicationContext(), HostelWardenDashboard.class);
+                            if(documentSnapshot.getString("is_Hostel_Admin") != null){
+                                Intent i = new Intent(SplashActivity.this, HostelWardenDashboard.class);
+                                startActivity(i);
+                                finish();
+                            }
+                            if(documentSnapshot.getString("is_HOD") != null){
+                                Intent i = new Intent(SplashActivity.this, HOD_Dashboard_Activity.class);
                                 startActivity(i);
                                 finish();
                             }
@@ -54,7 +66,7 @@ public class SplashActivity extends AppCompatActivity {
                     });
                 }
                 else{
-                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                    Intent i = new Intent(SplashActivity.this,LoginActivity.class);
                     startActivity(i);
                     finish();
                 }

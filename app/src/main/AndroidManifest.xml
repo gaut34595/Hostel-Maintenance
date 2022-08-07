@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.hostelmaintenance">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +15,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HostelMaintenance"
         tools:targetApi="31">
+        <activity
+            android:name=".HOD_Final_Verification"
+            android:exported="false" />
+        <activity
+            android:name=".HOD_Stats_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".HOD_Granted_Leaves"
+            android:exported="false" />
+        <activity
+            android:name=".HOD_Grant_Leave"
+            android:exported="false" />
+        <activity
+            android:name=".HOD_Dashboard_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".CC_Final_Verification"
+            android:exported="false" />
+        <activity
+            android:name=".CC_College_Stats"
+            android:exported="false" />
+        <activity
+            android:name=".CC_Processed_Verification"
+            android:exported="false" />
+        <activity
+            android:name=".CC_Verify_Leave"
+            android:exported="false" />
+        <activity
+            android:name=".Course_Coordinator_Dashboard"
+            android:exported="false" />
         <activity
             android:name=".Student.LeaveStatusActivity"
             android:exported="false" />

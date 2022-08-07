@@ -2,13 +2,7 @@
     <string name="app_name">HostelMaintenance</string>
     <string name="title_activity_outing">OutingActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_electricity_bill">ElectricityBillActivity</string>
 
     <string-array name="hostel">
@@ -23,13 +17,6 @@
         <item>Carpenter</item>
         <item>House-Keeping</item>
         <item>Others</item>
-
-    </string-array>
-    <string-array name="block">
-        <item>Block A</item>
-        <item>Block B</item>
-        <item>Block C</item>
-
 
     </string-array>
 </resources>

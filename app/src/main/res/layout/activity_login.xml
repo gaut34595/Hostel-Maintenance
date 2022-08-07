@@ -67,6 +67,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             app:passwordToggleEnabled="true"
+            app:hintTextColor="@color/white"
             >
 
             <EditText

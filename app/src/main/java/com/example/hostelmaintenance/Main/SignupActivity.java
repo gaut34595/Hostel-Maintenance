@@ -71,7 +71,7 @@ public class SignupActivity extends AppCompatActivity {
             if(TextUtils.isEmpty(textemail)&& TextUtils.isEmpty(textpassword)&& TextUtils.isEmpty(textname)
                     && TextUtils.isEmpty(textenrollment)&& TextUtils.isEmpty(textfinger)&& TextUtils.isEmpty(textroom)
                     && TextUtils.isEmpty(text_std_cont)&& TextUtils.isEmpty(text_std_fat)&& TextUtils.isEmpty(fathername)
-                    && TextUtils.isEmpty(textcourse)){
+                    && TextUtils.isEmpty(textcourse) && text_std_cont.trim().length()<10 && text_std_fat.trim().length()<10){
                 Toast.makeText(this, "Please provide all the details", Toast.LENGTH_SHORT).show();
             }
             else if(textpassword.length()<6){

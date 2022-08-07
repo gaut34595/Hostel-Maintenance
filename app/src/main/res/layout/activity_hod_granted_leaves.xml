@@ -5,11 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context=".Student.LeaveStatusActivity">
+    android:background="@drawable/login_background"
+    tools:context=".HOD_Granted_Leaves">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewleave"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:id="@+id/recyclercheck3"/>
 </LinearLayout>
