@@ -12,7 +12,7 @@
         app:cardElevation="10dp"
         app:cardCornerRadius="10dp"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="#D2CE93D8"
+        app:cardBackgroundColor="#81C784"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                 android:text="Status"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/stud_course"

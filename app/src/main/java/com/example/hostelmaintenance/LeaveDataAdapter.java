@@ -38,8 +38,8 @@ public class LeaveDataAdapter extends RecyclerView.Adapter<LeaveDataAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.name.setText(getLeaveDataList.get(position).getStudent_Name());
-     //   holder.std_l_from.setText(getLeaveDataList.get(position).getLeave_From() + " ");
-      //  holder.std_l_to.setText(getLeaveDataList.get(position).getLeave_to() + " ");
+         holder.std_l_from.setText(getLeaveDataList.get(position).getLeave_From() + " ");
+        holder.std_l_to.setText(getLeaveDataList.get(position).getLeave_to() + " ");
         holder.std_course.setText(getLeaveDataList.get(position).getStudent_Course());
         holder.std_enroll.setText(getLeaveDataList.get(position).getStudent_Enrollment());
 
@@ -59,8 +59,12 @@ public class LeaveDataAdapter extends RecyclerView.Adapter<LeaveDataAdapter.View
             holder.leave_stat.setBackgroundColor(green1);
         }
         else if(getLeaveDataList.get(position).getVerified_CC()==1 && getLeaveDataList.get(position).getVerified_HOD()==1 &&getLeaveDataList.get(position).getVerified_HW()==1){
-            holder.leave_stat.setText("Done");
+            holder.leave_stat.setText("On Leave");
             holder.leave_stat.setBackgroundColor(colorAccent);
+        }
+        else if(getLeaveDataList.get(position).getVerified_HW()==-1){
+            holder.leave_stat.setText("Student In");
+            holder.leave_stat.setBackgroundColor(green1);
         }
 
     }
@@ -82,8 +86,8 @@ public class LeaveDataAdapter extends RecyclerView.Adapter<LeaveDataAdapter.View
             super(itemView);
             mView=itemView;
             name= mView.findViewById(R.id.stud_name);
-            std_l_from=mView.findViewById(R.id.leavefrom);
-            std_l_to=mView.findViewById(R.id.leaveto);
+            std_l_from=mView.findViewById(R.id.leave_from);
+            std_l_to=mView.findViewById(R.id.leave_to);
             std_course=mView.findViewById(R.id.stud_course);
             std_enroll=mView.findViewById(R.id.enrollment);
             leave_stat=mView.findViewById(R.id.status_leave);

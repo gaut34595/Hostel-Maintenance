@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    tools:context=".FinalIncomingActivity">
+
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/leave_back" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Student Incoming"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/incoming_student_enrol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textV"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_assured_workload_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Enrollment Number"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/incoming_student_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/incoming_student_enrol"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Student Name"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
+        <EditText
+            android:id="@+id/incoming_stud_program"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/incoming_student_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_book_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Course"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+        <EditText
+            android:id="@+id/incoming_roomNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/incoming_stud_program"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_room_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Room No"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+        <EditText
+            android:id="@+id/incoming_finger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/incoming_roomNo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_fingerprint_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Finger No"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+
+        <EditText
+            android:id="@+id/incoming_leavefrom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/incoming_finger"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:cursorVisible="false"
+            android:drawableLeft="@drawable/ic_baseline_time_to_leave_24"
+            android:drawablePadding="20dp"
+            android:focusable="false"
+            android:hint="Leave From"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/incoming_leaveto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/incoming_leavefrom"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:cursorVisible="false"
+            android:drawableLeft="@drawable/ic_baseline_time_to_leave_24"
+            android:drawablePadding="20dp"
+            android:focusable="false"
+            android:hint="Leave To"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+        <EditText
+            android:id="@+id/incoming_indate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/incoming_leaveto"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:cursorVisible="false"
+            android:drawableLeft="@drawable/ic_baseline_time_to_leave_24"
+            android:drawablePadding="20dp"
+            android:focusable="false"
+            android:hint="In date"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <Button
+            android:id="@+id/button_accept"
+            style="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/incoming_indate"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_login"
+            android:text="Verify Student In"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF" />
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

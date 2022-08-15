@@ -16,6 +16,24 @@
         android:theme="@style/Theme.HostelMaintenance"
         tools:targetApi="31">
         <activity
+            android:name=".FinalIncomingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StudentIncomingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FinalTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TransactedLeaveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LeaveTransactActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HostelLeaveActivity"
+            android:exported="false" />
+        <activity
             android:name=".HOD_Final_Verification"
             android:exported="false" />
         <activity
@@ -65,9 +83,6 @@
             android:exported="false" />
         <activity
             android:name=".HostelStats"
-            android:exported="false" />
-        <activity
-            android:name=".VerifiedLeavesHostel"
             android:exported="false" />
         <activity
             android:name=".HostelWardenDashboard"

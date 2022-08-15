@@ -35,7 +35,7 @@ public class HostelWardenDashboard extends AppCompatActivity {
             startActivity(i);
         });
         view_leaves.setOnClickListener(e->{
-            Intent i = new Intent(this,VerifiedLeavesHostel.class);
+            Intent i = new Intent(this,HostelLeaveActivity.class);
             startActivity(i);
         });
         hos_stats.setOnClickListener(e->{

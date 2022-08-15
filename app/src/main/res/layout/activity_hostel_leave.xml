@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg"
     android:orientation="vertical"
-    tools:context=".Student.LeaveActivity">
-
-
+    android:background="@drawable/bg"
+    android:layout_height="match_parent"
+    tools:context=".HostelLeaveActivity">
 
     <androidx.gridlayout.widget.GridLayout
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:ignore="UselessParent"
         app:rowCount="2"
-        app:columnCount="2">
+        app:columnCount="2"
+        >
 
         <ImageButton
-            android:id="@+id/leave_register"
+            android:id="@+id/transact_leave"
             android:layout_width="150dp"
             android:layout_height="120dp"
             android:backgroundTint="@color/white"
@@ -33,8 +29,8 @@
             android:src="@drawable/icon_complaints_color"
             android:textSize="15sp"
             app:layout_row="0"
-            app:layout_column="0"
-            app:layout_gravity="center" />
+            app:layout_gravity="center"
+            app:layout_column="0" />
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -42,13 +38,13 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Register for Leave"
+            android:text="Transact Leave"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_gravity="center" />
         <ImageButton
-            android:id="@+id/leave_status"
+            android:id="@+id/transacted_leave"
             android:layout_width="150dp"
             android:layout_height="120dp"
             android:backgroundTint="@color/white"
@@ -70,11 +66,39 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Leave Status"
+            android:text="Transacted Leave"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_gravity="center" />
+        <ImageButton
+            android:id="@+id/leave_incoming"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:backgroundTint="@color/white"
+            android:paddingStart="25dp"
+            android:paddingTop="35dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="25dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/leave"
+            android:textSize="15sp"
+            app:layout_gravity="center" />
 
+
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="Student Incoming"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_gravity="center" />
     </androidx.gridlayout.widget.GridLayout>
+
 </LinearLayout>

@@ -10,10 +10,21 @@ import java.io.Serializable;
 public class GetLeaveData implements Serializable {
 
     @Exclude private String id;
-    String Student_Email, Student_Enrollment, Student_Name, Student_Contact,
-            Student_Course, Room_No, Finger_No,
-            Father_Name, Father_Contact, No_of_Days,
-            Leave_Reason, Leave_Address, Leave_From, Leave_to;
+    String Student_Email;
+    String Student_Enrollment;
+    String Student_Name;
+    String Student_Contact;
+    String Student_Course;
+    String Room_No;
+    String Finger_No;
+    String Father_Name;
+    String Father_Contact;
+    String No_of_Days;
+    String Leave_Reason;
+    String Leave_Address;
+    String Leave_From;
+    String Leave_to;
+    String Leave_in_date;
 
     int Verified_CC, Verified_HOD, Verified_HW;
 
@@ -27,7 +38,7 @@ public class GetLeaveData implements Serializable {
         this.id = id;
     }
 
-    public GetLeaveData(String student_Email, String student_Enrollment, String student_Name, String student_Contact, String student_Course, String room_No, String finger_No, String father_Name, String father_Contact, String no_of_Days, String leave_Reason, String leave_Address, String leave_From, String leave_to, int verified_CC, int verified_HOD, int verified_HW) {
+    public GetLeaveData(String student_Email, String student_Enrollment, String student_Name, String student_Contact, String student_Course, String room_No, String finger_No, String father_Name, String father_Contact, String no_of_Days, String leave_Reason, String leave_Address, String leave_From, String leave_to, int verified_CC, int verified_HOD, int verified_HW, String leave_in_date) {
         Student_Email = student_Email;
         Student_Enrollment = student_Enrollment;
         Student_Name = student_Name;
@@ -45,7 +56,10 @@ public class GetLeaveData implements Serializable {
         Verified_CC = verified_CC;
         Verified_HOD = verified_HOD;
         Verified_HW = verified_HW;
+        Leave_in_date = leave_in_date;
     }
+
+
 
     protected GetLeaveData(Parcel in) {
         Student_Email = in.readString();
@@ -65,6 +79,8 @@ public class GetLeaveData implements Serializable {
         Verified_CC = in.readInt();
         Verified_HOD = in.readInt();
         Verified_HW = in.readInt();
+        Leave_in_date= in.readString();
+
     }
 
 
@@ -202,6 +218,14 @@ public class GetLeaveData implements Serializable {
 
     public void setVerified_HW(int verified_HW) {
         Verified_HW = verified_HW;
+    }
+
+    public String getLeave_in_date() {
+        return Leave_in_date;
+    }
+
+    public void setLeave_in_date(String leave_in_date) {
+        Leave_in_date = leave_in_date;
     }
 
 }

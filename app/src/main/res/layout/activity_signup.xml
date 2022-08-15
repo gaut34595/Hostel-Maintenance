@@ -124,21 +124,22 @@
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
+
     <EditText
         android:id="@+id/std_finger"
-        android:layout_below="@id/stud_course"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#30ffffff"
-        android:hint="Finger No"
-        android:drawableLeft="@drawable/ic_baseline_fingerprint_24"
-        android:textColorHint="@color/white"
-        android:drawablePadding="20dp"
-        android:textColor="@color/white"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/stud_course"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:padding="10dp"/>
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_fingerprint_24"
+        android:drawablePadding="20dp"
+        android:hint="Finger No"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/room_no"

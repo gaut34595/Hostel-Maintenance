@@ -116,7 +116,7 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Verified Leaves"
+            android:text="Student Leaves"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
