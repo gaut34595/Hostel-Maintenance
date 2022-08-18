@@ -19,4 +19,8 @@
         <item>Others</item>
 
     </string-array>
+
+    <string name="Account_SID">ACf0340978828bc1b671943f92ec12c0b3</string>
+    <string name="Auth_Token">3da36370a3f492431a5caaceb4d0a7c6</string>
+    <string name="Phone_Number">+15802036610</string>
 </resources>

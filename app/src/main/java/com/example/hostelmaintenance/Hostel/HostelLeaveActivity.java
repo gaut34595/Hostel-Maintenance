@@ -1,11 +1,12 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.Hostel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.widget.ImageButton;
+
+import com.example.hostelmaintenance.R;
 
 public class HostelLeaveActivity extends AppCompatActivity {
     ImageButton transact , transacted,incoming;

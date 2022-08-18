@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
-    tools:context=".College.CC_College_Stats">
-
-    <androidx.recyclerview.widget.RecyclerView
+    tools:context=".testt.VollyTest">
+    <Button
+        android:onClick="check1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recylerstats"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

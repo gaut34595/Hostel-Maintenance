@@ -1,8 +1,10 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.College;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.hostelmaintenance.R;
 
 public class HOD_Stats_Activity extends AppCompatActivity {
 

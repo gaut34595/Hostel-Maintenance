@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.College;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.hostelmaintenance.GetLeaveData;
+import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;

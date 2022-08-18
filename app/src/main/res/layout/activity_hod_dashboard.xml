@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/login_backgroundmain"
     android:layout_height="match_parent"
-    tools:context=".HOD_Dashboard_Activity">
+    tools:context=".College.HOD_Dashboard_Activity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

@@ -1,14 +1,17 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.Hostel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+
+import java.net.URI;
+import java.math.BigDecimal;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,16 +20,27 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.hostelmaintenance.GetLeaveData;
+import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class FinalTransactionActivity extends AppCompatActivity {
     String stud_enroll,stud_name,stud_cont,stud_course,stud_fath,fath_con
             ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger;
+    String url = "https://api.twilio.com/2010-04-01/Accounts/ACf0340978828bc1b671943f92ec12c0b3/Messages.json";
     int cc, hod, hw;
     EditText stud_enroll_text,stud_name_text,roomNo,fingerNo,stud_course_text,stud_fath_text,fath_con_text
             ,num_days_text,reason_text,leave_add_text;
@@ -97,6 +111,8 @@ public class FinalTransactionActivity extends AppCompatActivity {
             dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
+                    sendSms();
+                    sendWhatsappSms();
                     Toast.makeText(FinalTransactionActivity.this, "Leave Granted Successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(FinalTransactionActivity.this,LeaveTransactActivity.class);
                     startActivity(i);
@@ -114,6 +130,80 @@ public class FinalTransactionActivity extends AppCompatActivity {
         });
 
     }
+
+    private void sendWhatsappSms() {
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(">>>>responsewhatsapp",response+"");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(">>>>errwhatsapp",error.getMessage()+"");
+
+            }
+        }) {
+            protected Map<String, String> getParams() {
+
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("To","whatsapp:+918439046950");
+                params.put("From","whatsapp:+15802036610");
+                params.put("Body","Respected Sir, Your Ward " + stud_name + " has been checked out from Hostel from " + leave_from + " to " + leave_to + " Thank You-TMU HOSTEL");
+                return params;
+            }
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Basic QUNmMDM0MDk3ODgyOGJjMWI2NzE5NDNmOTJlYzEyYzBiMzozZGEzNjM3MGEzZjQ5MjQzMWE1Y2FhY2ViNGQwYTdjNg==");
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+
+                return params;
+
+
+            }
+        };
+        RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
+        queue.add(request);
+    }
+
+    private void sendSms() {
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(">>>>response",response+"");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(">>>>err",error.getMessage()+"");
+
+            }
+        }) {
+            protected Map<String, String> getParams() {
+
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("To","+918439046950");
+                params.put("From","+15802036610");
+                params.put("MessagingServiceSid", "MG09b2716158c1a5a75c8598a0da3d546e");
+                params.put("Body","Respected Sir, Your Ward " + stud_name + " has been checked out from Hostel from " + leave_from + " to " + leave_to + " Thank You-TMU HOSTEL");
+                return params;
+            }
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Basic QUNmMDM0MDk3ODgyOGJjMWI2NzE5NDNmOTJlYzEyYzBiMzozZGEzNjM3MGEzZjQ5MjQzMWE1Y2FhY2ViNGQwYTdjNg==");
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+
+                return params;
+
+
+            }
+        };
+        RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
+        queue.add(request);
+    }
+
     private void makePhoneCall() {
         if(fath_con.trim().length()>0){
             if(ContextCompat.

@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.College;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.example.hostelmaintenance.GetLeaveData;
+import com.example.hostelmaintenance.LeaveVerifyAdapter;
+import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
@@ -20,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class HOD_Granted_Leaves extends AppCompatActivity implements LeaveVerifyAdapter.OnLeaveListener{
+public class HOD_Granted_Leaves extends AppCompatActivity implements LeaveVerifyAdapter.OnLeaveListener {
     RecyclerView recyclerView3;
     LeaveVerifyAdapter leaveGrantAdapter;
     ArrayList<GetLeaveData> grantlist;
@@ -35,24 +39,34 @@ public class HOD_Granted_Leaves extends AppCompatActivity implements LeaveVerify
         progressDialog.show();
         grantlist= new ArrayList<>();
         int num = 1;
+        int num2 =0;
         recyclerView3 = findViewById(R.id.recyclercheck3);
         recyclerView3.setHasFixedSize(true);
         recyclerView3.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HOD",num)
+        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HOD",num).whereEqualTo("Verified_HW",num2)
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for(DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()){
-                            GetLeaveData getdata = ds.getDocument().toObject(GetLeaveData.class);
-                            getdata.setId(ds.getDocument().getId());
-                            grantlist.add(getdata);
+                        if(queryDocumentSnapshots.size()!=0) {
+                            for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
+                                GetLeaveData getdata = ds.getDocument().toObject(GetLeaveData.class);
+                                getdata.setId(ds.getDocument().getId());
+                                grantlist.add(getdata);
 
-                            leaveGrantAdapter = new LeaveVerifyAdapter(getApplicationContext(),grantlist,HOD_Granted_Leaves.this);
-                            recyclerView3.setAdapter(leaveGrantAdapter);
-                            leaveGrantAdapter.notifyDataSetChanged();
-                            if(progressDialog.isShowing()){
+                                leaveGrantAdapter = new LeaveVerifyAdapter(getApplicationContext(), grantlist, HOD_Granted_Leaves.this);
+                                recyclerView3.setAdapter(leaveGrantAdapter);
+                                leaveGrantAdapter.notifyDataSetChanged();
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                }
+
+                            }
+                        }
+                        else{
+                            if (progressDialog.isShowing()) {
                                 progressDialog.dismiss();
+                                Toast.makeText(HOD_Granted_Leaves.this, "No Data Found", Toast.LENGTH_SHORT).show();
                             }
 
                         }

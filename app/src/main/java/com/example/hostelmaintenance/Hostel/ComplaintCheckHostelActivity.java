@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.Hostel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.example.hostelmaintenance.GetComplaintData;
+import com.example.hostelmaintenance.MyAdap;
+import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,16 +48,24 @@ public class ComplaintCheckHostelActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                        for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
-                            GetComplaintData get = ds.getDocument().toObject(GetComplaintData.class);
-                            complaintList.add(get);
-                            dataAdap = new MyAdap(getApplicationContext(),complaintList);
-                            recyclerView.setAdapter(dataAdap);
-                            dataAdap.notifyDataSetChanged();
+                        if (queryDocumentSnapshots.size() != 0) {
+                            for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
+                                GetComplaintData get = ds.getDocument().toObject(GetComplaintData.class);
+                                complaintList.add(get);
+                                dataAdap = new MyAdap(getApplicationContext(), complaintList);
+                                recyclerView.setAdapter(dataAdap);
+                                dataAdap.notifyDataSetChanged();
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        }
+                        else{
                             if (progressDialog.isShowing()) {
                                 progressDialog.dismiss();
+                                Toast.makeText(ComplaintCheckHostelActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
                             }
+
                         }
                     }
                 });

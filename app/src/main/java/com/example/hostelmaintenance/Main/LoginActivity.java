@@ -11,9 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hostelmaintenance.Course_Coordinator_Dashboard;
-import com.example.hostelmaintenance.HOD_Dashboard_Activity;
-import com.example.hostelmaintenance.HostelWardenDashboard;
+import com.example.hostelmaintenance.College.Course_Coordinator_Dashboard;
+import com.example.hostelmaintenance.College.HOD_Dashboard_Activity;
+import com.example.hostelmaintenance.Hostel.HostelWardenDashboard;
 import com.example.hostelmaintenance.R;
 import com.example.hostelmaintenance.Student.StudentDashboard;
 import com.google.android.gms.tasks.OnSuccessListener;

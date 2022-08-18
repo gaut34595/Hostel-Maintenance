@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.College;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,40 +9,45 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.hostelmaintenance.Main.LoginActivity;
+import com.example.hostelmaintenance.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HOD_Dashboard_Activity extends AppCompatActivity {
-    ImageView grant,granted,stats;
+public class Course_Coordinator_Dashboard extends AppCompatActivity {
+    ImageView verify,processed,stats;
     Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hod_dashboard);
-        grant= findViewById(R.id.grant_leave);
-        granted = findViewById(R.id.granted_leave);
-        stats= findViewById(R.id.stats);
+        setContentView(R.layout.activity_course_coordinator_dashboard);
+
+        verify= findViewById(R.id.verify_leave);
+        processed = findViewById(R.id.procc_verification);
+        stats= findViewById(R.id.stats_leave);
         logout= findViewById(R.id.LogoutBtn);
 
+        //for logout
         logout.setOnClickListener(e->{
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(HOD_Dashboard_Activity.this, LoginActivity.class);
+            Intent i = new Intent(Course_Coordinator_Dashboard.this, LoginActivity.class);
             startActivity(i);
             finish();
         });
 
         // for Different buttons
-        grant.setOnClickListener(e->{
-            Intent i = new Intent(this,HOD_Grant_Leave.class);
+        verify.setOnClickListener(e->{
+            Intent i = new Intent(this, CC_Verify_Leave.class);
             startActivity(i);
         });
-        granted.setOnClickListener(e->{
-            Intent i = new Intent(this,HOD_Granted_Leaves.class);
+        processed.setOnClickListener(e->{
+            Intent i = new Intent(this, CC_Processed_Verification.class);
             startActivity(i);
         });
         stats.setOnClickListener(e->{
-            Intent i = new Intent(this,HOD_Stats_Activity.class);
+            Intent i = new Intent(this, CC_College_Stats.class);
             startActivity(i);
         });
+
+
     }
 }

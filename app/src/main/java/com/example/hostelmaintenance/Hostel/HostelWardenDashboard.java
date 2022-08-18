@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.Hostel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.hostelmaintenance.Main.LoginActivity;
+import com.example.hostelmaintenance.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HostelWardenDashboard extends AppCompatActivity {

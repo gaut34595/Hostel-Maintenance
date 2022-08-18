@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.Hostel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,14 +14,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.hostelmaintenance.GetLeaveData;
+import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class FinalIncomingActivity extends AppCompatActivity {
     String stud_enroll,stud_name,stud_course
@@ -80,6 +85,7 @@ public class FinalIncomingActivity extends AppCompatActivity {
                             dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
+                                    lateby();
                                     Toast.makeText(FinalIncomingActivity.this, "Student Incoming Successful", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(FinalIncomingActivity.this,StudentIncomingActivity.class);
                                     startActivity(i);
@@ -117,5 +123,23 @@ public class FinalIncomingActivity extends AppCompatActivity {
 
 
 
+
+
+
+    }
+
+    private void lateby() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String leavedateto = leave_to_text.getText().toString();
+        String leaveindate = leavein_text.getText().toString();
+
+        try {
+            Date d1 = dateFormat.parse(leaveindate);
+            Date d2 = dateFormat.parse(leavedateto);
+            long diff = d1.getTime()-d2.getTime();
+            Log.d(">>>>>", String.valueOf((int) TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS)) + "");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

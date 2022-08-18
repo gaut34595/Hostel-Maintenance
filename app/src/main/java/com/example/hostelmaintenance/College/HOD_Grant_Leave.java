@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.College;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,60 +6,79 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.example.hostelmaintenance.GetLeaveData;
+import com.example.hostelmaintenance.LeaveVerifyAdapter;
+import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class CC_Processed_Verification extends AppCompatActivity implements LeaveVerifyAdapter.OnLeaveListener {
-    RecyclerView recyclerView2;
+public class HOD_Grant_Leave extends AppCompatActivity implements LeaveVerifyAdapter.OnLeaveListener {
+    RecyclerView recyclerView;
     LeaveVerifyAdapter leaveVerifyAdapter;
-    ArrayList<GetLeaveData> leavel;
+    ArrayList<GetLeaveData> grantlist;
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cc_processed_verification);
-        int num = 1;
+        setContentView(R.layout.activity_hod_grant_leave);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
-        leavel= new ArrayList<>();
-        recyclerView2 = findViewById(R.id.recyclercheck2);
-        recyclerView2.setHasFixedSize(true);
-        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_CC",num)
+        int num = 1;
+        int num2 = 0;
+        grantlist= new ArrayList<>();
+        recyclerView = findViewById(R.id.recyclercheck3);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_CC", num).whereEqualTo("Verified_HOD",num2)
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Log.d("---->>>>>>>>","Inside for success");
+                        if(queryDocumentSnapshots.size()!=0){
                         for(DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()){
-                            GetLeaveData getdata = ds.getDocument().toObject(GetLeaveData.class);
-                            getdata.setId(ds.getDocument().getId());
-                            leavel.add(getdata);
+                            Log.d("---->>>>>>>>","Inside for");
+                                GetLeaveData gdata = ds.getDocument().toObject(GetLeaveData.class);
+                                gdata.setId(ds.getDocument().getId());
+                                grantlist.add(gdata);
 
-                            leaveVerifyAdapter = new LeaveVerifyAdapter(getApplicationContext(),leavel,CC_Processed_Verification.this);
-                            recyclerView2.setAdapter(leaveVerifyAdapter);
-                            leaveVerifyAdapter.notifyDataSetChanged();
-                            if(progressDialog.isShowing()){
+                                leaveVerifyAdapter = new LeaveVerifyAdapter(getApplicationContext(), grantlist, HOD_Grant_Leave.this);
+                                recyclerView.setAdapter(leaveVerifyAdapter);
+                                leaveVerifyAdapter.notifyDataSetChanged();
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                }
+                            }
+
+
+                            }
+                        else {
+                            if (progressDialog.isShowing()) {
                                 progressDialog.dismiss();
+                                Toast.makeText(HOD_Grant_Leave.this, "NO DATA FOUND", Toast.LENGTH_SHORT).show();
                             }
 
                         }
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Log.d("---->>>>>>>>","Inside for");
                         if(progressDialog.isShowing()){
                             progressDialog.dismiss();
                         }
@@ -67,10 +86,6 @@ public class CC_Processed_Verification extends AppCompatActivity implements Leav
 
                     }
                 });
-    }
-
-    @Override
-    public void OnLeaveClick(int position) {
 
     }
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
@@ -93,5 +108,12 @@ public class CC_Processed_Verification extends AppCompatActivity implements Leav
         });
         return super.onCreateOptionsMenu(menu);
 
+    }
+    @Override
+    public void OnLeaveClick(int position) {
+        Intent i = new Intent(this,HOD_Final_Verification.class);
+        i.putExtra("Grant_Item",grantlist.get(position));
+        startActivity(i);
+        finish();
     }
 }

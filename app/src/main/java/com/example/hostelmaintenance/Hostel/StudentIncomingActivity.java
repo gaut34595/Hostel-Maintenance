@@ -1,4 +1,4 @@
-package com.example.hostelmaintenance;
+package com.example.hostelmaintenance.Hostel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.example.hostelmaintenance.GetLeaveData;
+import com.example.hostelmaintenance.LeaveVerifyAdapter;
+import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
@@ -21,42 +25,47 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class LeaveTransactActivity extends AppCompatActivity implements LeaveVerifyAdapter.OnLeaveListener {
-
-    RecyclerView recyclerViewTransact;
+public class StudentIncomingActivity extends AppCompatActivity implements LeaveVerifyAdapter.OnLeaveListener {
+    RecyclerView recyclerviewIncoming;
     LeaveVerifyAdapter lVA;
-    ArrayList<GetLeaveData> transactlist;
+    ArrayList<GetLeaveData> incominglist;
     ProgressDialog progressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leave_transact);
+        setContentView(R.layout.activity_student_incoming);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data.....");
         progressDialog.show();
+        incominglist = new ArrayList<>();
         int num = 1;
-        int num2=0;
-        transactlist = new ArrayList<>();
-        recyclerViewTransact = findViewById(R.id.transact_recycle);
-        recyclerViewTransact.setHasFixedSize(true);
-        recyclerViewTransact.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HOD", num).whereEqualTo("Verified_HW",num2)
+        recyclerviewIncoming= findViewById(R.id.incoming_recycle);
+        recyclerviewIncoming.setHasFixedSize(true);
+        recyclerviewIncoming.setLayoutManager(new LinearLayoutManager(this));
+        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HW", num)
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
-                            GetLeaveData getData = ds.getDocument().toObject(GetLeaveData.class);
-                            getData.setId(ds.getDocument().getId());
-                            transactlist.add(getData);
+                        if (queryDocumentSnapshots.size() != 0) {
+                        for (DocumentChange ds: queryDocumentSnapshots.getDocumentChanges()) {
+                            GetLeaveData getIncoming = ds.getDocument().toObject(GetLeaveData.class);
+                            getIncoming.setId(ds.getDocument().getId());
+                            incominglist.add(getIncoming);
 
-                            lVA = new LeaveVerifyAdapter(getApplicationContext(), transactlist, LeaveTransactActivity.this);
-                            recyclerViewTransact.setAdapter(lVA);
+                            lVA = new LeaveVerifyAdapter(getApplicationContext(), incominglist, StudentIncomingActivity.this);
+                            recyclerviewIncoming.setAdapter(lVA);
                             lVA.notifyDataSetChanged();
                             if (progressDialog.isShowing()) {
                                 progressDialog.dismiss();
 
+                            }
+                        }
+                        }
+                        else{
+                            if (progressDialog.isShowing()) {
+                                progressDialog.dismiss();
+                                Toast.makeText(StudentIncomingActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -70,8 +79,16 @@ public class LeaveTransactActivity extends AppCompatActivity implements LeaveVer
                         Log.d(">>>>>>>>>", e.getMessage());
                     }
                 });
+
     }
 
+    @Override
+    public void OnLeaveClick(int position) {
+        Intent i = new Intent(this,FinalIncomingActivity.class);
+        i.putExtra("Incoming_Item",incominglist.get(position));
+        startActivity(i);
+        finish();
+    }
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search_item, menu);
         MenuItem menuItem = menu.findItem(R.id.searchaction);
@@ -91,13 +108,5 @@ public class LeaveTransactActivity extends AppCompatActivity implements LeaveVer
             }
         });
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public void OnLeaveClick(int position) {
-        Intent i = new Intent(this,FinalTransactionActivity.class);
-        i.putExtra("Transact_Item",transactlist.get(position));
-        startActivity(i);
-        finish();
     }
 }

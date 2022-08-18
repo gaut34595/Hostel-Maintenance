@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.hostelmaintenance">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -16,52 +17,56 @@
         android:theme="@style/Theme.HostelMaintenance"
         tools:targetApi="31">
         <activity
-            android:name=".FinalIncomingActivity"
+            android:name=".testt.VollyTest"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".Hostel.FinalIncomingActivity"
             android:exported="false" />
         <activity
-            android:name=".StudentIncomingActivity"
+            android:name=".Hostel.StudentIncomingActivity"
             android:exported="false" />
         <activity
-            android:name=".FinalTransactionActivity"
+            android:name=".Hostel.FinalTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".TransactedLeaveActivity"
+            android:name=".Hostel.TransactedLeaveActivity"
             android:exported="false" />
         <activity
-            android:name=".LeaveTransactActivity"
+            android:name=".Hostel.LeaveTransactActivity"
             android:exported="false" />
         <activity
-            android:name=".HostelLeaveActivity"
+            android:name=".Hostel.HostelLeaveActivity"
             android:exported="false" />
         <activity
-            android:name=".HOD_Final_Verification"
+            android:name=".College.HOD_Final_Verification"
             android:exported="false" />
         <activity
-            android:name=".HOD_Stats_Activity"
+            android:name=".College.HOD_Stats_Activity"
             android:exported="false" />
         <activity
-            android:name=".HOD_Granted_Leaves"
+            android:name=".College.HOD_Granted_Leaves"
             android:exported="false" />
         <activity
-            android:name=".HOD_Grant_Leave"
+            android:name=".College.HOD_Grant_Leave"
             android:exported="false" />
         <activity
-            android:name=".HOD_Dashboard_Activity"
+            android:name=".College.HOD_Dashboard_Activity"
             android:exported="false" />
         <activity
-            android:name=".CC_Final_Verification"
+            android:name=".College.CC_Final_Verification"
             android:exported="false" />
         <activity
-            android:name=".CC_College_Stats"
+            android:name=".College.CC_College_Stats"
             android:exported="false" />
         <activity
-            android:name=".CC_Processed_Verification"
+            android:name=".College.CC_Processed_Verification"
             android:exported="false" />
         <activity
-            android:name=".CC_Verify_Leave"
+            android:name=".College.CC_Verify_Leave"
             android:exported="false" />
         <activity
-            android:name=".Course_Coordinator_Dashboard"
+            android:name=".College.Course_Coordinator_Dashboard"
             android:exported="false" />
         <activity
             android:name=".Student.LeaveStatusActivity"
@@ -70,22 +75,22 @@
             android:name=".Student.LeaveRegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".ComplaintCheckHostelActivity"
+            android:name=".Hostel.ComplaintCheckHostelActivity"
             android:exported="false" />
         <activity
-            android:name=".StudentDirectoryHostel"
+            android:name=".Hostel.StudentDirectoryHostel"
             android:exported="false" />
         <activity
-            android:name=".ElectricityBillStats"
+            android:name=".Hostel.ElectricityBillStats"
             android:exported="false" />
         <activity
-            android:name=".StaffDetailsHostel"
+            android:name=".Hostel.StaffDetailsHostel"
             android:exported="false" />
         <activity
-            android:name=".HostelStats"
+            android:name=".Hostel.HostelStats"
             android:exported="false" />
         <activity
-            android:name=".HostelWardenDashboard"
+            android:name=".Hostel.HostelWardenDashboard"
             android:exported="false" />
         <activity
             android:name=".Student.ComplaintStatusActivity"
