@@ -36,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class FinalTransactionActivity extends AppCompatActivity {
     String stud_enroll,stud_name,stud_cont,stud_course,stud_fath,fath_con
@@ -105,8 +106,10 @@ public class FinalTransactionActivity extends AppCompatActivity {
         leave_add_text.setText(leave_add);
 
         accept.setOnClickListener(e->{
+
             DocumentReference dd = db.collection("Student_Leaves").document(t_data.getId());
             HashMap<String,Object> map = new HashMap<>();
+            map.put("QRCode",getQrcode());
             map.put("Verified_HW",1);
             dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -131,6 +134,10 @@ public class FinalTransactionActivity extends AppCompatActivity {
 
     }
 
+    public String getQrcode(){
+      return UUID.randomUUID().toString();
+    }
+
     private void sendWhatsappSms() {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -147,15 +154,15 @@ public class FinalTransactionActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
 
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("To","whatsapp:+918439046950");
-                params.put("From","whatsapp:+15802036610");
+                params.put("To","whatsapp:+919675056122");
+                params.put("From","whatsapp:+14155238886");
                 params.put("Body","Respected Sir, Your Ward " + stud_name + " has been checked out from Hostel from " + leave_from + " to " + leave_to + " Thank You-TMU HOSTEL");
                 return params;
             }
             public Map<String, String> getHeaders() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", "Basic QUNmMDM0MDk3ODgyOGJjMWI2NzE5NDNmOTJlYzEyYzBiMzozZGEzNjM3MGEzZjQ5MjQzMWE1Y2FhY2ViNGQwYTdjNg==");
+                params.put("Authorization", "Basic QUNmMDM0MDk3ODgyOGJjMWI2NzE5NDNmOTJlYzEyYzBiMzo3ZTUyODQ4ZDgyNGQzOWFhMmUyNzU4MWZhOTIyZDVkYw==");
                 params.put("Content-Type", "application/x-www-form-urlencoded");
 
                 return params;
@@ -183,7 +190,7 @@ public class FinalTransactionActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
 
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("To","+918439046950");
+                params.put("To","+919675056122");
                 params.put("From","+15802036610");
                 params.put("MessagingServiceSid", "MG09b2716158c1a5a75c8598a0da3d546e");
                 params.put("Body","Respected Sir, Your Ward " + stud_name + " has been checked out from Hostel from " + leave_from + " to " + leave_to + " Thank You-TMU HOSTEL");
@@ -192,7 +199,7 @@ public class FinalTransactionActivity extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", "Basic QUNmMDM0MDk3ODgyOGJjMWI2NzE5NDNmOTJlYzEyYzBiMzozZGEzNjM3MGEzZjQ5MjQzMWE1Y2FhY2ViNGQwYTdjNg==");
+                params.put("Authorization", "Basic QUNmMDM0MDk3ODgyOGJjMWI2NzE5NDNmOTJlYzEyYzBiMzo3ZTUyODQ4ZDgyNGQzOWFhMmUyNzU4MWZhOTIyZDVkYw==");
                 params.put("Content-Type", "application/x-www-form-urlencoded");
 
                 return params;

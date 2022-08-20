@@ -72,32 +72,44 @@ public class FinalIncomingActivity extends AppCompatActivity {
         fingern_text.setText(finger);
         roomn_text.setText(room_no);
 
-        accept.setOnClickListener(e->{
-                        in_Date = leavein_text.getText().toString();
-                        if(TextUtils.isEmpty(in_Date)){
-                            Toast.makeText(this, "Please fill the in-Date", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            DocumentReference dd = db.collection("Student_Leaves").document(incoming_data.getId());
-                            HashMap <String,Object> map = new HashMap<>();
-                            map.put("Leave_in_date",in_Date);
-                            map.put("Verified_HW", num);
-                            dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    lateby();
-                                    Toast.makeText(FinalIncomingActivity.this, "Student Incoming Successful", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(FinalIncomingActivity.this,StudentIncomingActivity.class);
-                                    startActivity(i);
-                                    finish();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d(">>>>>>>>>>>>>>>>>>>>>", e.getMessage());
-                                }
-                            });
-                        }
+        accept.setOnClickListener(e-> {
+            in_Date = leavein_text.getText().toString();
+            String late = null;
+            if (TextUtils.isEmpty(in_Date)) {
+                Toast.makeText(this, "Please fill the in-Date", Toast.LENGTH_SHORT).show();
+            } else {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String leavedateto = leave_to_text.getText().toString();
+                String leaveindate = leavein_text.getText().toString();
+                try {
+                    Date d1 = dateFormat.parse(leaveindate);
+                    Date d2 = dateFormat.parse(leavedateto);
+                    long diff = d1.getTime() - d2.getTime();
+                    late = String.valueOf((int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + "");
+                    Log.d(">>>>>", String.valueOf((int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)) + "");
+                } catch (ParseException a) {
+                    a.printStackTrace();
+                }
+            }
+            DocumentReference dd = db.collection("Student_Leaves").document(incoming_data.getId());
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("Lateby", late);
+            map.put("Verified_HW", num);
+            dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+
+                    Toast.makeText(FinalIncomingActivity.this, "Student Incoming Successful", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(FinalIncomingActivity.this, StudentIncomingActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(">>>>>>>>>>>>>>>>>>>>>", e.getMessage());
+                }
+            });
 
         });
 
@@ -128,18 +140,4 @@ public class FinalIncomingActivity extends AppCompatActivity {
 
     }
 
-    private void lateby() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String leavedateto = leave_to_text.getText().toString();
-        String leaveindate = leavein_text.getText().toString();
-
-        try {
-            Date d1 = dateFormat.parse(leaveindate);
-            Date d2 = dateFormat.parse(leavedateto);
-            long diff = d1.getTime()-d2.getTime();
-            Log.d(">>>>>", String.valueOf((int) TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS)) + "");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 }

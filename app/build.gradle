@@ -55,5 +55,5 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
-
+    implementation'com.journeyapps:zxing-android-embedded:4.3.0'
 }

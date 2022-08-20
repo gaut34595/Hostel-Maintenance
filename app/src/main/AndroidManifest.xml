@@ -17,9 +17,11 @@
         android:theme="@style/Theme.HostelMaintenance"
         tools:targetApi="31">
         <activity
+            android:name=".Student.ShowQRActivity"
+            android:exported="false" />
+        <activity
             android:name=".testt.VollyTest"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Hostel.FinalIncomingActivity"
             android:exported="false" />

@@ -98,9 +98,9 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                     IsVerifiedbyHW= 0;
 
                     FirebaseFirestore db= FirebaseFirestore.getInstance();
-                    if(TextUtils.isEmpty(leave_f)&& TextUtils.isEmpty(leave_t)&&
-                     TextUtils.isEmpty(no_of_days) &&  TextUtils.isEmpty(leave_reason)
-                    && TextUtils.isEmpty(leave_add)){
+                    if(TextUtils.isEmpty(leave_f) ||TextUtils.isEmpty(leave_t) ||
+                     TextUtils.isEmpty(no_of_days) ||  TextUtils.isEmpty(leave_reason)
+                    || TextUtils.isEmpty(leave_add)){
                         Toast.makeText(this, "All details are mandatory", Toast.LENGTH_SHORT).show();
                         if(progressDialog.isShowing()){
                             progressDialog.dismiss();
@@ -125,6 +125,7 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                         map.put("Verified_CC",IsVerifiedbyCC);
                         map.put("Verified_HOD",IsVerifiedbyHOD);
                         map.put("Verified_HW",IsVerifiedbyHW);
+                        map.put("QRCode","");
 
                         db.collection("Student_Leaves").add(map).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                             @Override

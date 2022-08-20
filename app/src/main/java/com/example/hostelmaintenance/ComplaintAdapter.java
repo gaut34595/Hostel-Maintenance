@@ -12,15 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements Filterable {
+public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.MyViewHolder> implements Filterable {
 
     private Context con;
     public ArrayList<GetComplaintData> complArrayList;
     public ArrayList<GetComplaintData> complArrayListFull;
 
-    public MyAdap(Context con, ArrayList<GetComplaintData> compArrayList) {
+    public ComplaintAdapter(Context con, ArrayList<GetComplaintData> compArrayList) {
         this.con = con;
         this.complArrayListFull = compArrayList;
         this.complArrayList= new ArrayList<>(complArrayListFull);
@@ -31,7 +30,7 @@ public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.data_comp_row,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.leave_complaint_row,parent,false);
         return new MyViewHolder(v);
 
     }
@@ -43,6 +42,7 @@ public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements
         holder.comp_title.setText(complArrayList.get(position).getComplaint_Title());
         holder.comp_roomNo.setText(complArrayList.get(position).getRoom_No());
         holder.comp_time.setText(complArrayList.get(position).getComplaint_Time());
+        holder.comp_desc.setText(complArrayList.get(position).getDescription());
         if(complArrayList.get(position).getComplaint_Status()==0) {
             holder.comp_status.setText("Pending");
         }else{
@@ -98,6 +98,7 @@ public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements
         TextView comp_status;
         TextView comp_roomNo;
         TextView comp_time;
+        TextView comp_desc;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -108,6 +109,7 @@ public class MyAdap extends RecyclerView.Adapter<MyAdap.MyViewHolder> implements
             comp_status=mView.findViewById(R.id.status_complain);
             comp_roomNo=mView.findViewById(R.id.status_roomNo);
             comp_time = mView.findViewById(R.id.comp_time);
+            comp_desc=mView.findViewById(R.id.comp_desc);
         }
     }
 }

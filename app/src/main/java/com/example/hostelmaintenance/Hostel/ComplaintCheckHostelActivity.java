@@ -9,12 +9,11 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.hostelmaintenance.GetComplaintData;
-import com.example.hostelmaintenance.MyAdap;
+import com.example.hostelmaintenance.ComplaintAdapter;
 import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 
 public class ComplaintCheckHostelActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    MyAdap dataAdap;
+    ComplaintAdapter dataAdap;
     ArrayList<GetComplaintData> complaintList;
     ProgressDialog progressDialog;
 
@@ -52,7 +51,7 @@ public class ComplaintCheckHostelActivity extends AppCompatActivity {
                             for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
                                 GetComplaintData get = ds.getDocument().toObject(GetComplaintData.class);
                                 complaintList.add(get);
-                                dataAdap = new MyAdap(getApplicationContext(), complaintList);
+                                dataAdap = new ComplaintAdapter(getApplicationContext(), complaintList);
                                 recyclerView.setAdapter(dataAdap);
                                 dataAdap.notifyDataSetChanged();
                                 if (progressDialog.isShowing()) {

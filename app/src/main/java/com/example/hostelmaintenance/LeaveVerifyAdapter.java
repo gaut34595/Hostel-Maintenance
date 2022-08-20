@@ -64,7 +64,7 @@ public class LeaveVerifyAdapter extends RecyclerView.Adapter<LeaveVerifyAdapter.
             holder.leave_stat.setBackgroundColor(R.color.color_login_button);
         }
         else if(leaveDatalist.get(position).getVerified_CC()==1 && leaveDatalist.get(position).getVerified_HOD()==1 &&leaveDatalist.get(position).getVerified_HW()==1){
-            holder.leave_stat.setText("On Leave");
+            holder.leave_stat.setText("GP Generated");
             holder.leave_stat.setBackgroundColor(R.color.detail_color);
         }
         else if(leaveDatalist.get(position).getVerified_HW()==-1){
@@ -80,6 +80,7 @@ public class LeaveVerifyAdapter extends RecyclerView.Adapter<LeaveVerifyAdapter.
 
     @Override
     public Filter getFilter() {
+
         return leavefilter;
     }
     private  final  Filter leavefilter = new Filter() {

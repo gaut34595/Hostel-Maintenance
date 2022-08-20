@@ -32,6 +32,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             TextView comp_status;
             TextView comp_roomNo;
             TextView comp_time;
+            TextView comp_desc;
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -43,12 +44,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             comp_status=mView.findViewById(R.id.status_complain);
             comp_roomNo=mView.findViewById(R.id.status_roomNo);
             comp_time=mView.findViewById(R.id.comp_time);
+            comp_desc= mView.findViewById(R.id.comp_desc);
+
         }
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.data_comp_row,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.leave_complaint_row,parent,false);
 
         return new ViewHolder(view);
     }
@@ -60,6 +63,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         holder.comp_date.setText(getComplaintDataList.get(position).getComplaint_Date());
         holder.comp_roomNo.setText(getComplaintDataList.get(position).getRoom_No());
         holder.comp_time.setText(getComplaintDataList.get(position).getComplaint_Time());
+        holder.comp_desc.setText(getComplaintDataList.get(position).getDescription());
 
 
         if(getComplaintDataList.get(position).getComplaint_Status()==0) {
