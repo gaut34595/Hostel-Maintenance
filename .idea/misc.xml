@@ -70,6 +70,9 @@
         <entry key="app/src/main/res/layout/activity_emergency.xml" value="0.3183876811594203" />
         <entry key="app/src/main/res/layout/activity_final_incoming.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/activity_final_transaction.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_gate_man_dashboard.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_gate_pass_verification.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_hod_dashboard.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_hod_grant_leave.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_hod_granted_leaves.xml" value="0.15577507598784193" />
         <entry key="app/src/main/res/layout/activity_hostel_leave.xml" value="0.3183876811594203" />
@@ -78,6 +81,7 @@
         <entry key="app/src/main/res/layout/activity_leave_registration.xml" value="0.3183876811594203" />
         <entry key="app/src/main/res/layout/activity_leave_transact.xml" value="0.15577507598784193" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24547101449275363" />
+        <entry key="app/src/main/res/layout/activity_qrscan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_show_qractivity.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_student_incoming.xml" value="0.30625" />
@@ -96,5 +100,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.3183876811594203" />
+      </ProjectState>
+    </option>
   </component>
 </project>

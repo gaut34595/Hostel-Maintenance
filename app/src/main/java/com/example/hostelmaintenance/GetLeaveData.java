@@ -26,6 +26,7 @@ public class GetLeaveData implements Serializable {
     String Leave_in_date;
     String QRCode;
     String Lateby;
+    String Gateout;
 
 
     int Verified_CC, Verified_HOD, Verified_HW;
@@ -40,7 +41,7 @@ public class GetLeaveData implements Serializable {
         this.id = id;
     }
 
-    public GetLeaveData(String lateby,String student_Email, String student_Enrollment, String student_Name, String student_Contact, String student_Course, String room_No, String finger_No, String father_Name, String father_Contact, String no_of_Days, String leave_Reason, String leave_Address, String leave_From, String leave_to, int verified_CC, int verified_HOD, int verified_HW, String leave_in_date,String qrCode) {
+    public GetLeaveData(String lateby,String student_Email, String student_Enrollment, String student_Name, String student_Contact, String student_Course, String room_No, String finger_No, String father_Name, String father_Contact, String no_of_Days, String leave_Reason, String leave_Address, String leave_From, String leave_to, int verified_CC, int verified_HOD, int verified_HW, String leave_in_date,String qrCode, String gateout) {
         Student_Email = student_Email;
         Student_Enrollment = student_Enrollment;
         Student_Name = student_Name;
@@ -61,6 +62,7 @@ public class GetLeaveData implements Serializable {
         Leave_in_date = leave_in_date;
         QRCode=qrCode ;
         Lateby= lateby;
+        Gateout= gateout;
     }
 
 
@@ -246,5 +248,13 @@ public class GetLeaveData implements Serializable {
 
     public void setLateby(String lateby) {
         Lateby = lateby;
+    }
+
+    public String getGateout() {
+        return Gateout;
+    }
+
+    public void setGateout(String gateout) {
+        Gateout = gateout;
     }
 }

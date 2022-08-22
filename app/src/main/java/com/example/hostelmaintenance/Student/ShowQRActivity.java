@@ -42,7 +42,7 @@ public class ShowQRActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }catch (Exception e){
-            Toast.makeText(this, "Gate Pass Not generated yet", Toast.LENGTH_SHORT).show(); 
+            Toast.makeText(this, "Gate Pass Not generated yet", Toast.LENGTH_SHORT).show();
         }
 
 

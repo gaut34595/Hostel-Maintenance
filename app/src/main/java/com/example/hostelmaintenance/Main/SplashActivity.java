@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import com.example.hostelmaintenance.College.Course_Coordinator_Dashboard;
 import com.example.hostelmaintenance.College.HOD_Dashboard_Activity;
+import com.example.hostelmaintenance.GateManDashboard;
 import com.example.hostelmaintenance.Hostel.HostelWardenDashboard;
 import com.example.hostelmaintenance.R;
 import com.example.hostelmaintenance.Student.StudentDashboard;
@@ -60,6 +61,12 @@ public class SplashActivity extends AppCompatActivity {
                                 Intent i = new Intent(SplashActivity.this, HOD_Dashboard_Activity.class);
                                 startActivity(i);
                                 finish();
+                            }
+                            if(documentSnapshot.getString("is_Security")!= null){
+                                Intent i = new Intent(SplashActivity.this, GateManDashboard.class);
+                                startActivity(i);
+                                finish();
+
                             }
 
                         }
