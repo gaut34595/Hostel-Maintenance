@@ -19,5 +19,18 @@
         <item>Others</item>
 
     </string-array>
+    <string-array name="Course">
+        <item>Select Course</item>
+        <item>B.Tech CSE</item>
+        <item>B.Tech AI</item>
+        <item>B.Tech IBM</item>
+        <item>BCA</item>
+        <item>B.Sc</item>
+
+    </string-array>
+    <!-- to toggle the open close button of the navigation drawer -->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+
 
 </resources>

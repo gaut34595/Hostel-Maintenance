@@ -83,7 +83,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24547101449275363" />
         <entry key="app/src/main/res/layout/activity_qrscan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_show_qractivity.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_student_incoming.xml" value="0.30625" />
         <entry key="app/src/main/res/layout/activity_testdemo.xml" value="0.1625" />
         <entry key="app/src/main/res/layout/activity_transacted_leave.xml" value="0.15577507598784193" />
@@ -91,6 +91,7 @@
         <entry key="app/src/main/res/layout/data_comp_row.xml" value="0.335" />
         <entry key="app/src/main/res/layout/leave_comp_row.xml" value="0.335" />
         <entry key="app/src/main/res/layout/leave_complaint_row.xml" value="0.245018115942029" />
+        <entry key="app/src/main/res/layout/spinner_row.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/stats_incoming_leave.xml" value="0.18206521739130435" />
       </map>
     </option>
@@ -104,7 +105,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.3183876811594203" />
+        <option name="scale" value="0.335" />
       </ProjectState>
     </option>
   </component>

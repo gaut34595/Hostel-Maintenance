@@ -19,7 +19,11 @@ import com.example.hostelmaintenance.LeaveVerifyAdapter;
 import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -30,6 +34,9 @@ public class CC_Verify_Leave extends AppCompatActivity implements LeaveVerifyAda
     LeaveVerifyAdapter leaveVerifyAdapter;
     ArrayList<GetLeaveData> leavelist;
     ProgressDialog progressDialog;
+    FirebaseAuth auth;
+    FirebaseUser user;
+    FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,49 +44,69 @@ public class CC_Verify_Leave extends AppCompatActivity implements LeaveVerifyAda
         setContentView(R.layout.activity_cc_verify_leave);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
+        firebaseFirestore= FirebaseFirestore.getInstance();
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
         int num = 0;
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        String email = user.getEmail();
+        String uid = user.getUid();
+        Log.d("--->>>>>>",uid);
         leavelist= new ArrayList<>();
         recyclerView1 = findViewById(R.id.recyclercheck);
         recyclerView1.setHasFixedSize(true);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_CC",num)
-                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(queryDocumentSnapshots.size()!=0){
-                        for(DocumentChange ds: queryDocumentSnapshots.getDocumentChanges()){
-                                GetLeaveData geta = ds.getDocument().toObject(GetLeaveData.class);
-                                geta.setId(ds.getDocument().getId());
-                                leavelist.add(geta);
+        DocumentReference dr = firebaseFirestore.collection("Users").document(uid);
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+              String course = String.valueOf(documentSnapshot.get("Course"));
+                Log.d(">>>>>>>>>.",course);
+                FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_CC",num).whereEqualTo("Student_Course",course)
+                        .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if(queryDocumentSnapshots.size()!=0){
+                                    for(DocumentChange ds: queryDocumentSnapshots.getDocumentChanges()){
+                                        GetLeaveData geta = ds.getDocument().toObject(GetLeaveData.class);
+                                        geta.setId(ds.getDocument().getId());
+                                        leavelist.add(geta);
 
-                                leaveVerifyAdapter = new LeaveVerifyAdapter(getApplicationContext(), leavelist, CC_Verify_Leave.this);
-                                recyclerView1.setAdapter(leaveVerifyAdapter);
-                                leaveVerifyAdapter.notifyDataSetChanged();
-                                if (progressDialog.isShowing()) {
-                                    progressDialog.dismiss();
+                                        leaveVerifyAdapter = new LeaveVerifyAdapter(getApplicationContext(), leavelist, CC_Verify_Leave.this);
+                                        recyclerView1.setAdapter(leaveVerifyAdapter);
+                                        leaveVerifyAdapter.notifyDataSetChanged();
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                        }
+                                    }
+
+                                }
+                                else{
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(CC_Verify_Leave.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
                             }
-
-                        }
-                        else{
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                                Toast.makeText(CC_Verify_Leave.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                }
+                                Log.d(">>>>>>>>>",e.getMessage());
                             }
+                        });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("----->>>>",e.getMessage());
+            }
+        });
 
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        if(progressDialog.isShowing()){
-                            progressDialog.dismiss();
-                        }
-                        Log.d(">>>>>>>>>",e.getMessage());
-                    }
-                });
 
 
     }
@@ -112,4 +139,6 @@ public class CC_Verify_Leave extends AppCompatActivity implements LeaveVerifyAda
         startActivity(i);
         finish();
     }
+
+
 }

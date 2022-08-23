@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,12 +33,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private TextView login;
     private Button register;
     private EditText email, password, name, father_name, enrollment, course, finger, room, cont_stud, cont_father;
+    Spinner course1;
+    ScrollView scrollView;
     private FirebaseAuth auth;
     private FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        scrollView=findViewById(R.id.root);
         setContentView(R.layout.activity_signup);
         login = findViewById(R.id.register_bottom);
         email = findViewById(R.id.email);
@@ -42,7 +49,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         name = findViewById(R.id.std_name);
         father_name = findViewById(R.id.father_name);
         enrollment = findViewById(R.id.enrollment);
-        course = findViewById(R.id.stud_course);
+       // course = findViewById(R.id.stud_course);
         finger = findViewById(R.id.std_finger);
         room = findViewById(R.id.room_no);
         cont_stud = findViewById(R.id.std_contact);
@@ -50,6 +57,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         register = findViewById(R.id.button_signup);
         auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+        course1= findViewById(R.id.stud_course);
 
         login.setOnClickListener(e->{
             Intent i = new Intent(this, LoginActivity.class);
@@ -57,7 +65,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         register.setOnClickListener(this);
-
 
     }
 
@@ -67,7 +74,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         String textname = name.getText().toString();
         String fathername = father_name.getText().toString();
         String textenrollment = enrollment.getText().toString();
-        String textcourse = course.getText().toString();
+        String textcourse = course1.getSelectedItem().toString();
         String textfinger = finger.getText().toString();
         String textroom = room.getText().toString();
         String text_std_cont = cont_stud.getText().toString();
@@ -92,6 +99,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
                 Toast.makeText(this, "Password to Short", Toast.LENGTH_SHORT).show();
               }
+            else if(textcourse.equals("Select Course")){
+          //  Toast.makeText(this, "Please select a valid course", Toast.LENGTH_SHORT).show();
+            Snackbar.make(this,course1.getRootView(),"Please Select Course",Snackbar.LENGTH_LONG).show();
+        }
                 else{
 
             auth.createUserWithEmailAndPassword(textemail, textpassword)

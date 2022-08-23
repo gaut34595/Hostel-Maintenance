@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_drawer_layout"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".testt.VollyTest">
+    tools:context=".testt.VollyTest"
+    tools:ignore="HardcodedText">
 
 <!--    <Button-->
-<!--        android:onClick="check1"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"/>-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Generate"-->
+<!--        android:id="@+id/btn"/>-->
 
-    <Button
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/qr"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:adjustViewBounds="true"/>-->
+
+    <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Generate"
-        android:id="@+id/btn"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_drawer" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/qr"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"/>
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

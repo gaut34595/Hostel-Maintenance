@@ -1,5 +1,6 @@
 package com.example.hostelmaintenance.Main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -17,6 +18,7 @@ import com.example.hostelmaintenance.GateManDashboard;
 import com.example.hostelmaintenance.Hostel.HostelWardenDashboard;
 import com.example.hostelmaintenance.R;
 import com.example.hostelmaintenance.Student.StudentDashboard;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,6 +85,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(AuthResult authResult) {
                 Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                 checkUserAccessLevel(authResult.getUser().getUid());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
+                Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
             }
         });
     }

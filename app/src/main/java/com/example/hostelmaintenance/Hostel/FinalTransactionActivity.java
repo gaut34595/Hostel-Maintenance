@@ -154,7 +154,7 @@ public class FinalTransactionActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
 
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("To","whatsapp:+919675056122");
+                params.put("To","whatsapp:+918439046950");
                 params.put("From","whatsapp:+14155238886");
                 params.put("Body","Respected Sir, Your Ward " + stud_name + " has been checked out from Hostel from " + leave_from + " to " + leave_to + " Thank You-TMU HOSTEL");
                 return params;
@@ -190,7 +190,7 @@ public class FinalTransactionActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
 
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("To","+919675056122");
+                params.put("To","+918439046950");
                 params.put("From","+15802036610");
                 params.put("MessagingServiceSid", "MG09b2716158c1a5a75c8598a0da3d546e");
                 params.put("Body","Respected Sir, Your Ward " + stud_name + " has been checked out from Hostel from " + leave_from + " to " + leave_to + " Thank You-TMU HOSTEL");

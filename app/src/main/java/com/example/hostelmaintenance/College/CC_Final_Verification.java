@@ -254,8 +254,8 @@ public class CC_Final_Verification extends AppCompatActivity {
                 ActivityCompat.requestPermissions(CC_Final_Verification.this,new String[]{
                         Manifest.permission.CALL_PHONE},REQUEST_CALL);
             }else{
-                String dial = "tel:" +"+91" +stud_cont;
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                String dial1 = "tel:" +"+91" +stud_cont;
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial1)));
             }
         }else{
             Toast.makeText(this, "Check Phone Number", Toast.LENGTH_SHORT).show();

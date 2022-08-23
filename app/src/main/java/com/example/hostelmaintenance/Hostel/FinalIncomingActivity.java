@@ -19,8 +19,10 @@ import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,6 +97,7 @@ public class FinalIncomingActivity extends AppCompatActivity {
             HashMap<String, Object> map = new HashMap<>();
             map.put("Lateby", late);
             map.put("Verified_HW", num);
+            map.put("QRCode", FieldValue.delete());
             dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
