@@ -41,6 +41,8 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
             leave_f,leave_t,fat_cont,no_of_days,leave_reason,leave_add,stud_dept,stud_hostel;
     String imageurl;
     int IsVerifiedbyCC,IsVerifiedbyHOD,IsVerifiedbyHW;
+
+    int gateout,gatein;
     EditText leaveFrom,leaveTo;
     Button submit;
     DatePickerDialog picker;
@@ -96,6 +98,8 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                     IsVerifiedbyCC= 0;
                     IsVerifiedbyHOD  = 0;
                     IsVerifiedbyHW= 0;
+                    gatein=0;
+                    gateout = 0;
 
                     FirebaseFirestore db= FirebaseFirestore.getInstance();
                     if(TextUtils.isEmpty(leave_f) ||TextUtils.isEmpty(leave_t) ||
@@ -127,8 +131,8 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                         map.put("Verified_HW",IsVerifiedbyHW);
                         map.put("QRCode","");
                         map.put("ImageLink",imageurl);
-                        map.put("Gate_Validation_Out","");
-                        map.put("Gate_Validation_In","");
+                        map.put("Gate_Validation_Out",gateout);
+                        map.put("Gate_Validation_In",gatein);
                         map.put("Gate_Validation_Out_Time","");
                         map.put("Gate_Validation_In_Time","");
                         map.put("Late_by","");
@@ -148,6 +152,14 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                                   startActivity(i);
                                   finish();
                               }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                if(progressDialog.isShowing()){
+                                    progressDialog.dismiss();
+                                    Toast.makeText(LeaveRegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                     }
@@ -238,7 +250,7 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                                 }
 
                             } catch (ParseException e) {
-                                e.printStackTrace();
+                                Toast.makeText(LeaveRegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -247,12 +259,6 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
 
                         }
                     });
-
-
-                  //  String leavefromdate = "05/04/2021";
-                  //  String leavedateto =   "05/04/2021";
-
-
 
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
@@ -267,7 +273,10 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(LeaveRegistrationActivity.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                            Toast.makeText(LeaveRegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }

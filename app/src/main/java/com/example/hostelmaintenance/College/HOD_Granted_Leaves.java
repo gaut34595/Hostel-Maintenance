@@ -91,8 +91,8 @@ public class HOD_Granted_Leaves extends AppCompatActivity implements LeaveVerify
                             public void onFailure(@NonNull Exception e) {
                                 if(progressDialog.isShowing()){
                                     progressDialog.dismiss();
+                                    Toast.makeText(HOD_Granted_Leaves.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                Log.d(">>>>>>>>>",e.getMessage());
 
                             }
                         });
@@ -101,6 +101,10 @@ public class HOD_Granted_Leaves extends AppCompatActivity implements LeaveVerify
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                    Toast.makeText(HOD_Granted_Leaves.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

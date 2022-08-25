@@ -46,41 +46,6 @@ public class ComplaintStatusActivity extends AppCompatActivity {
         rvlist.setLayoutManager(new LinearLayoutManager(this));
         rvlist.setAdapter(dataAdapter);
 
-//            db=FirebaseFirestore.getInstance();
-//            documentReference=db.collection("Maintenance").document();
-//            db.collection("Maintenance").addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                @Override
-//                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                     for(DocumentSnapshot ds : value){
-//                         String first= ds.getString("Name");
-//                         Log.d("-------->>>>",first);
-//                     }
-//                }
-//            });
-////
-//        FirebaseFirestore.getInstance().collection("Maintenance").whereEqualTo("Email",email)
-//                .get().addOnCompleteListener((Task<QuerySnapshot> task) -> {
-//                    if(task.isSuccessful()){
-//                        Log.d(">>>>>>>>>","Inside Maintenance");
-//                        for (QueryDocumentSnapshot doc : task.getResult()){
-//                            Log.d("------>>>>>>>>>>", doc.getId() + ">>" + doc.getData());
-//                            String txt_n = doc.getString("Email");
-//                            ArrayAdapter<String> adapter= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_selectable_list_item);
-//                            adapter.notifyDataSetChanged();
-//                        }
-//                    }
-//                });
-//        FirebaseFirestore.getInstance().collection("Maintenance").whereEqualTo("Email",email)
-//                .get().addOnCompleteListener(task -> {
-//                   if(task.isSuccessful()){
-//                       for(DocumentSnapshot ds: task.getResult()){
-////                           String first = ds.getString("Room_No  ");
-////                           Log.d("--->>>>>>>",first);
-//                           GetComplaintData getComplaintData= ds.getData(GetComplaintData.class);
-//                       }
-//                   }
-//                });
-
         FirebaseFirestore.getInstance().collection("Complaints")
                 .whereEqualTo("Email",email)
                 .get().addOnCompleteListener(task -> {
@@ -103,6 +68,7 @@ public class ComplaintStatusActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         if (progressDialog.isShowing()) {
                             progressDialog.dismiss();
+
                         }
                     }
                 });

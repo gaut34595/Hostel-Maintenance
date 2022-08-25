@@ -180,9 +180,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -219,7 +216,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(Uri uri) {
                         imageurl= uri.toString();
-                        Log.d(">>>>>>>>>",imageurl);
                         uploadData();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -276,9 +272,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     public void onFailure(@NonNull Exception e) {
                         if(progressDialog.isShowing()){
                             progressDialog.dismiss();
+                            Toast.makeText(SignupActivity.this, e.getMessage()+"", Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(SignupActivity.this, e.getMessage()+"", Toast.LENGTH_SHORT).show();
-                        Log.d("------->>>>>>>>", e.getMessage());
+
                     }
                 });
     }

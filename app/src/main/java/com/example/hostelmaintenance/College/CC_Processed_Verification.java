@@ -90,8 +90,8 @@ public class CC_Processed_Verification extends AppCompatActivity implements Leav
                             public void onFailure(@NonNull Exception e) {
                                 if(progressDialog.isShowing()){
                                     progressDialog.dismiss();
+                                    Toast.makeText(CC_Processed_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                Log.d(">>>>>>>>>",e.getMessage());
 
                             }
                         });
@@ -99,7 +99,10 @@ public class CC_Processed_Verification extends AppCompatActivity implements Leav
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("---->>>>",e.getMessage());
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                    Toast.makeText(CC_Processed_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

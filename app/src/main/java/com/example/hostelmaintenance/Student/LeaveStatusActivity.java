@@ -84,36 +84,10 @@ public class LeaveStatusActivity extends AppCompatActivity implements LeaveVerif
                     public void onFailure(@NonNull Exception e) {
                         if (progressDialog.isShowing()) {
                             progressDialog.dismiss();
+                            Toast.makeText(LeaveStatusActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                        Log.d(">>>>>>>>>", e.getMessage());
                     }
                 });
-//        auth=FirebaseAuth.getInstance();
-//        user= auth.getCurrentUser();
-//        String email = user.getEmail();
-//        leavelist= new ArrayList<>();
-////        leaveAdapter = new LeaveVerifyAdapter(this,leavelist);
-////        leaverecycle= findViewById(R.id.recyclerviewleave);
-////        leaverecycle.setHasFixedSize(true);
-////        leaverecycle.setLayoutManager(new LinearLayoutManager(this));
-////        leaverecycle.setAdapter(leaveAdapter);
-////
-////       FirebaseFirestore.getInstance().collection("Student_Leaves").
-////               whereEqualTo("Student_Email", email).get()
-////               .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-////                   @Override
-////                   public void onComplete(@NonNull Task<QuerySnapshot> task) {
-////                       if(task.isSuccessful()){
-////                           Log.d("---------->>>","Yha tk aa gya hu m");
-////                           for(DocumentChange dd: task.getResult().getDocumentChanges()){
-////                               GetLeaveData getLeaveDat = dd.getDocument().toObject(GetLeaveData.class);
-////                               leavelist.add(getLeaveDat);
-////                               leaveAdapter.notifyDataSetChanged();
-////                           }
-////                       }
-////
-////                   }
-////               });
     }
 
     @Override

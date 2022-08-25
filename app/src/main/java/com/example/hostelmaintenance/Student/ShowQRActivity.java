@@ -39,7 +39,7 @@ public class ShowQRActivity extends AppCompatActivity {
                 Bitmap bitmap = encoder.createBitmap(matrix);
                 qr.setImageBitmap(bitmap);
             } catch (WriterException e) {
-                e.printStackTrace();
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }catch (Exception e){
             Toast.makeText(this, "Gate Pass Not generated yet", Toast.LENGTH_SHORT).show();

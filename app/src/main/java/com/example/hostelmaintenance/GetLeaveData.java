@@ -27,8 +27,8 @@ public class GetLeaveData implements Serializable {
     String QRCode;
     String ImageLink;
     String Late_by;
-    String Gate_Validation_Out;
-    String Gate_Validation_In;
+    int Gate_Validation_Out;
+    int Gate_Validation_In;
     String Gate_Validation_Out_Time;
     String Gate_Validation_In_Time;
     String Student_Department;
@@ -43,7 +43,7 @@ public class GetLeaveData implements Serializable {
     public GetLeaveData(String late_by,String student_Email, String student_Enrollment, String student_Name, String student_Contact,
                         String student_Course, String room_No, String finger_No, String father_Name, String father_Contact, String no_of_Days, String leave_Reason,
                         String leave_Address, String leave_From, String leave_to, int verified_CC, int verified_HOD, int verified_HW, String leave_in_date,String qrCode,
-                        String gate_validation_out, String imagelink , String gate_Validation_In, String gate_Validation_Out_Time, String gate_Validation_In_Time
+                        int gate_validation_out, String imagelink , int gate_Validation_In, String gate_Validation_Out_Time, String gate_Validation_In_Time
                             ,String student_Department, String student_Hostel) {
         Student_Email = student_Email;
         Student_Enrollment = student_Enrollment;
@@ -97,9 +97,9 @@ public class GetLeaveData implements Serializable {
         Leave_in_date= in.readString();
         QRCode= in.readString() ;
         Late_by= in.readString();
-        Gate_Validation_Out= in.readString();
+        Gate_Validation_Out= in.readInt();
         ImageLink= in.readString();
-        Gate_Validation_In = in.readString();
+        Gate_Validation_In = in.readInt();
         Gate_Validation_Out_Time= in.readString();
         Gate_Validation_In_Time = in.readString();
         Student_Hostel= in.readString();
@@ -284,22 +284,6 @@ public class GetLeaveData implements Serializable {
         Late_by = late_by;
     }
 
-    public String getGate_Validation_Out() {
-        return Gate_Validation_Out;
-    }
-
-    public void setGate_Validation_Out(String gate_Validation_Out) {
-        Gate_Validation_Out = gate_Validation_Out;
-    }
-
-    public String getGate_Validation_In() {
-        return Gate_Validation_In;
-    }
-
-    public void setGate_Validation_In(String gate_Validation_In) {
-        Gate_Validation_In = gate_Validation_In;
-    }
-
     public String getGate_Validation_Out_Time() {
         return Gate_Validation_Out_Time;
     }
@@ -330,5 +314,21 @@ public class GetLeaveData implements Serializable {
 
     public void setStudent_Hostel(String student_Hostel) {
         Student_Hostel = student_Hostel;
+    }
+
+    public int getGate_Validation_Out() {
+        return Gate_Validation_Out;
+    }
+
+    public void setGate_Validation_Out(int gate_Validation_Out) {
+        Gate_Validation_Out = gate_Validation_Out;
+    }
+
+    public int getGate_Validation_In() {
+        return Gate_Validation_In;
+    }
+
+    public void setGate_Validation_In(int gate_Validation_In) {
+        Gate_Validation_In = gate_Validation_In;
     }
 }

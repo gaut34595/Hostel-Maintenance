@@ -1,11 +1,13 @@
 package com.example.hostelmaintenance.Main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.hostelmaintenance.College.Course_Coordinator_Dashboard;
 import com.example.hostelmaintenance.College.HOD_Dashboard_Activity;
@@ -13,6 +15,7 @@ import com.example.hostelmaintenance.GateManDashboard;
 import com.example.hostelmaintenance.Hostel.HostelWardenDashboard;
 import com.example.hostelmaintenance.R;
 import com.example.hostelmaintenance.Student.StudentDashboard;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -69,6 +72,11 @@ public class SplashActivity extends AppCompatActivity {
 
                             }
 
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SplashActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

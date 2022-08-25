@@ -63,13 +63,21 @@ public class LeaveVerifyAdapter extends RecyclerView.Adapter<LeaveVerifyAdapter.
             holder.leave_stat.setText("HOD");
             holder.leave_stat.setBackgroundColor(R.color.color_login_button);
         }
-        else if(leaveDatalist.get(position).getVerified_CC()==1 && leaveDatalist.get(position).getVerified_HOD()==1 &&leaveDatalist.get(position).getVerified_HW()==1){
+        else if(leaveDatalist.get(position).getVerified_HW()==1 && leaveDatalist.get(position).getGate_Validation_Out()==0){
             holder.leave_stat.setText("GP Generated");
             holder.leave_stat.setBackgroundColor(R.color.detail_color);
         }
-        else if(leaveDatalist.get(position).getVerified_HW()==-1){
-            holder.leave_stat.setText("Student In");
+        else if(leaveDatalist.get(position).getVerified_HW()==1 && leaveDatalist.get(position).getGate_Validation_Out()==1){ //&& leaveDatalist.get(position).getVerified_HW()==1 && leaveDatalist.get(position).getVerified_CC()==1 && leaveDatalist.get(position).getVerified_HOD()==1){
+            holder.leave_stat.setText("Student Out(Gate)");
+            holder.leave_stat.setBackgroundColor(R.color.purple_500);
+        }
+        else if(leaveDatalist.get(position).getVerified_HW()==1 && leaveDatalist.get(position).getGate_Validation_In()==1){
+            holder.leave_stat.setText("Student In(Gate)");
             holder.leave_stat.setBackgroundColor(green1);
+        }
+        else if(leaveDatalist.get(position).getVerified_HW()==-1 && leaveDatalist.get(position).getGate_Validation_In()==-1){
+            holder.leave_stat.setText("Student In");
+            holder.leave_stat.setBackgroundColor(R.color.purple_700);
         }
     }
 

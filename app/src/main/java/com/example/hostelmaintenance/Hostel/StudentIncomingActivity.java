@@ -19,7 +19,11 @@ import com.example.hostelmaintenance.LeaveVerifyAdapter;
 import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -30,6 +34,9 @@ public class StudentIncomingActivity extends AppCompatActivity implements LeaveV
     LeaveVerifyAdapter lVA;
     ArrayList<GetLeaveData> incominglist;
     ProgressDialog progressDialog;
+    FirebaseAuth auth;
+    FirebaseUser user;
+    FirebaseFirestore firebaseFirestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,46 +46,69 @@ public class StudentIncomingActivity extends AppCompatActivity implements LeaveV
         progressDialog.setMessage("Fetching Data.....");
         progressDialog.show();
         incominglist = new ArrayList<>();
+        firebaseFirestore= FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        String uid = user.getUid();
         int num = 1;
+
         recyclerviewIncoming= findViewById(R.id.incoming_recycle);
         recyclerviewIncoming.setHasFixedSize(true);
         recyclerviewIncoming.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HW", num)
-                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (queryDocumentSnapshots.size() != 0) {
-                        for (DocumentChange ds: queryDocumentSnapshots.getDocumentChanges()) {
-                            GetLeaveData getIncoming = ds.getDocument().toObject(GetLeaveData.class);
-                            getIncoming.setId(ds.getDocument().getId());
-                            incominglist.add(getIncoming);
+        DocumentReference dr = firebaseFirestore.collection("Users").document(uid);
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String hostel = String.valueOf(documentSnapshot.get("Hostel"));
+                FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HW", num).whereEqualTo("Gate_Validation_In",num).whereEqualTo("Student_Hostel",hostel)
+                        .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if (queryDocumentSnapshots.size() != 0) {
+                                    for (DocumentChange ds: queryDocumentSnapshots.getDocumentChanges()) {
+                                        GetLeaveData getIncoming = ds.getDocument().toObject(GetLeaveData.class);
+                                        getIncoming.setId(ds.getDocument().getId());
+                                        incominglist.add(getIncoming);
 
-                            lVA = new LeaveVerifyAdapter(getApplicationContext(), incominglist, StudentIncomingActivity.this);
-                            recyclerviewIncoming.setAdapter(lVA);
-                            lVA.notifyDataSetChanged();
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
+                                        lVA = new LeaveVerifyAdapter(getApplicationContext(), incominglist, StudentIncomingActivity.this);
+                                        recyclerviewIncoming.setAdapter(lVA);
+                                        lVA.notifyDataSetChanged();
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
 
+                                        }
+                                    }
+                                }
+                                else{
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(StudentIncomingActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
                             }
-                        }
-                        }
-                        else{
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                                Toast.makeText(StudentIncomingActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(StudentIncomingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
+                        });
 
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        if (progressDialog.isShowing()) {
-                            progressDialog.dismiss();
-                        }
-                        Log.d(">>>>>>>>>", e.getMessage());
-                    }
-                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                    Toast.makeText(StudentIncomingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
     }
 

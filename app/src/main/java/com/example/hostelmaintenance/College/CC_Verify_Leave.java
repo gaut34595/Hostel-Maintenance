@@ -95,15 +95,18 @@ public class CC_Verify_Leave extends AppCompatActivity implements LeaveVerifyAda
                             public void onFailure(@NonNull Exception e) {
                                 if(progressDialog.isShowing()){
                                     progressDialog.dismiss();
+                                    Toast.makeText(CC_Verify_Leave.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                Log.d(">>>>>>>>>",e.getMessage());
                             }
                         });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("----->>>>",e.getMessage());
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                    Toast.makeText(CC_Verify_Leave.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

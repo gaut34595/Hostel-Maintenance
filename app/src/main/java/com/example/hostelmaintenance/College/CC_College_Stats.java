@@ -60,7 +60,7 @@ public class CC_College_Stats extends AppCompatActivity implements IncomingLeave
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String course = String.valueOf(documentSnapshot.get("Course"));
-                FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Student_Course",course).whereEqualTo("Verified_HW",1)
+                FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Student_Course",course)
                         .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -89,15 +89,18 @@ public class CC_College_Stats extends AppCompatActivity implements IncomingLeave
                             public void onFailure(@NonNull Exception e) {
                                 if(progressDialog.isShowing()){
                                     progressDialog.dismiss();
+                                    Toast.makeText(CC_College_Stats.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                Log.d(">>>>>>>>>",e.getMessage());
                             }
                         });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(">>>>>>>",e.getMessage());
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                    Toast.makeText(CC_College_Stats.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

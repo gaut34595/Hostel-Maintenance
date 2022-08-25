@@ -65,10 +65,8 @@ public class HOD_Grant_Leave extends AppCompatActivity implements LeaveVerifyAda
                         .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                Log.d("---->>>>>>>>","Inside for success");
                                 if(queryDocumentSnapshots.size()!=0){
                                     for(DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()){
-                                        Log.d("---->>>>>>>>","Inside for");
                                         GetLeaveData gdata = ds.getDocument().toObject(GetLeaveData.class);
                                         gdata.setId(ds.getDocument().getId());
                                         grantlist.add(gdata);
@@ -80,8 +78,6 @@ public class HOD_Grant_Leave extends AppCompatActivity implements LeaveVerifyAda
                                             progressDialog.dismiss();
                                         }
                                     }
-
-
                                 }
                                 else {
                                     if (progressDialog.isShowing()) {
@@ -95,11 +91,10 @@ public class HOD_Grant_Leave extends AppCompatActivity implements LeaveVerifyAda
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.d("---->>>>>>>>","Inside for");
                                 if(progressDialog.isShowing()){
                                     progressDialog.dismiss();
+                                    Toast.makeText(HOD_Grant_Leave.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                Log.d(">>>>>>>>>",e.getMessage());
 
                             }
                         });
@@ -109,6 +104,10 @@ public class HOD_Grant_Leave extends AppCompatActivity implements LeaveVerifyAda
             @Override
             public void onFailure(@NonNull Exception e) {
 
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                    Toast.makeText(HOD_Grant_Leave.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -82,21 +82,20 @@ public class HOD_Stats_Activity extends AppCompatActivity implements IncomingLea
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-
-                                if(progressDialog.isShowing()){
+                                if (progressDialog.isShowing()) {
                                     progressDialog.dismiss();
+                                    Toast.makeText(HOD_Stats_Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                Log.d(">>>>>>>>>",e.getMessage());
                             }
                         });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                if(progressDialog.isShowing()){
+                if (progressDialog.isShowing()) {
                     progressDialog.dismiss();
+                    Toast.makeText(HOD_Stats_Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-                Log.d(">>>>>>>>>",e.getMessage());
             }
         });
     }

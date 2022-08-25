@@ -117,7 +117,7 @@ public class HOD_Final_Verification extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d(">>>>>>>>>>>>>>>>>>>>>", e.getMessage());
+                    Toast.makeText(HOD_Final_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });

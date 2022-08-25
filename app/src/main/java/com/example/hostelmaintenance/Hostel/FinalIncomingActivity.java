@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.hostelmaintenance.GetLeaveData;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -36,6 +38,8 @@ public class FinalIncomingActivity extends AppCompatActivity {
     EditText stud_enroll_text,stud_name_text,stud_course_text,leave_from_text,leave_to_text,roomn_text,
     fingern_text,leavein_text;
     Button accept;
+    ImageView userimage;
+    String imageurl;
     private FirebaseFirestore db;
     private GetLeaveData incoming_data;
     DatePickerDialog picker;
@@ -54,6 +58,7 @@ public class FinalIncomingActivity extends AppCompatActivity {
         fingern_text = findViewById(R.id.incoming_finger);
         leavein_text = findViewById(R.id.incoming_indate);
         accept= findViewById(R.id.button_accept);
+        userimage= findViewById(R.id.hosuser_image);
 
         incoming_data= (GetLeaveData) i.getSerializableExtra("Incoming_Item");
         db= FirebaseFirestore.getInstance();
@@ -65,7 +70,9 @@ public class FinalIncomingActivity extends AppCompatActivity {
         leave_to = incoming_data.getLeave_to();
         room_no= incoming_data.getRoom_No();
         finger = incoming_data.getFinger_No();
+        imageurl= incoming_data.getImageLink();
 
+        Picasso.get().load(imageurl).into(userimage);
         stud_enroll_text.setText(stud_enroll);
         stud_name_text.setText(stud_name);
         stud_course_text.setText(stud_course);
@@ -73,6 +80,7 @@ public class FinalIncomingActivity extends AppCompatActivity {
         leave_to_text.setText(leave_to);
         fingern_text.setText(finger);
         roomn_text.setText(room_no);
+
 
         accept.setOnClickListener(e-> {
             in_Date = leavein_text.getText().toString();
@@ -88,15 +96,15 @@ public class FinalIncomingActivity extends AppCompatActivity {
                     Date d2 = dateFormat.parse(leavedateto);
                     long diff = d1.getTime() - d2.getTime();
                     late = String.valueOf((int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + "");
-                    Log.d(">>>>>", String.valueOf((int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)) + "");
                 } catch (ParseException a) {
                     a.printStackTrace();
                 }
             }
             DocumentReference dd = db.collection("Student_Leaves").document(incoming_data.getId());
             HashMap<String, Object> map = new HashMap<>();
-            map.put("Lateby", late);
+            map.put("Late_by", late);
             map.put("Verified_HW", num);
+            map.put("Gate_Validation_In", num);
             map.put("QRCode", FieldValue.delete());
             dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -110,7 +118,7 @@ public class FinalIncomingActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d(">>>>>>>>>>>>>>>>>>>>>", e.getMessage());
+                    Toast.makeText(FinalIncomingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 

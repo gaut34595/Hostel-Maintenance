@@ -133,7 +133,7 @@ public class FinalTransactionActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d("----->>>>>>>",e.getMessage());
+                    Toast.makeText(FinalTransactionActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });

@@ -19,7 +19,11 @@ import com.example.hostelmaintenance.LeaveVerifyAdapter;
 import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -31,6 +35,9 @@ public class LeaveTransactActivity extends AppCompatActivity implements LeaveVer
     LeaveVerifyAdapter lVA;
     ArrayList<GetLeaveData> transactlist;
     ProgressDialog progressDialog;
+    FirebaseAuth auth;
+    FirebaseUser user;
+    FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,49 +47,73 @@ public class LeaveTransactActivity extends AppCompatActivity implements LeaveVer
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data.....");
         progressDialog.show();
+        firebaseFirestore= FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        String uid = user.getUid();
         int num = 1;
         int num2=0;
         transactlist = new ArrayList<>();
         recyclerViewTransact = findViewById(R.id.transact_recycle);
         recyclerViewTransact.setHasFixedSize(true);
         recyclerViewTransact.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HOD", num).whereEqualTo("Verified_HW",num2)
-                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (queryDocumentSnapshots.size() != 0) {
-                            for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
-                                GetLeaveData getData = ds.getDocument().toObject(GetLeaveData.class);
-                                getData.setId(ds.getDocument().getId());
-                                transactlist.add(getData);
 
-                                lVA = new LeaveVerifyAdapter(getApplicationContext(), transactlist, LeaveTransactActivity.this);
-                                recyclerViewTransact.setAdapter(lVA);
-                                lVA.notifyDataSetChanged();
-                                if (progressDialog.isShowing()) {
-                                    progressDialog.dismiss();
+        DocumentReference dr = firebaseFirestore.collection("Users").document(uid);
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String hostel = String.valueOf(documentSnapshot.get("Hostel"));
+                FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_HOD", num).whereEqualTo("Verified_HW",num2)
+                        .whereEqualTo("Student_Hostel",hostel)
+                        .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if (queryDocumentSnapshots.size() != 0) {
+                                    for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
+                                        GetLeaveData getData = ds.getDocument().toObject(GetLeaveData.class);
+                                        getData.setId(ds.getDocument().getId());
+                                        transactlist.add(getData);
+
+                                        lVA = new LeaveVerifyAdapter(getApplicationContext(), transactlist, LeaveTransactActivity.this);
+                                        recyclerViewTransact.setAdapter(lVA);
+                                        lVA.notifyDataSetChanged();
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+
+                                        }
+                                    }
+                                }
+                                else{
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(LeaveTransactActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
+
+                                    }
 
                                 }
                             }
-                        }
-                        else{
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                                Toast.makeText(LeaveTransactActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
-
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(LeaveTransactActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
+                        });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                    Toast.makeText(LeaveTransactActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
 
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        if (progressDialog.isShowing()) {
-                            progressDialog.dismiss();
-                        }
-                        Log.d(">>>>>>>>>", e.getMessage());
-                    }
-                });
+
+        });
+
     }
 
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {

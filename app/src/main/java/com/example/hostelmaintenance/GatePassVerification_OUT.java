@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class GatePassVerification_OUT extends AppCompatActivity {
-    EditText enroll,name,course,fathname,fathercont,leavefrom,leaveto;
+    EditText enroll,name,course,fathname,fathercont,leavefrom,leaveto,hostel;
     ScrollView scrollView;
     ImageView userimage;
     String imagelink;
@@ -44,6 +44,7 @@ public class GatePassVerification_OUT extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
+        int num= 0;
         enroll=findViewById(R.id.gatestudent_enrol);
         name = findViewById(R.id.gatestudent_name);
         course = findViewById(R.id.gatestud_program);
@@ -52,12 +53,13 @@ public class GatePassVerification_OUT extends AppCompatActivity {
         leavefrom = findViewById(R.id.gateleavefrom);
         leaveto = findViewById(R.id.gateleaveto);
         validate=findViewById(R.id.button_validate);
+        hostel= findViewById(R.id.gatestud_hostel);
         userimage= findViewById(R.id.gateuser_image);
         String qrid = intent.getStringExtra("QRid");
         gatetimeout = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
 
 
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("QRCode",qrid)
+        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("QRCode",qrid).whereEqualTo("Gate_Validation_Out",num)
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -72,6 +74,7 @@ public class GatePassVerification_OUT extends AppCompatActivity {
                                 fathercont.setText(geta.getFather_Contact());
                                 leavefrom.setText(geta.getLeave_From());
                                 leaveto.setText(geta.getLeave_to());
+                                hostel.setText(geta.getStudent_Hostel());
                                 geta.setId(ds.getDocument().getId());
                                 Picasso.get().load(imagelink).into(userimage);
                                 if (progressDialog.isShowing()) {
@@ -94,7 +97,6 @@ public class GatePassVerification_OUT extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(GatePassVerification_OUT.this, "No data available", Toast.LENGTH_SHORT).show();
-                        Log.d(">>>>>>>>>",e.getMessage());
                     }
                 });
 
@@ -115,7 +117,7 @@ public class GatePassVerification_OUT extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d("----->>>>>>>",e.getMessage());
+                    Toast.makeText(GatePassVerification_OUT.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });

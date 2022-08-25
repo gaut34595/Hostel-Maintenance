@@ -46,28 +46,40 @@ public class IncomingLeaveAdapter extends RecyclerView.Adapter<IncomingLeaveAdap
         holder.name.setText(leaveDlist.get(position).getStudent_Name());
         holder.std_l_from.setText(leaveDlist.get(position).getLeave_From() + " ");
         Log.d("------>>>>>>>>>>", leaveDlist.get(position).getLeave_From());
-
         holder.std_l_to.setText(leaveDlist.get(position).getLeave_to() + " ");
         holder.std_course.setText(leaveDlist.get(position).getStudent_Course());
         holder.std_late.setText("Late by " + leaveDlist.get(position).getLate_by());
 
-        if (leaveDlist.get(position).getVerified_CC() == 0) {
+        if(leaveDlist.get(position).getVerified_CC()==0){
             holder.leave_stat.setText("Pending");
-        } else if (leaveDlist.get(position).getVerified_CC() == -1) {
+        }
+        else if(leaveDlist.get(position).getVerified_CC()==-1){
             holder.leave_stat.setText("Rejected");
             holder.leave_stat.setBackgroundColor(R.color.red);
-        } else if (leaveDlist.get(position).getVerified_CC() == 1 && leaveDlist.get(position).getVerified_HOD() == 0) {
+        }
+        else if(leaveDlist.get(position).getVerified_CC()==1 && leaveDlist.get(position).getVerified_HOD()==0){
             holder.leave_stat.setText("CC");
             holder.leave_stat.setBackgroundColor(R.color.yellow);
-        } else if (leaveDlist.get(position).getVerified_CC() == 1 && leaveDlist.get(position).getVerified_HOD() == 1 && leaveDlist.get(position).getVerified_HW() == 0) {
+        }
+        else if(leaveDlist.get(position).getVerified_CC()==1 && leaveDlist.get(position).getVerified_HOD()==1 &&leaveDlist.get(position).getVerified_HW()==0){
             holder.leave_stat.setText("HOD");
             holder.leave_stat.setBackgroundColor(R.color.color_login_button);
-        } else if (leaveDlist.get(position).getVerified_CC() == 1 && leaveDlist.get(position).getVerified_HOD() == 1 && leaveDlist.get(position).getVerified_HW() == 1) {
-            holder.leave_stat.setText("On Leave");
+        }
+        else if(leaveDlist.get(position).getVerified_HW()==1 && leaveDlist.get(position).getGate_Validation_Out()==0){
+            holder.leave_stat.setText("GP Generated");
             holder.leave_stat.setBackgroundColor(R.color.detail_color);
-        } else if (leaveDlist.get(position).getVerified_HW() == -1) {
-            holder.leave_stat.setText("Student In");
+        }
+        else if(leaveDlist.get(position).getVerified_HW()==1 && leaveDlist.get(position).getGate_Validation_Out()==1){ //&& leaveDatalist.get(position).getVerified_HW()==1 && leaveDatalist.get(position).getVerified_CC()==1 && leaveDatalist.get(position).getVerified_HOD()==1){
+            holder.leave_stat.setText("Student Out(Gate)");
+            holder.leave_stat.setBackgroundColor(R.color.purple_500);
+        }
+        else if(leaveDlist.get(position).getVerified_HW()==1 && leaveDlist.get(position).getGate_Validation_In()==1){
+            holder.leave_stat.setText("Student In(Gate)");
             holder.leave_stat.setBackgroundColor(green1);
+        }
+        else if(leaveDlist.get(position).getVerified_HW()==-1 && leaveDlist.get(position).getGate_Validation_In()==-1){
+            holder.leave_stat.setText("Student In");
+            holder.leave_stat.setBackgroundColor(R.color.purple_700);
         }
     }
 
