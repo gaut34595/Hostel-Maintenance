@@ -60,7 +60,7 @@ public class CC_College_Stats extends AppCompatActivity implements IncomingLeave
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String course = String.valueOf(documentSnapshot.get("Course"));
-                FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Student_Course",course)
+                FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Student_Course",course).whereEqualTo("Verified_HW",1)
                         .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

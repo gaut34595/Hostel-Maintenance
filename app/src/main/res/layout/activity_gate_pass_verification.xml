@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
+    android:id="@+id/gatescroll"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GatePassVerification">
+    tools:context=".GatePassVerification_OUT">
 
-    <com.flaviofaria.kenburnsview.KenBurnsView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/leave_back"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <com.flaviofaria.kenburnsview.KenBurnsView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/leave_back"/>
     <TextView
         android:id="@+id/textV"
         android:layout_width="match_parent"
@@ -26,11 +27,23 @@
         android:textColor="@color/white"
         android:gravity="center"/>
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/gateuser_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@mipmap/signupimg_round"
+            android:layout_below="@id/textV"
+            android:layout_centerHorizontal="true"
+            app:civ_border_width="3dp"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            app:civ_border_color="#FF000000"/>
+
         <EditText
             android:id="@+id/gatestudent_enrol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textV"
+            android:layout_below="@id/gateuser_image"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
@@ -156,9 +169,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/button_login"
-            android:text="Validate"
+            android:text="Validate OUT"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFFFFF" />
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

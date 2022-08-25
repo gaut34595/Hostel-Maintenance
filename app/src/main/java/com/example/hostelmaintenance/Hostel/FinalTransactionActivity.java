@@ -18,6 +18,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,6 +35,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +44,9 @@ import java.util.UUID;
 public class FinalTransactionActivity extends AppCompatActivity {
     String stud_enroll,stud_name,stud_cont,stud_course,stud_fath,fath_con
             ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger;
+    String imageurl;
+    ImageView userimage;
+    ScrollView scrollView;
     String url = "https://api.twilio.com/2010-04-01/Accounts/ACf0340978828bc1b671943f92ec12c0b3/Messages.json";
     int cc, hod, hw;
     EditText stud_enroll_text,stud_name_text,roomNo,fingerNo,stud_course_text,stud_fath_text,fath_con_text
@@ -54,8 +60,10 @@ public class FinalTransactionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        scrollView= findViewById(R.id.hostelscroll);
         setContentView(R.layout.activity_final_transaction);
         Intent i = getIntent();
+        userimage = findViewById(R.id.hosuser_image);
         stud_enroll_text = findViewById(R.id.transact_student_enrol);
         stud_name_text = findViewById(R.id.transact_student_name);
         stud_course_text = findViewById(R.id.transact_stud_program);
@@ -90,8 +98,9 @@ public class FinalTransactionActivity extends AppCompatActivity {
         cc=t_data.getVerified_CC();
         hod= t_data.getVerified_HOD();
         hw= t_data.getVerified_HW();
+        imageurl= t_data.getImageLink();
 
-
+        Picasso.get().load(imageurl).into(userimage);
         stud_enroll_text.setText(stud_enroll);
         stud_name_text.setText(stud_name);
         stud_course_text.setText(stud_course);

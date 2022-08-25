@@ -38,8 +38,8 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
     EditText enroll,student_name,stud_cont,course,roomNo,Finger_no,father_name,father_cont,
             noofdays,reason,add_leave;
     String student_email,student_enroll,std_name,std_cont,std_course,std_room,std_finger,std_father,
-            leave_f,leave_t,fat_cont,no_of_days,leave_reason,leave_add;
-
+            leave_f,leave_t,fat_cont,no_of_days,leave_reason,leave_add,stud_dept,stud_hostel;
+    String imageurl;
     int IsVerifiedbyCC,IsVerifiedbyHOD,IsVerifiedbyHW;
     EditText leaveFrom,leaveTo;
     Button submit;
@@ -126,6 +126,15 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                         map.put("Verified_HOD",IsVerifiedbyHOD);
                         map.put("Verified_HW",IsVerifiedbyHW);
                         map.put("QRCode","");
+                        map.put("ImageLink",imageurl);
+                        map.put("Gate_Validation_Out","");
+                        map.put("Gate_Validation_In","");
+                        map.put("Gate_Validation_Out_Time","");
+                        map.put("Gate_Validation_In_Time","");
+                        map.put("Late_by","");
+                        map.put("Student_Department",stud_dept);
+                        map.put("Student_Hostel",stud_hostel);
+
 
                         db.collection("Student_Leaves").add(map).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                             @Override
@@ -201,6 +210,10 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                     Finger_no.setText(documentSnapshot.getString("Finger_No"));
                     father_name.setText(documentSnapshot.getString("Father's_Name"));
                     father_cont.setText(documentSnapshot.getString("Father_Cont"));
+                    imageurl= documentSnapshot.getString("Image");
+                    stud_dept = documentSnapshot.getString("Student_Department");
+                    stud_hostel = documentSnapshot.getString("Student_Hostel");
+
 
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     leaveTo.addTextChangedListener(new TextWatcher() {

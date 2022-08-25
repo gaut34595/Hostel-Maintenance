@@ -9,7 +9,10 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +22,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.hostelmaintenance.GetLeaveData;
@@ -27,7 +32,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,20 +46,24 @@ import java.util.concurrent.TimeUnit;
 public class CC_Final_Verification extends AppCompatActivity {
     String stud_enroll,stud_name,stud_cont,stud_course,stud_fath,fath_con
     ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger;
+    String imageurl;
     int cc, hod, hw;
     EditText stud_enroll_text,stud_name_text,stud_cont_text,stud_course_text,stud_fath_text,fath_con_text
             ,num_days_text,reason_text,leave_add_text;
     Button accept,reject;
+    ImageView userimage;
     private FirebaseFirestore db;
     private GetLeaveData leave_data;
     EditText leave_from_text,leave_to_text;
     DatePickerDialog picker;
     private static final int REQUEST_CALL = 1;
     ImageButton callfather,callstudent;
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        scrollView= findViewById(R.id.ccscroll);
         setContentView(R.layout.activity_cc_final_verification);
         Intent intent = getIntent();
         stud_enroll_text = findViewById(R.id.verify_student_enrol);
@@ -69,7 +81,7 @@ public class CC_Final_Verification extends AppCompatActivity {
         reject = findViewById(R.id.button_reject);
         callfather=findViewById(R.id.call_father);
         callstudent=findViewById(R.id.call_stud);
-
+        userimage= findViewById(R.id.ccuser_image);
 
         leave_data = (GetLeaveData) intent.getSerializableExtra("Leave_Item");
         db=FirebaseFirestore.getInstance();
@@ -84,14 +96,15 @@ public class CC_Final_Verification extends AppCompatActivity {
         leave_to = leave_data.getLeave_to();
         num_days = leave_data.getNo_of_Days();
         reason = leave_data.getLeave_Reason();
-        leave_add = leave_data.getLeave_Reason();
+        leave_add = leave_data.getLeave_Address();
         room_no= leave_data.getRoom_No();
         finger = leave_data.getFinger_No();
         cc=leave_data.getVerified_CC();
         hod= leave_data.getVerified_HOD();
         hw= leave_data.getVerified_HW();
+        imageurl= leave_data.getImageLink();
 
-
+        Picasso.get().load(imageurl).into(userimage);
         stud_enroll_text.setText(stud_enroll);
         stud_name_text.setText(stud_name);
         stud_cont_text.setText(stud_cont);
@@ -103,11 +116,6 @@ public class CC_Final_Verification extends AppCompatActivity {
         num_days_text.setText(num_days);
         reason_text.setText(reason);
         leave_add_text.setText(leave_add);
-
-
-        //Document Reference
-//            GetLeaveData ldata = new GetLeaveData(stud_email,stud_enroll,stud_name,stud_cont,stud_course,room_no,finger,stud_fath,fath_con
-//                    ,numdays,reason,leave_add,leavefrom,leaveto,cc,hod,hw);
 
             accept.setOnClickListener(e->{
                 String leavefrom= leave_from_text.getText().toString();
@@ -233,6 +241,8 @@ public class CC_Final_Verification extends AppCompatActivity {
         });
 
     }
+
+
     private void makePhoneCall() {
         if(fath_con.trim().length()>0){
             if(ContextCompat.

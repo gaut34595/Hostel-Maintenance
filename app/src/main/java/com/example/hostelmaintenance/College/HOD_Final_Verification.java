@@ -8,12 +8,15 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.hostelmaintenance.GetLeaveData;
@@ -22,15 +25,19 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
 public class HOD_Final_Verification extends AppCompatActivity {
+    ScrollView scrollView;
     Button accept,reject;
     EditText stud_enroll_text,stud_name_text,stud_cont_text,stud_course_text,stud_fath_text,fath_con_text
             ,num_days_text,reason_text,leave_add_text,leave_from_text,leave_to_text;
     ImageButton callfather,callstudent;
     FirebaseFirestore db;
+    String imageurl;
+    ImageView imageView;
     private static final int REQUEST_CALL = 1;
     String stud_enroll,stud_name,stud_cont,stud_course,stud_fath,fath_con
             ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger;
@@ -40,8 +47,10 @@ public class HOD_Final_Verification extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        scrollView=findViewById(R.id.hodscroll);
         setContentView(R.layout.activity_hod_final_verification);
         stud_enroll_text = findViewById(R.id.grant_student_enrol);
+        imageView= findViewById(R.id.hoduser_image);
         stud_name_text = findViewById(R.id.grant_student_name);
         stud_cont_text = findViewById(R.id.grant_stud_contact);
         stud_course_text = findViewById(R.id.grant_stud_program);
@@ -72,13 +81,15 @@ public class HOD_Final_Verification extends AppCompatActivity {
         leave_to = grant_leave.getLeave_to();
         num_days = grant_leave.getNo_of_Days();
         reason = grant_leave.getLeave_Reason();
-        leave_add = grant_leave.getLeave_Reason();
+        leave_add = grant_leave.getLeave_Address();
         room_no= grant_leave.getRoom_No();
         finger = grant_leave.getFinger_No();
         cc=grant_leave.getVerified_CC();
         hod= grant_leave.getVerified_HOD();
         hw= grant_leave.getVerified_HW();
+        imageurl= grant_leave.getImageLink();
 
+        Picasso.get().load(imageurl).into(imageView);
         stud_enroll_text.setText(stud_enroll);
         stud_name_text.setText(stud_name);
         stud_cont_text.setText(stud_cont);

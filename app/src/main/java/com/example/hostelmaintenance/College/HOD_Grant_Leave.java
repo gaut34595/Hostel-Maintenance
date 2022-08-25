@@ -19,7 +19,11 @@ import com.example.hostelmaintenance.LeaveVerifyAdapter;
 import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -30,6 +34,9 @@ public class HOD_Grant_Leave extends AppCompatActivity implements LeaveVerifyAda
     LeaveVerifyAdapter leaveVerifyAdapter;
     ArrayList<GetLeaveData> grantlist;
     ProgressDialog progressDialog;
+    FirebaseAuth auth;
+    FirebaseUser user;
+    FirebaseFirestore firebaseFirestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,54 +45,73 @@ public class HOD_Grant_Leave extends AppCompatActivity implements LeaveVerifyAda
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
+        auth= FirebaseAuth.getInstance();
+        user= auth.getCurrentUser();
+        String uid = user.getUid();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         int num = 1;
         int num2 = 0;
         grantlist= new ArrayList<>();
         recyclerView = findViewById(R.id.recyclercheck3);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_CC", num).whereEqualTo("Verified_HOD",num2)
-                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Log.d("---->>>>>>>>","Inside for success");
-                        if(queryDocumentSnapshots.size()!=0){
-                        for(DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()){
-                            Log.d("---->>>>>>>>","Inside for");
-                                GetLeaveData gdata = ds.getDocument().toObject(GetLeaveData.class);
-                                gdata.setId(ds.getDocument().getId());
-                                grantlist.add(gdata);
+        DocumentReference dr = firebaseFirestore.collection("Users").document(uid);
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String dept = String.valueOf(documentSnapshot.get("Department"));
+                FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_CC", num).whereEqualTo("Verified_HOD",num2)
+                        .whereEqualTo("Student_Department",dept)
+                        .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                Log.d("---->>>>>>>>","Inside for success");
+                                if(queryDocumentSnapshots.size()!=0){
+                                    for(DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()){
+                                        Log.d("---->>>>>>>>","Inside for");
+                                        GetLeaveData gdata = ds.getDocument().toObject(GetLeaveData.class);
+                                        gdata.setId(ds.getDocument().getId());
+                                        grantlist.add(gdata);
 
-                                leaveVerifyAdapter = new LeaveVerifyAdapter(getApplicationContext(), grantlist, HOD_Grant_Leave.this);
-                                recyclerView.setAdapter(leaveVerifyAdapter);
-                                leaveVerifyAdapter.notifyDataSetChanged();
-                                if (progressDialog.isShowing()) {
+                                        leaveVerifyAdapter = new LeaveVerifyAdapter(getApplicationContext(), grantlist, HOD_Grant_Leave.this);
+                                        recyclerView.setAdapter(leaveVerifyAdapter);
+                                        leaveVerifyAdapter.notifyDataSetChanged();
+                                        if (progressDialog.isShowing()) {
+                                            progressDialog.dismiss();
+                                        }
+                                    }
+
+
+                                }
+                                else {
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(HOD_Grant_Leave.this, "NO DATA FOUND", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d("---->>>>>>>>","Inside for");
+                                if(progressDialog.isShowing()){
                                     progressDialog.dismiss();
                                 }
+                                Log.d(">>>>>>>>>",e.getMessage());
+
                             }
+                        });
 
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
 
-                            }
-                        else {
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                                Toast.makeText(HOD_Grant_Leave.this, "NO DATA FOUND", Toast.LENGTH_SHORT).show();
-                            }
+            }
+        });
 
-                        }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("---->>>>>>>>","Inside for");
-                        if(progressDialog.isShowing()){
-                            progressDialog.dismiss();
-                        }
-                        Log.d(">>>>>>>>>",e.getMessage());
-
-                    }
-                });
 
     }
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {

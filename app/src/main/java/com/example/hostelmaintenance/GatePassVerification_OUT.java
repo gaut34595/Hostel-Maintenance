@@ -7,9 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,18 +18,26 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
-public class GatePassVerification extends AppCompatActivity {
+public class GatePassVerification_OUT extends AppCompatActivity {
     EditText enroll,name,course,fathname,fathercont,leavefrom,leaveto;
+    ScrollView scrollView;
+    ImageView userimage;
+    String imagelink;
+    String gatetimeout;
     Button validate;
     ProgressDialog progressDialog;
     public GetLeaveData geta;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        scrollView= findViewById(R.id.gatescroll);
         setContentView(R.layout.activity_gate_pass_verification);
         Intent intent = getIntent();
         progressDialog = new ProgressDialog(this);
@@ -43,17 +52,19 @@ public class GatePassVerification extends AppCompatActivity {
         leavefrom = findViewById(R.id.gateleavefrom);
         leaveto = findViewById(R.id.gateleaveto);
         validate=findViewById(R.id.button_validate);
-        String id = intent.getStringExtra("QRid");
+        userimage= findViewById(R.id.gateuser_image);
+        String qrid = intent.getStringExtra("QRid");
+        gatetimeout = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
 
 
-
-        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("QRCode",id)
+        FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("QRCode",qrid)
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (queryDocumentSnapshots.size() != 0) {
                             for (DocumentChange ds : queryDocumentSnapshots.getDocumentChanges()) {
                              geta = ds.getDocument().toObject(GetLeaveData.class);
+                                imagelink = geta.getImageLink();
                                 enroll.setText(geta.getStudent_Enrollment());
                                 name.setText(geta.getStudent_Name());
                                 course.setText(geta.getStudent_Course());
@@ -61,6 +72,8 @@ public class GatePassVerification extends AppCompatActivity {
                                 fathercont.setText(geta.getFather_Contact());
                                 leavefrom.setText(geta.getLeave_From());
                                 leaveto.setText(geta.getLeave_to());
+                                geta.setId(ds.getDocument().getId());
+                                Picasso.get().load(imagelink).into(userimage);
                                 if (progressDialog.isShowing()) {
                                     progressDialog.dismiss();
                                 }
@@ -70,19 +83,41 @@ public class GatePassVerification extends AppCompatActivity {
                         else{
                             if(progressDialog.isShowing()){
                                 progressDialog.dismiss();
-                                Toast.makeText(GatePassVerification.this, "Not a valid Gate Pass",Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(getApplicationContext(),GateManDashboard.class);
+                                Toast.makeText(GatePassVerification_OUT.this, "Not a valid Gate Pass",Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(GatePassVerification_OUT.this,GateManDashboard.class);
                                 startActivity(i);
+                                finish();
                             }
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(GatePassVerification.this, "No data available", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GatePassVerification_OUT.this, "No data available", Toast.LENGTH_SHORT).show();
                         Log.d(">>>>>>>>>",e.getMessage());
                     }
                 });
 
+        validate.setOnClickListener(e->{
+            DocumentReference dd= FirebaseFirestore.getInstance().collection("Student_Leaves").document(geta.getId());
+            HashMap<String,Object> map = new HashMap<>();
+            map.put("Gate_Validation_Out",1);
+            map.put("Gate_Validation_Out_Time",gatetimeout);
+            dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(GatePassVerification_OUT.this, "Gate Pass Verified Successfully", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(GatePassVerification_OUT.this,GateManDashboard.class);
+                    startActivity(i);
+                    finish();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("----->>>>>>>",e.getMessage());
+                }
+            });
+        });
     }
 }

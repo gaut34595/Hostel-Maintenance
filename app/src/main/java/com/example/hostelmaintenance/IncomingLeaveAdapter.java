@@ -3,6 +3,7 @@ package com.example.hostelmaintenance;
 import static com.example.hostelmaintenance.R.color.green1;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,12 @@ import com.example.hostelmaintenance.College.CC_College_Stats;
 import java.util.ArrayList;
 
 public class IncomingLeaveAdapter extends RecyclerView.Adapter<IncomingLeaveAdapter.MyViewHolder> implements Filterable {
-    private CC_College_Stats con;
+    private Context con;
     public ArrayList<GetLeaveData> leaveDlist;
     public ArrayList<GetLeaveData> leaveDlistfull;
     private IncomingListener mIncomingListener;
 
-    public IncomingLeaveAdapter(CC_College_Stats con, ArrayList<GetLeaveData> leaveDlist, IncomingListener mIncomingListener){
+    public IncomingLeaveAdapter(Context con, ArrayList<GetLeaveData> leaveDlist, IncomingListener mIncomingListener){
         this.con = con;
         this.leaveDlistfull = leaveDlist;
         this.leaveDlist = new ArrayList<>(leaveDlistfull);
@@ -48,7 +49,7 @@ public class IncomingLeaveAdapter extends RecyclerView.Adapter<IncomingLeaveAdap
 
         holder.std_l_to.setText(leaveDlist.get(position).getLeave_to() + " ");
         holder.std_course.setText(leaveDlist.get(position).getStudent_Course());
-        holder.std_late.setText("Late by " + leaveDlist.get(position).getLateby());
+        holder.std_late.setText("Late by " + leaveDlist.get(position).getLate_by());
 
         if (leaveDlist.get(position).getVerified_CC() == 0) {
             holder.leave_stat.setText("Pending");

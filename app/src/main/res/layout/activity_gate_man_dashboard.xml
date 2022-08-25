@@ -86,22 +86,22 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Scan Gate Pass"
+            android:text="Scan Gate Pass(OUT)"
             android:textColor="@color/white"
             android:textSize="20dp" />
 
         <ImageButton
-            android:id="@+id/granted_leave"
+            android:id="@+id/scan_qr_in"
             android:layout_width="150dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/white"
-            android:paddingStart="30dp"
+            android:paddingStart="25dp"
             android:paddingTop="35dp"
-            android:paddingEnd="30dp"
+            android:paddingEnd="10dp"
             android:paddingBottom="25dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_complaints_color"
+            android:src="@drawable/qrcode"
             android:textSize="15sp" />
         <TextView
             android:layout_width="200dp"
@@ -111,7 +111,7 @@
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:gravity="center"
-            android:text="Granted Leaves"
+            android:text="Scan Gate Pass(IN)"
             android:textColor="@color/white"
             android:textSize="20dp" />
 

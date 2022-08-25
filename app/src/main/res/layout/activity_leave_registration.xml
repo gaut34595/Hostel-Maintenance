@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/leave_back"
     tools:context=".Student.LeaveRegistrationActivity">
-
-    <com.flaviofaria.kenburnsview.KenBurnsView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/leave_back" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,23 +21,22 @@
             android:textColor="@color/white"
             android:gravity="center"/>
 
-        <EditText
-            android:id="@+id/student_enrol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textV"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:background="#60ffffff"
-            android:drawableLeft="@drawable/ic_baseline_assured_workload_24"
-            android:drawablePadding="20dp"
-            android:editable="false"
-            android:hint="Enrollment Number"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
-
+            <EditText
+                android:id="@+id/student_enrol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textV"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="#60ffffff"
+                android:hint="Student Enrollment"
+                android:drawableLeft="@drawable/ic_baseline_assured_workload_24"
+                android:drawablePadding="20dp"
+                android:editable="false"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         <EditText
             android:id="@+id/student_name"
             android:layout_width="match_parent"
@@ -254,14 +249,12 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_login"
             android:text="Submit"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFFFFF" />
 
-
     </RelativeLayout>
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

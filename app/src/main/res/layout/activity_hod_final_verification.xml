@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
+    android:id="@+id/hodscroll"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".College.HOD_Final_Verification">
-    <com.flaviofaria.kenburnsview.KenBurnsView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/leave_back" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <com.flaviofaria.kenburnsview.KenBurnsView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/login_background" />
         <TextView
             android:id="@+id/textV"
             android:layout_width="match_parent"
@@ -24,12 +25,22 @@
             android:textSize="30dp"
             android:textColor="@color/white"
             android:gravity="center"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/hoduser_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_below="@id/textV"
+            android:layout_centerHorizontal="true"
+            app:civ_border_width="3dp"
+            android:layout_marginTop="10dp"
+            app:civ_border_color="#FF000000"/>
 
         <EditText
             android:id="@+id/grant_student_enrol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textV"
+            android:layout_below="@id/hoduser_image"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
@@ -273,4 +284,4 @@
 
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

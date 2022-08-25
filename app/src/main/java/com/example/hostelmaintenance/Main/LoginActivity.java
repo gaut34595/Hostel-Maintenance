@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         login.setOnClickListener(e->{
+
             progressDialog = new ProgressDialog(this);
             progressDialog.setCancelable(false);
             progressDialog.setMessage("Logging in....");

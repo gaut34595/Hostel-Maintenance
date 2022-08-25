@@ -9,12 +9,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.hostelmaintenance.Main.LoginActivity;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class GateManDashboard extends AppCompatActivity {
-    ImageView scanqr;
+    ImageView scanqr,scanqrin;
     Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +20,7 @@ public class GateManDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_gate_man_dashboard);
         scanqr=findViewById(R.id.scan_qr);
         logout=findViewById(R.id.LogoutBtn);
+        scanqrin= findViewById(R.id.scan_qr_in);
 
         logout.setOnClickListener(e->{
             FirebaseAuth.getInstance().signOut();
@@ -32,9 +31,13 @@ public class GateManDashboard extends AppCompatActivity {
         });
 
         scanqr.setOnClickListener(e->{
-            Intent i = new Intent(this,QRScanActivity.class);
+            Intent i = new Intent(this, QRScanActivity_OUT.class);
             startActivity(i);
         });
 
+        scanqrin.setOnClickListener(e->{
+            Intent i = new Intent(this,QRScanActivity_IN.class);
+            startActivity(i);
+        });
     }
 }
