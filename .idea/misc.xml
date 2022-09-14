@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/btn_dropdown.xml" value="0.1" />
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/spinner_dropdown_background.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/bg_input_cursor.xml" value="0.1895" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/gradient_view.xml" value="0.1" />
         <entry key="..\:/Users/JAIN/flutter_proj/Hostel-Maintenance/app/src/main/res/drawable/ic_baseline_assignment_ind_24.xml" value="0.1075" />
@@ -58,24 +60,45 @@
         <entry key="..\:/Users/JAIN/flutter_proj/HostelMaintenance/app/src/main/res/layout/customlayout_complaint.xml" value="0.19791666666666666" />
         <entry key="..\:/Users/JAIN/flutter_proj/HostelMaintenance/app/src/main/res/layout/temp.xml" value="0.16324786324786325" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/button_login.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_assignment_ind_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_assured_workload_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_book_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_contact_emergency_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_corporate_fare_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_fingerprint_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_people_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_phone_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_room_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_school_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.1515" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_new_background.xml" value="0.1355" />
         <entry key="app/src/main/res/drawable/ic_launcher_new_foreground.xml" value="0.1355" />
+        <entry key="app/src/main/res/drawable/rounded_edittext.xml" value="0.1515" />
         <entry key="app/src/main/res/drawable/signupimg_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/signupimg_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.30625" />
         <entry key="app/src/main/res/layout/activity_cc_college_stats.xml" value="0.18125" />
-        <entry key="app/src/main/res/layout/activity_cc_final_verification.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_cc_final_verification.xml" value="0.29916897506925205" />
         <entry key="app/src/main/res/layout/activity_cc_processed_verification.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/activity_cc_verify_leave.xml" value="0.313953488372093" />
+        <entry key="app/src/main/res/layout/activity_college_principal_dashboard.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_college_report.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_complaint.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/activity_complaint_check_hostel.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/activity_complaint_registration.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_complaint_status.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/activity_course_coordinator_dashboard.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_electricity_bill.xml" value="0.18125" />
+        <entry key="app/src/main/res/layout/activity_electricity_bill_stats.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_emergency.xml" value="0.3183876811594203" />
         <entry key="app/src/main/res/layout/activity_final_incoming.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/activity_final_transaction.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_gate_man_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_gate_pass_verification.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_gate_pass_verification_in.xml" value="0.30625" />
@@ -89,21 +112,38 @@
         <entry key="app/src/main/res/layout/activity_hostel_warden_dashboard.xml" value="0.23546511627906977" />
         <entry key="app/src/main/res/layout/activity_leave.xml" value="0.3183876811594203" />
         <entry key="app/src/main/res/layout/activity_leave_registration.xml" value="0.3183876811594203" />
+        <entry key="app/src/main/res/layout/activity_leave_status.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_leave_transact.xml" value="0.15577507598784193" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.24547101449275363" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_mess.xml" value="0.3203125" />
+        <entry key="app/src/main/res/layout/activity_outing.xml" value="0.3203125" />
+        <entry key="app/src/main/res/layout/activity_pdf.xml" value="0.12135416666666667" />
+        <entry key="app/src/main/res/layout/activity_principal_final_verification.xml" value="0.30625" />
+        <entry key="app/src/main/res/layout/activity_principal_processed_verification.xml" value="0.3203125" />
+        <entry key="app/src/main/res/layout/activity_principal_stats.xml" value="0.3203125" />
+        <entry key="app/src/main/res/layout/activity_principal_verify_leaves.xml" value="0.30625" />
         <entry key="app/src/main/res/layout/activity_qrscan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_qrscan_in.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_show_qractivity.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_staff_details_hostel.xml" value="0.3203125" />
+        <entry key="app/src/main/res/layout/activity_student_dashboard.xml" value="0.3203125" />
+        <entry key="app/src/main/res/layout/activity_student_directory_hostel.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_student_incoming.xml" value="0.30625" />
         <entry key="app/src/main/res/layout/activity_testdemo.xml" value="0.1625" />
         <entry key="app/src/main/res/layout/activity_transacted_leave.xml" value="0.15577507598784193" />
-        <entry key="app/src/main/res/layout/activity_volly_test.xml" value="0.3203125" />
+        <entry key="app/src/main/res/layout/activity_volly_test.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/customlayout_complaint.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/data_comp_row.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/leave_comp_row.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/leave_comp_row.xml" value="0.1" />
         <entry key="app/src/main/res/layout/leave_complaint_row.xml" value="0.245018115942029" />
+        <entry key="app/src/main/res/layout/newleaverow.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/newrow.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/spinner_background.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/spinner_row.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/stats_incoming_leave.xml" value="0.18206521739130435" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>
@@ -116,7 +156,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.1" />
+        <option name="scale" value="0.335" />
       </ProjectState>
     </option>
   </component>

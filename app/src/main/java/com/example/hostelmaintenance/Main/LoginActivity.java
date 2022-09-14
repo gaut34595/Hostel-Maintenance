@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,12 +15,15 @@ import android.widget.Toast;
 
 import com.example.hostelmaintenance.College.Course_Coordinator_Dashboard;
 import com.example.hostelmaintenance.College.HOD_Dashboard_Activity;
-import com.example.hostelmaintenance.GateManDashboard;
+import com.example.hostelmaintenance.College.CollegePrincipalDashboard;
+import com.example.hostelmaintenance.Gate.GateManDashboard;
 import com.example.hostelmaintenance.Hostel.HostelWardenDashboard;
 import com.example.hostelmaintenance.R;
 import com.example.hostelmaintenance.Student.StudentDashboard;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,11 +36,12 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
     private EditText email,password;
     public Button login;
-    TextView signup;
+    TextView signup,forgot;
     private FirebaseAuth auth;
     private  FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
     private FirebaseFirestore fStore;
+    String text_email;
     ProgressDialog progressDialog;
 
     @Override
@@ -47,10 +52,11 @@ public class LoginActivity extends AppCompatActivity {
         signup=findViewById(R.id.login_tv3);
         email=findViewById(R.id.ed_user_name);
         password=findViewById(R.id.ed_password);
-        login=findViewById(R.id.button_login);
+        login=findViewById(R.id.login);
         auth=FirebaseAuth.getInstance();
-         currentUser = auth.getCurrentUser();
+        currentUser = auth.getCurrentUser();
         fStore=FirebaseFirestore.getInstance();
+        forgot= findViewById(R.id.forgot_pass);
 
         // For Signup
         signup.setOnClickListener(e->{
@@ -64,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.setCancelable(false);
             progressDialog.setMessage("Logging in....");
             progressDialog.show();
-            String text_email = email.getText().toString();
+            text_email = email.getText().toString();
             String text_password = password.getText().toString();
             if(TextUtils.isEmpty(text_email) || TextUtils.isEmpty(text_password)){
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
@@ -72,20 +78,48 @@ public class LoginActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                 }
             }
+
             else{
                 //login
                 loginUser(text_email,text_password);
             }
 
         });
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this,ForgotPassword.class);
+                startActivity(i);
+
+            }
+        });
     }
 
     private void loginUser(String email, String password) {
-        auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                checkUserAccessLevel(authResult.getUser().getUid());
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                   // FirebaseUser nuser = FirebaseAuth.getInstance().getCurrentUser();
+                 //   Boolean emailflag =nuser.isEmailVerified();
+                    
+                   // if(emailflag){
+                        Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                        checkUserAccessLevel(task.getResult().getUser().getUid());
+                    }
+//                else{
+//                        if(progressDialog.isShowing()){
+//                            progressDialog.dismiss();
+//                        }
+//                        Toast.makeText(LoginActivity.this, "Email not verified", Toast.LENGTH_SHORT).show();
+//                        nuser.sendEmailVerification();
+//                        Toast.makeText(LoginActivity.this, "Verification Email has been sent", Toast.LENGTH_SHORT).show();
+//                        auth.signOut();
+//
+//                    }
+//                }
+                
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -109,27 +143,36 @@ public class LoginActivity extends AppCompatActivity {
                startActivity(i);
                finish();
            }
-            if(documentSnapshot.getString("is_Program_Coordinator") != null){
+           if(documentSnapshot.getString("is_Program_Coordinator") != null){
                     Intent i = new Intent(getApplicationContext(), Course_Coordinator_Dashboard.class);
                     startActivity(i);
                     finish();
                 }
-              if(documentSnapshot.getString("is_Hostel_Admin") != null){
+           if(documentSnapshot.getString("is_Hostel_Admin") != null){
                     Intent i = new Intent(LoginActivity.this, HostelWardenDashboard.class);
                     startActivity(i);
                     finish();
                 }
-                if(documentSnapshot.getString("is_HOD") != null){
+           if(documentSnapshot.getString("is_HOD") != null){
                     Intent i = new Intent(LoginActivity.this, HOD_Dashboard_Activity.class);
                     startActivity(i);
                     finish();
                 }
-                if(documentSnapshot.getString("is_Security") != null){
+           if(documentSnapshot.getString("is_Security") != null){
                     Intent i = new Intent(LoginActivity.this, GateManDashboard.class);
                     startActivity(i);
                     finish();
                 }
-
+           if(documentSnapshot.getString("is_Principal") != null){
+                    Intent i = new Intent(LoginActivity.this, CollegePrincipalDashboard.class);
+                    startActivity(i);
+                    finish();
+                }
+                if(documentSnapshot.getString("is_Admin") != null){
+                    Intent i = new Intent(LoginActivity.this, AdminActivity.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/login_backgroundmain"
     android:layout_height="match_parent"
-    tools:context=".GateManDashboard">
+    tools:context=".Gate.GateManDashboard">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -115,31 +115,6 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-        <ImageButton
-            android:id="@+id/stats"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/white"
-            android:paddingStart="30dp"
-            android:paddingTop="35dp"
-            android:paddingEnd="30dp"
-            android:paddingBottom="25dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/analytics"
-            android:textSize="15sp" />
-
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="2dp"
-            android:clickable="false"
-            android:gravity="center"
-            android:text="Statistics"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
     </GridLayout>
 
     <androidx.constraintlayout.widget.Guideline

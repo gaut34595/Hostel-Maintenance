@@ -13,7 +13,7 @@
     android:layout_height="match_parent"
     android:layout_centerVertical="true"
     android:adjustViewBounds="false"
-    android:src="@drawable/gif_splash"/>
+    android:src="@drawable/anim1"/>
 
 
 

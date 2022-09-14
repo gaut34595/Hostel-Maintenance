@@ -38,7 +38,7 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
     EditText enroll,student_name,stud_cont,course,roomNo,Finger_no,father_name,father_cont,
             noofdays,reason,add_leave;
     String student_email,student_enroll,std_name,std_cont,std_course,std_room,std_finger,std_father,
-            leave_f,leave_t,fat_cont,no_of_days,leave_reason,leave_add,stud_dept,stud_hostel;
+            leave_f,leave_t,fat_cont,no_of_days,leave_reason,leave_add,stud_dept,stud_hostel,stud_college;
     String imageurl;
     int IsVerifiedbyCC,IsVerifiedbyHOD,IsVerifiedbyHW;
 
@@ -138,6 +138,7 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                         map.put("Late_by","");
                         map.put("Student_Department",stud_dept);
                         map.put("Student_Hostel",stud_hostel);
+                        map.put("Student_College",stud_college);
 
 
                         db.collection("Student_Leaves").add(map).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -225,6 +226,7 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                     imageurl= documentSnapshot.getString("Image");
                     stud_dept = documentSnapshot.getString("Student_Department");
                     stud_hostel = documentSnapshot.getString("Student_Hostel");
+                    stud_college = documentSnapshot.getString("College");
 
 
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

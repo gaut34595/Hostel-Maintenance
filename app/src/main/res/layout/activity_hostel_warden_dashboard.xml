@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_backgroundmain"
+    android:background="@drawable/bg5"
     android:orientation="vertical"
     tools:context=".Hostel.HostelWardenDashboard">
 
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hostel Warden Dashboard"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="32dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
@@ -104,7 +104,7 @@
             android:clickable="false"
             android:gravity="center"
             android:text="View Complaints"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Student Leaves"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -158,7 +158,7 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Hostel Stats"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -171,7 +171,7 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Staff Details"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -214,7 +214,7 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Electricity Bill Stats"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -229,7 +229,7 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Student Directory"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
     </GridLayout>

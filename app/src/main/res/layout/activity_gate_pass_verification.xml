@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/leave_back"
-    tools:context=".GatePassVerification_OUT">
+    tools:context=".Gate.GatePassVerification_OUT">
 
 
 

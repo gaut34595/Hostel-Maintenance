@@ -62,7 +62,7 @@ public class CC_Verify_Leave extends AppCompatActivity implements LeaveVerifyAda
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
               String course = String.valueOf(documentSnapshot.get("Course"));
-                Log.d(">>>>>>>>>.",course);
+
                 FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("Verified_CC",num).whereEqualTo("Student_Course",course)
                         .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override

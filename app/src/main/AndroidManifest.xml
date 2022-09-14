@@ -24,113 +24,188 @@
         android:theme="@style/Theme.HostelMaintenance"
         tools:targetApi="31">
         <activity
-            android:name=".GatePassVerification_IN"
+            android:name=".CollegeReportActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+
+        <activity
+            android:name=".testt.PdfActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".Main.ForgotPassword"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
-            android:name=".QRScanActivity_IN"
+            android:name=".Main.AdminActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+        <activity
+            android:name=".College.Principal_Final_Verification"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+        <activity
+            android:name=".College.Principal_Stats"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+        <activity
+            android:name=".College.PrincipalProcessedVerification"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+        <activity
+            android:name=".College.PrincipalVerifyLeaves"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+        <activity
+            android:name=".College.CollegePrincipalDashboard"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+        <activity
+            android:name=".Gate.GatePassVerification_IN"
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            android:exported="false" />
+        <activity
+            android:name=".Gate.QRScanActivity_IN"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Main.CropperActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".GatePassVerification_OUT"
+            android:name=".Gate.GatePassVerification_OUT"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
-            android:name=".QRScanActivity_OUT"
+            android:name=".Gate.QRScanActivity_OUT"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
-            android:name=".GateManDashboard"
+            android:name=".Gate.GateManDashboard"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.ShowQRActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".testt.VollyTest"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="true" />
         <activity
             android:name=".Hostel.FinalIncomingActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.StudentIncomingActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.FinalTransactionActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.TransactedLeaveActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.LeaveTransactActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.HostelLeaveActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".College.HOD_Final_Verification"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".College.HOD_Stats_Activity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".College.HOD_Granted_Leaves"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".College.HOD_Grant_Leave"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".College.HOD_Dashboard_Activity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".College.CC_Final_Verification"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".College.CC_College_Stats"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:name=".College.CC_Processed_Verification"
             android:exported="false" />
         <activity
             android:name=".College.CC_Verify_Leave"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".College.Course_Coordinator_Dashboard"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.LeaveStatusActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.LeaveRegistrationActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.ComplaintCheckHostelActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.StudentDirectoryHostel"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.ElectricityBillStats"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.StaffDetailsHostel"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.HostelStats"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Hostel.HostelWardenDashboard"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.ComplaintStatusActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.ComplaintRegistrationActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Main.SplashActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -140,34 +215,43 @@
         </activity>
         <activity
             android:name=".Main.SignupActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
         <activity
             android:name=".Student.OutingActivity"
             android:exported="false"
             android:label="@string/title_activity_outing"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:theme="@style/Theme.HostelMaintenance.NoActionBar" />
         <activity
             android:name=".Student.ElectricityBillActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false"
             android:label="@string/title_activity_electricity_bill"
             android:theme="@style/Theme.HostelMaintenance.NoActionBar" />
         <activity
             android:name=".Student.EmergencyActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.MessActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.LeaveActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.ComplaintActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Student.StudentDashboard"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
         <activity
             android:name=".Main.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:exported="false" />
     </application>
 

@@ -1,7 +1,6 @@
 package com.example.hostelmaintenance;
 
 import static com.example.hostelmaintenance.R.color.green1;
-import static com.example.hostelmaintenance.R.color.textcolor;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -51,9 +50,13 @@ public class LeaveVerifyAdapter extends RecyclerView.Adapter<LeaveVerifyAdapter.
         if(leaveDatalist.get(position).getVerified_CC()==0){
             holder.leave_stat.setText("Pending");
         }
-        else if(leaveDatalist.get(position).getVerified_CC()==-1){
+        else if(leaveDatalist.get(position).getVerified_CC()==-1 && leaveDatalist.get(position).getVerified_HOD()==0){
             holder.leave_stat.setText("Rejected");
             holder.leave_stat.setBackgroundColor(R.color.red);
+        }
+        else if(leaveDatalist.get(position).getVerified_CC()==-1 && leaveDatalist.get(position).getVerified_HOD()==-1){
+            holder.leave_stat.setText("Rejected by Principal Sir");
+            holder.leave_stat.setBackgroundColor(green1);
         }
         else if(leaveDatalist.get(position).getVerified_CC()==1 && leaveDatalist.get(position).getVerified_HOD()==0){
             holder.leave_stat.setText("CC");

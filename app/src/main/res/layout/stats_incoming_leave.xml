@@ -10,47 +10,51 @@
     android:layout_marginBottom="10dp">
 
     <androidx.cardview.widget.CardView
-        app:cardElevation="10dp"
+        app:cardElevation="7dp"
         app:cardCornerRadius="10dp"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="#81C784"
+        app:cardBackgroundColor="#C5CAE9"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/leave_from"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="start"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:hint="Leave from"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="15sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/leave_to"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="start"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="17dp"
-                android:gravity="center"
-                android:hint="Leave to"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="15sp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/leave_from"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Leave from"
+                    android:gravity="start"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/leave_to"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="end"
+                    android:hint="Leave to"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/stud_name"
@@ -65,49 +69,54 @@
                 android:textColorHint="@color/black"
                 android:textSize="25dp" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/stud_course"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:gravity="start"
+                    android:hint="Course"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/late_by"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="end"
+                    android:hint="Late by"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+
             <TextView
                 android:id="@+id/status_leave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/stud_name"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:background="@color/red"
-                android:gravity="center"
-                android:hint="Status"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
+                android:layout_gravity="center_horizontal"
                 android:text="Status"
+                android:layout_marginTop="4dp"
                 android:textColor="@color/white"
+                android:layout_marginBottom="5dp"
                 android:textColorHint="@color/white"
                 android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/stud_course"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/stud_name"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="80dp"
-                android:layout_toRightOf="@+id/status_leave"
-                android:hint="Course"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/late_by"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/stud_name"
-                android:layout_marginLeft="38dp"
-                android:layout_marginBottom="5dp"
-                android:layout_toRightOf="@+id/stud_course"
-                android:hint="Late by"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="20sp" />
-        </RelativeLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 

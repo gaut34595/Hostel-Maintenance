@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/leave_back"
+    tools:context=".College.Principal_Final_Verification">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verify Hostel Leave"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ccuser_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/textV"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/signupimg_round"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="3dp" />
+        <EditText
+            android:id="@+id/verify_student_enrol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ccuser_image"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_assured_workload_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Enrollment Number"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/verify_student_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_student_enrol"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Student Name"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/verify_stud_contact"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_student_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_phone_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Student Contact No"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+        <ImageButton
+            android:id="@+id/call_stud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#ffffff"
+            android:layout_below="@id/verify_student_name"
+            android:src="@drawable/ic_baseline_phone_forwarded_24"
+            android:layout_toRightOf="@id/verify_stud_contact"
+            android:paddingStart="21dp"
+            android:paddingEnd="21dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+
+        <EditText
+            android:id="@+id/verify_stud_program"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_stud_contact"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_book_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Course"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/verify_stud_father"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_stud_program"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_people_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Father's Name"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/verify_student_father_cont"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_stud_father"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_contact_emergency_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Father's Contact No"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+        <ImageButton
+            android:id="@+id/call_father"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_stud_father"
+            android:layout_marginTop="5dp"
+            android:background="#ffffff"
+            android:src="@drawable/ic_baseline_phone_forwarded_24"
+            android:layout_toRightOf="@id/verify_student_father_cont"
+            android:paddingStart="21dp"
+            android:paddingEnd="21dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/verify_leavefrom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_student_father_cont"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:cursorVisible="false"
+            android:drawableLeft="@drawable/ic_baseline_time_to_leave_24"
+            android:drawablePadding="20dp"
+            android:focusable="false"
+            android:hint="Leave From"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/verify_leaveto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_leavefrom"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:cursorVisible="false"
+            android:drawableLeft="@drawable/ic_baseline_time_to_leave_24"
+            android:drawablePadding="20dp"
+            android:focusable="false"
+            android:hint="Leave To"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/verify_num_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_leaveto"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="No of Days"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/verify_reason_leave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_num_days"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_campaign_24"
+            android:drawablePadding="20dp"
+            android:hint="Reason for Leave"
+            android:editable="false"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/verify_add_leave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify_reason_leave"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="#60ffffff"
+            android:drawableLeft="@drawable/ic_baseline_add_location_24"
+            android:drawablePadding="20dp"
+            android:editable="false"
+            android:hint="Address during Leave"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+        <Button
+            android:id="@+id/button_accept"
+            style="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/verify_add_leave"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_login"
+            android:text="Accept"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF" />
+        <Button
+            android:id="@+id/button_reject"
+            style="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/button_accept"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_login"
+            android:text="Reject"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF" />
+
+
+    </RelativeLayout>
+</ScrollView>

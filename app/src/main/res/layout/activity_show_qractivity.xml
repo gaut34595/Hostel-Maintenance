@@ -9,7 +9,7 @@
     tools:context=".Student.ShowQRActivity">
 
     <ImageView
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:layout_gravity="center"
         android:id="@+id/qrshow"
         android:layout_width="match_parent"

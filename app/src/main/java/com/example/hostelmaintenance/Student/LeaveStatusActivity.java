@@ -12,8 +12,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.hostelmaintenance.GetLeaveData;
-import com.example.hostelmaintenance.Hostel.StudentIncomingActivity;
-import com.example.hostelmaintenance.LeaveDataAdapter;
 import com.example.hostelmaintenance.LeaveVerifyAdapter;
 import com.example.hostelmaintenance.R;
 import com.google.android.gms.tasks.OnCompleteListener;

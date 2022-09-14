@@ -20,6 +20,8 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +39,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -60,7 +63,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private Button register;
     private EditText email, password, name, father_name, enrollment, course, finger, room, cont_stud, cont_father;
     String textemail,textpassword,textname,fathername,textenrollment,textcourse,textfinger,textroom,
-            text_std_cont,text_std_fat,text_isUser,textHostel,textDept;
+            text_std_cont,text_std_fat,text_isUser,textHostel,textDept,textCollege;
+    Spinner college;
     Spinner course1;
     Spinner hostel;
     Spinner stud_dept;
@@ -100,6 +104,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         course1= findViewById(R.id.stud_course);
         hostel = findViewById(R.id.stud_hostel);
         stud_dept= findViewById(R.id.stud_dept);
+        college=findViewById(R.id.stud_coll);
 
         login.setOnClickListener(e->{
             Intent i = new Intent(this, LoginActivity.class);
@@ -120,6 +125,150 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+       college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               if (i == 0) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.dept,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   stud_dept.setAdapter(adapter);
+
+               }
+               else if (i == 1) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.foe_dept,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   stud_dept.setAdapter(adapter);
+
+               }
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> adapterView) {
+
+           }
+       });
+
+       stud_dept.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               if (i == 0) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+              else if (i == 1) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.ccsit_course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+               else if (i == 2) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.civil_course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+               else if (i == 3) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.electrical_course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+               else if (i == 4) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.electronics_course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+               else if (i == 5) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.mechanical_course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+               else if (i == 6) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.physics_course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+               else if (i == 7) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.mathematics_course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+               else if (i == 8) {
+
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter
+
+                           .createFromResource(SignupActivity.this, R.array.chemistry_course,
+
+                                   android.R.layout.simple_spinner_item);
+
+                   course1.setAdapter(adapter);
+
+               }
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> adapterView) {
+
+           }
+       });
+
+
     }
 
 
@@ -132,6 +281,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
          textcourse = course1.getSelectedItem().toString();
          textHostel = hostel.getSelectedItem().toString();
          textDept = stud_dept.getSelectedItem().toString();
+         textCollege= college.getSelectedItem().toString();
          textfinger = finger.getText().toString();
          textroom = room.getText().toString();
          text_std_cont = cont_stud.getText().toString();
@@ -157,6 +307,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
                 Toast.makeText(this, "Password to Short", Toast.LENGTH_SHORT).show();
               }
+
             else if(textcourse.equals("Select Course")){
                     Toast.makeText(this, "Please select a Course", Toast.LENGTH_SHORT).show();
             //Snackbar.make(this,course1.getRootView(),"Please Select Course",Snackbar.LENGTH_LONG).show();
@@ -172,9 +323,18 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             //Snackbar.make(this,course1.getRootView(),"Please Select Course",Snackbar.LENGTH_LONG).show();
 
         }
+        else if(textCollege.equals("Select College")){
+            Toast.makeText(this, "Please select a College", Toast.LENGTH_SHORT).show();
+            //Snackbar.make(this,course1.getRootView(),"Please Select Course",Snackbar.LENGTH_LONG).show();
+
+        }
+        else if(imagebyte == null){
+            Toast.makeText(this, "Please Upload Image", Toast.LENGTH_SHORT).show();
+        }
                 else{
                     progressDialog.setMessage("Please Wait");
                     progressDialog.show();
+                    progressDialog.setCancelable(false);
                     uploadImage(imagebyte);
          }
 
@@ -202,6 +362,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
+            catch (Exception e){
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
 
     }
@@ -224,7 +387,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         Log.d(">>>>>>>>>",e.getMessage());
                     }
                 });
-                Toast.makeText(SignupActivity.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(SignupActivity.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -239,13 +402,25 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = auth.getCurrentUser();
+                            user = auth.getCurrentUser();
+                            user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(SignupActivity.this, "Verification email has been send", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             HashMap<String, Object> signup_map = new HashMap<>();
                             signup_map.put("is_User", text_isUser);
                             signup_map.put("Email", textemail);
                             signup_map.put("Name", textname);
                             signup_map.put("Father's_Name", fathername);
                             signup_map.put("Enrollment_No", textenrollment);
+                            signup_map.put("College", textCollege);
                             signup_map.put("Student_Department",textDept);
                             signup_map.put("Student_Course", textcourse);
                             signup_map.put("Student_Hostel",textHostel);
@@ -255,6 +430,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             signup_map.put("Father_Cont", text_std_fat);
                             signup_map.put("Image",imageurl);
 
+                         //  DocumentReference df = fStore.collection("Users").document(user.getUid());
                             DocumentReference df = fStore.collection("Users").document(user.getUid());
                             df.set(signup_map);
                             if(progressDialog.isShowing()){
@@ -272,7 +448,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     public void onFailure(@NonNull Exception e) {
                         if(progressDialog.isShowing()){
                             progressDialog.dismiss();
+                            StorageReference photoRef = FirebaseStorage.getInstance().getReferenceFromUrl(imageurl);
+                            photoRef.delete();
                             Toast.makeText(SignupActivity.this, e.getMessage()+"", Toast.LENGTH_SHORT).show();
+                            Log.d(">>>>>>",e.getMessage());
                         }
 
                     }

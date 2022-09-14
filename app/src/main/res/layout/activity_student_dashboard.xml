@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_backgroundmain"
+    android:background="@drawable/bg5"
     android:orientation="vertical"
     tools:context=".Student.StudentDashboard">
 
@@ -44,8 +44,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Student Dashboard"
-        android:textColor="@color/white"
+        android:textColor="@color/detail_color"
         android:textSize="35dp"
+        android:textStyle="bold"
+        android:fontFamily="cursive"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +103,8 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Complaint"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="20dp" />
 
         <TextView
@@ -113,7 +116,8 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Hostel Leave"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="20dp" />
 
         <ImageButton
@@ -154,7 +158,8 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Outing(Sunday)"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="20dp" />
         <TextView
             android:layout_width="200dp"
@@ -164,7 +169,8 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Mess Menu"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="20dp" />
 
 
@@ -195,7 +201,7 @@
             android:paddingBottom="25dp"
             android:scaleType="fitCenter"
             android:src="@drawable/siren"
-            android:textSize="15sp" />
+            android:textSize="15sp"/>
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -205,7 +211,8 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Get Electricity Bill"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="20dp" />
 
 
@@ -217,7 +224,8 @@
             android:clickable="false"
             android:gravity="center"
             android:text="Emergency"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="20dp" />
     </GridLayout>
 
@@ -227,7 +235,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
-
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -241,9 +248,8 @@
         android:id="@+id/LogoutBtn"
         style="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_login"

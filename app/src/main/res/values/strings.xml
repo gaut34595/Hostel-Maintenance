@@ -20,23 +20,102 @@
         <item>Others</item>
 
     </string-array>
-    <string-array name="Course">
+
+
+    <string-array name="College">
+        <item><b>Select College</b></item>
+        <!--        <item><b>College of Computing Sciences and Information Technology</b></item>-->
+        <item><b>Faculty of Engineering</b></item>
+        <!--        <item><b>College of Pharmacy</b></item>-->
+        <!--        <item><b>Medical College and Research Center</b></item>-->
+        <!--        <item><b>Dental College and Research Center</b></item>-->
+        <!--        <item><b>College of Nursing</b></item>-->
+        <!--        <item><b>College of Paramedical Sciences</b></item>-->
+        <!--        <item><b>Department of Physiotherapy</b></item>-->
+        <!--        <item><b>College of Management (TMIMT)</b></item>-->
+        <!--        <item><b>College of Physical Education</b></item>-->
+        <!--        <item><b>College of Law and Legal Studies</b></item>-->
+        <!--        <item><b>Faculty of Education</b></item>-->
+        <!--        <item><b>College of Fine Arts</b></item>-->
+        <!--        <item><b>College of Fine Arts</b></item>-->
+
+    </string-array>
+
+
+    <string-array name="ccsit_course">
         <item><b>Select Course</b></item>
         <item><b>B.Tech CSE/AI</b></item>
         <item><b>B.Tech IBM</b></item>
+        <item><b>B.Tech-INurture</b></item>
+        <item><b>B.Tech DS (TCS)</b></item>
         <item><b>BCA</b></item>
-        <item><b>B.Sc</b></item>
+        <item><b>BCA-INurture</b></item>
+        <item><b>BBA-INurture</b></item>
+        <item><b>B.Sc(H) CS</b></item>
+        <item><b>B.Sc Animation</b></item>
+        <item><b>MCA</b></item>
+        <item><b>M.Tech</b></item>
+    </string-array>
+    <string-array name="civil_course">
+        <item><b>Select Course</b></item>
+        <item><b>B.Tech Civil</b></item>
+    </string-array>
+    <string-array name="course">
+        <item><b>Select Course</b></item>
     </string-array>
 
-    <string-array name="Department">
+
+    <string-array name="dept">
         <item><b>Select Department</b></item>
-        <item><b>CCSIT</b></item>
-        <item><b>FOE</b></item>
+    </string-array>
+    <string-array name="electrical_course">
+        <item><b>Select Course</b></item>
+        <item><b>B.Tech Electrical</b></item>
+
+    </string-array>
+    <string-array name="electronics_course">
+        <item><b>Select Course</b></item>
+        <item><b>B.Tech Electronics</b></item>
+
+    </string-array>
+    <string-array name="mechanical_course">
+        <item><b>Select Course</b></item>
+        <item><b>B.Tech Mechanical</b></item>
+
+    </string-array>
+    <string-array name="physics_course">
+        <item><b>Select Course</b></item>
+        <item><b>B.SC Physics</b></item>
+        <item><b>M.SC Physics</b></item>
+
+    </string-array>
+    <string-array name="mathematics_course">
+        <item><b>Select Course</b></item>
+        <item><b>B.SC Mathematics</b></item>
+        <item><b>M.SC Mathematics</b></item>
+
+    </string-array>
+    <string-array name="chemistry_course">
+        <item><b>Select Course</b></item>
+        <item><b>B.SC Chemistry</b></item>
+        <item><b>M.SC Chemistry</b></item>
+
+    </string-array>
+
+
+    <string-array name="foe_dept">
+        <item><b>Select Department</b></item>
+        <item><b>College of Computing Sciences and Information Technology</b></item>
+        <item><b>Civil Engineering</b></item>
+        <item><b>Electrical Engineering</b></item>
+        <item><b>Electronics Engineering</b></item>
+        <item><b>Mechanical Engineering</b></item>
+        <item><b>Department of Physics</b></item>
+        <item><b>Department of Mathematics</b></item>
+        <item><b>Department of Chemistry</b></item>
     </string-array>
 
     <!-- to toggle the open close button of the navigation drawer -->
-    <string name="nav_open">Open</string>
-    <string name="nav_close">Close</string>
 
 
 </resources>

@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 import com.example.hostelmaintenance.College.Course_Coordinator_Dashboard;
 import com.example.hostelmaintenance.College.HOD_Dashboard_Activity;
-import com.example.hostelmaintenance.GateManDashboard;
+import com.example.hostelmaintenance.College.CollegePrincipalDashboard;
+import com.example.hostelmaintenance.Gate.GateManDashboard;
 import com.example.hostelmaintenance.Hostel.HostelWardenDashboard;
 import com.example.hostelmaintenance.R;
 import com.example.hostelmaintenance.Student.StudentDashboard;
@@ -71,6 +72,11 @@ public class SplashActivity extends AppCompatActivity {
                                 finish();
 
                             }
+                            if(documentSnapshot.getString("is_Principal") != null){
+                                Intent i = new Intent(SplashActivity.this, CollegePrincipalDashboard.class);
+                                startActivity(i);
+                                finish();
+                            }
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -87,6 +93,6 @@ public class SplashActivity extends AppCompatActivity {
                 }
 
             }
-        },2000);
+        },3200);
     }
 }

@@ -121,7 +121,7 @@ public class CC_Final_Verification extends AppCompatActivity {
                 String leavefrom= leave_from_text.getText().toString();
                 String leaveto = leave_to_text.getText().toString();
                 String numdays= num_days_text.getText().toString();
-      DocumentReference dd= db.collection("Student_Leaves").document(leave_data.getId());
+                DocumentReference dd= db.collection("Student_Leaves").document(leave_data.getId());
                 HashMap<String,Object> map = new HashMap<>();
                 map.put("Verified_CC",1);
                 map.put("Leave_From",leavefrom);
