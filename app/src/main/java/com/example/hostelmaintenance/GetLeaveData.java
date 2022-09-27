@@ -2,6 +2,7 @@ package com.example.hostelmaintenance;
 
 import android.os.Parcel;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
@@ -100,8 +101,6 @@ public class GetLeaveData implements Serializable {
         Gate_Validation_Out= in.readInt();
         ImageLink= in.readString();
         Gate_Validation_In = in.readInt();
-        Gate_Validation_Out_Time= in.readString();
-        Gate_Validation_In_Time = in.readString();
         Student_Hostel= in.readString();
         Student_Department= in.readString();
 
@@ -284,22 +283,6 @@ public class GetLeaveData implements Serializable {
         Late_by = late_by;
     }
 
-    public String getGate_Validation_Out_Time() {
-        return Gate_Validation_Out_Time;
-    }
-
-    public void setGate_Validation_Out_Time(String gate_Validation_Out_Time) {
-        Gate_Validation_Out_Time = gate_Validation_Out_Time;
-    }
-
-    public String getGate_Validation_In_Time() {
-        return Gate_Validation_In_Time;
-    }
-
-    public void setGate_Validation_In_Time(String gate_Validation_In_Time) {
-        Gate_Validation_In_Time = gate_Validation_In_Time;
-    }
-
     public String getStudent_Department() {
         return Student_Department;
     }
@@ -330,5 +313,21 @@ public class GetLeaveData implements Serializable {
 
     public void setGate_Validation_In(int gate_Validation_In) {
         Gate_Validation_In = gate_Validation_In;
+    }
+
+    public String getGate_Validation_Out_Time() {
+        return Gate_Validation_Out_Time;
+    }
+
+    public void setGate_Validation_Out_Time(String gate_Validation_Out_Time) {
+        Gate_Validation_Out_Time = gate_Validation_Out_Time;
+    }
+
+    public String getGate_Validation_In_Time() {
+        return Gate_Validation_In_Time;
+    }
+
+    public void setGate_Validation_In_Time(String gate_Validation_In_Time) {
+        Gate_Validation_In_Time = gate_Validation_In_Time;
     }
 }

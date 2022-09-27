@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
@@ -139,6 +140,7 @@ public class LeaveRegistrationActivity extends AppCompatActivity {
                         map.put("Student_Department",stud_dept);
                         map.put("Student_Hostel",stud_hostel);
                         map.put("Student_College",stud_college);
+                        map.put("expireAt","");
 
 
                         db.collection("Student_Leaves").add(map).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

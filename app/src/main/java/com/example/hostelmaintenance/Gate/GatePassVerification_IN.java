@@ -17,11 +17,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -55,7 +57,9 @@ public class GatePassVerification_IN extends AppCompatActivity {
         hostel= findViewById(R.id.gatestud_hostel);
         userimage= findViewById(R.id.gateuser_image);
         String qrid = intent.getStringExtra("QRID_IN");
-        gatetimein = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
+        Calendar cal = Calendar.getInstance();
+        gatetimein = cal.getTime().toString();
+        //gatetimein = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
 
         FirebaseFirestore.getInstance().collection("Student_Leaves").whereEqualTo("QRCode",qrid).whereEqualTo("Gate_Validation_Out",num )
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -103,7 +107,7 @@ public class GatePassVerification_IN extends AppCompatActivity {
             HashMap<String,Object> map = new HashMap<>();
             map.put("Gate_Validation_In",1);
             map.put("Gate_Validation_Out",-1);
-            map.put("Gate_Validation_In_Time",gatetimein);
+            map.put("Gate_Validation_In_Time", gatetimein);
             dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {

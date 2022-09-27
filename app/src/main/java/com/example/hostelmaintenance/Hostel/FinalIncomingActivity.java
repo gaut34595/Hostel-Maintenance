@@ -40,6 +40,7 @@ public class FinalIncomingActivity extends AppCompatActivity {
     Button accept;
     ImageView userimage;
     String imageurl;
+    String late;
     private FirebaseFirestore db;
     private GetLeaveData incoming_data;
     DatePickerDialog picker;
@@ -84,10 +85,11 @@ public class FinalIncomingActivity extends AppCompatActivity {
 
         accept.setOnClickListener(e-> {
             in_Date = leavein_text.getText().toString();
-            String late = null;
             if (TextUtils.isEmpty(in_Date)) {
                 Toast.makeText(this, "Please fill the in-Date", Toast.LENGTH_SHORT).show();
-            } else {
+
+            }
+            else {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String leavedateto = leave_to_text.getText().toString();
                 String leaveindate = leavein_text.getText().toString();
@@ -99,28 +101,29 @@ public class FinalIncomingActivity extends AppCompatActivity {
                 } catch (ParseException a) {
                     a.printStackTrace();
                 }
-            }
-            DocumentReference dd = db.collection("Student_Leaves").document(incoming_data.getId());
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("Late_by", late);
-            map.put("Verified_HW", num);
-            map.put("Gate_Validation_In", num);
-            map.put("QRCode", FieldValue.delete());
-            dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
+                DocumentReference dd = db.collection("Student_Leaves").document(incoming_data.getId());
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("Late_by", late);
+                map.put("Verified_HW", num);
+                map.put("Gate_Validation_In", num);
+                map.put("QRCode", FieldValue.delete());
+                dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
 
-                    Toast.makeText(FinalIncomingActivity.this, "Student Incoming Successful", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(FinalIncomingActivity.this, StudentIncomingActivity.class);
-                    startActivity(i);
-                    finish();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(FinalIncomingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                        Toast.makeText(FinalIncomingActivity.this, "Student Incoming Successful", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(FinalIncomingActivity.this, StudentIncomingActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(FinalIncomingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
 
         });
 
