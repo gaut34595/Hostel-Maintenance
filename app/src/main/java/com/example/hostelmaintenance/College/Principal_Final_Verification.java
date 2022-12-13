@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,6 +30,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mailgun.api.v3.MailgunMessagesApi;
+import com.mailgun.client.MailgunClient;
+import com.mailgun.model.message.Message;
+import com.mailgun.model.message.MessageResponse;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -39,8 +45,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Principal_Final_Verification extends AppCompatActivity {
     String stud_enroll,stud_name,stud_cont,stud_course,stud_fath,fath_con
-            ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger;
+            ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger,stud_college;
     String imageurl;
+    String reject_string;
     int cc, hod, hw;
     EditText stud_enroll_text,stud_name_text,stud_cont_text,stud_course_text,stud_fath_text,fath_con_text
             ,num_days_text,reason_text,leave_add_text;
@@ -53,6 +60,7 @@ public class Principal_Final_Verification extends AppCompatActivity {
     private static final int REQUEST_CALL = 1;
     ImageButton callfather,callstudent;
     ScrollView scrollView;
+    AlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +83,68 @@ public class Principal_Final_Verification extends AppCompatActivity {
         callstudent=findViewById(R.id.call_stud);
         userimage= findViewById(R.id.ccuser_image);
 
+        //Dialog box for rejection
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Reject");
+        View v = getLayoutInflater().inflate(R.layout.custom_dialog,null);
+        EditText reject_reason;
+        Button reject_final,back;
+        reject_final= v.findViewById(R.id.reject_final);
+        back= v.findViewById(R.id.back);
+        reject_reason=v.findViewById(R.id.reject_reason);
+
+
+        reject_final.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(reject_reason.getText().toString().isEmpty()){
+                    Toast.makeText(Principal_Final_Verification.this, "Please fill the reject reason", Toast.LENGTH_SHORT).show();
+                }else{
+                    reject_string= reject_reason.getText().toString();
+                    DocumentReference dd= db.collection("Student_Leaves").document(leave_data.getId());
+                    HashMap<String,Object> map = new HashMap<>();
+                    map.put("Verified_CC",-1);
+                    map.put("Verified_HOD",-1);
+
+                    dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Thread t = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    sendSimpleRejectMessage();
+                                }
+                            });
+                            t.start();
+                            Toast.makeText(Principal_Final_Verification.this, "Leave Rejected Successfully", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Principal_Final_Verification.this,PrincipalVerifyLeaves.class);
+                            startActivity(i);
+                            finish();
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Principal_Final_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(v);
+        dialog = builder.create();
+
+
         leave_data = (GetLeaveData) intent.getSerializableExtra("Leave_Item_Principal");
         db=FirebaseFirestore.getInstance();
         stud_email = leave_data.getStudent_Email();
@@ -95,6 +165,7 @@ public class Principal_Final_Verification extends AppCompatActivity {
         hod= leave_data.getVerified_HOD();
         hw= leave_data.getVerified_HW();
         imageurl= leave_data.getImageLink();
+        stud_college= leave_data.getStudent_College();
 
         Picasso.get().load(imageurl).into(userimage);
         stud_enroll_text.setText(stud_enroll);
@@ -123,6 +194,14 @@ public class Principal_Final_Verification extends AppCompatActivity {
             dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
+                    Thread t = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            sendSimpleMessage();
+                        }
+                    });
+                    t.start();
                     Toast.makeText(Principal_Final_Verification.this, "Leave Verified", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Principal_Final_Verification.this,PrincipalVerifyLeaves.class);
                     startActivity(i);
@@ -137,26 +216,8 @@ public class Principal_Final_Verification extends AppCompatActivity {
             });
         });
         reject.setOnClickListener(e->{
-            DocumentReference dd= db.collection("Student_Leaves").document(leave_data.getId());
-            HashMap<String,Object> map = new HashMap<>();
-            map.put("Verified_CC",-1);
-            map.put("Verified_HOD",-1);
+            dialog.show();
 
-            dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(Principal_Final_Verification.this, "Leave Rejected", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Principal_Final_Verification.this,PrincipalVerifyLeaves.class);
-                    startActivity(i);
-                    finish();
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Principal_Final_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
         });
 
         leave_from_text.setOnClickListener(new View.OnClickListener() {
@@ -278,5 +339,39 @@ public class Principal_Final_Verification extends AppCompatActivity {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    public MessageResponse sendSimpleMessage() {
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config("910b0661ca2d60fe37be52400140ec79-680bcd74-2a17c9ca")
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from("TMU-HOSTEL <hostel@warden.tmuhostel.me>")
+                .to(stud_email)
+                .subject("Leave approved for " + leave_from + " " +"to" + " " + leave_to)
+                .text("Hi " + stud_name + ",\n" + "We have received your leave request for these dates: " + leave_from + " to " +
+                        leave_to + " (" +  num_days +" days) " + ", for the reason " + reason+ ".\n" + "As of today we have accepted your leave.\n" + "All the very best for your future goals.\n\n"
+                        + "Thanks,\n" + "Principal, " + stud_college +",\n" + "Teerthanker Mahaveer University, Moradabad")
+                .build();
+
+        return mailgunMessagesApi.sendMessage("warden.tmuhostel.me", message);
+
+
+    }
+    public MessageResponse sendSimpleRejectMessage() {
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config("910b0661ca2d60fe37be52400140ec79-680bcd74-2a17c9ca")
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from("TMU-HOSTEL <hostel@warden.tmuhostel.me>")
+                .to(stud_email)
+                .subject("Leave rejected for " + leave_from + " " +"to" + " " + leave_to)
+                .text("Hi " + stud_name + ",\n" + "We have received your leave request for these dates: " + leave_from + " to " +
+                        leave_to + " (" +  num_days +" days) " + ", for the reason " + reason+ ".\n" + "As of today we have rejected your leave.\n\n" + "Reject Reason: " + reject_string +"\n"+ "All the very best for your future goals.\n\n"
+                        + "Thanks,\n" + "Principal, " + stud_college +",\n" + "Teerthanker Mahaveer University, Moradabad")
+                .build();
+
+        return mailgunMessagesApi.sendMessage("warden.tmuhostel.me", message);
+
+
     }
 }

@@ -6,12 +6,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,6 +27,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mailgun.api.v3.MailgunMessagesApi;
+import com.mailgun.client.MailgunClient;
+import com.mailgun.model.message.Message;
+import com.mailgun.model.message.MessageResponse;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -36,13 +42,14 @@ public class HOD_Final_Verification extends AppCompatActivity {
             ,num_days_text,reason_text,leave_add_text,leave_from_text,leave_to_text;
     ImageButton callfather,callstudent;
     FirebaseFirestore db;
+    String reject_string;
     String imageurl;
     ImageView imageView;
     private static final int REQUEST_CALL = 1;
     String stud_enroll,stud_name,stud_cont,stud_course,stud_fath,fath_con
-            ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger;
+            ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger,stud_dept,stud_college;
     int cc, hod, hw;
-
+    AlertDialog dialog;
     private GetLeaveData grant_leave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +73,55 @@ public class HOD_Final_Verification extends AppCompatActivity {
         callfather=findViewById(R.id.grant_call_father);
         callstudent=findViewById(R.id.grant_call_stud);
 
+        // Dialog box for rejection
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Reject");
+        View v = getLayoutInflater().inflate(R.layout.custom_dialog,null);
+        EditText reject_reason;
+        Button reject_final,back;
+        reject_final= v.findViewById(R.id.reject_final);
+        back= v.findViewById(R.id.back);
+        reject_reason=v.findViewById(R.id.reject_reason);
+
+        reject_final.setOnClickListener(e->{
+            if(reject_reason.getText().toString().isEmpty()){
+                Toast.makeText(this, "Please fill the reason", Toast.LENGTH_SHORT).show();
+            }else{
+                reject_string= reject_reason.getText().toString();
+                db.collection("Student_Leaves").document(grant_leave.getId())
+                        .update("Verified_HOD",-1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Thread t = new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        sendSimpleRejectMessage();
+                                    }
+                                });
+                                t.start();
+                                Toast.makeText(HOD_Final_Verification.this, "Leave Rejected", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(HOD_Final_Verification.this,CC_Verify_Leave.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(HOD_Final_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                dialog.dismiss();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(v);
+        dialog = builder.create();
 
         grant_leave= (GetLeaveData) getIntent().getSerializableExtra("Grant_Item");
         db=FirebaseFirestore.getInstance();
@@ -88,6 +144,9 @@ public class HOD_Final_Verification extends AppCompatActivity {
         hod= grant_leave.getVerified_HOD();
         hw= grant_leave.getVerified_HW();
         imageurl= grant_leave.getImageLink();
+        stud_dept= grant_leave.getStudent_Department();
+        stud_college= grant_leave.getStudent_College();
+
 
         Picasso.get().load(imageurl).into(imageView);
         stud_enroll_text.setText(stud_enroll);
@@ -109,6 +168,14 @@ public class HOD_Final_Verification extends AppCompatActivity {
             dd.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
+                    Thread t = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            sendSimpleMessage();
+                        }
+                    });
+                    t.start();
                     Toast.makeText(HOD_Final_Verification.this, "Leave Granted Successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(HOD_Final_Verification.this,HOD_Grant_Leave.class);
                     startActivity(i);
@@ -120,6 +187,12 @@ public class HOD_Final_Verification extends AppCompatActivity {
                     Toast.makeText(HOD_Final_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+        });
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+            }
         });
 
         callfather.setOnClickListener(e->{
@@ -169,5 +242,39 @@ public class HOD_Final_Verification extends AppCompatActivity {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    public MessageResponse sendSimpleMessage() {
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config("910b0661ca2d60fe37be52400140ec79-680bcd74-2a17c9ca")
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from("TMU-HOSTEL <hostel@warden.tmuhostel.me>")
+                .to(stud_email)
+                .subject("Leave approved for " + leave_from + " " +"to" + " " + leave_to)
+                .text("Hi " + stud_name + ",\n" + "We have received your leave request for these dates: " + leave_from + " to " +
+                        leave_to  + " ("  +num_days +" days) " + ", for the reason " + reason+ ".\n" + "As of today we have accepted your leave.\n" + "All the very best for your future goals.\n\n"
+                        + "Thanks,\n" + "Head Of Department, " + stud_dept + ".\n" + stud_college +",\n" + "Teerthanker Mahaveer University, Moradabad")
+                .build();
+
+        return mailgunMessagesApi.sendMessage("warden.tmuhostel.me", message);
+
+
+    }
+    public MessageResponse sendSimpleRejectMessage() {
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config("910b0661ca2d60fe37be52400140ec79-680bcd74-2a17c9ca")
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from("TMU-HOSTEL <hostel@warden.tmuhostel.me>")
+                .to(stud_email)
+                .subject("Leave rejected for " + leave_from + " " +"to" + " " + leave_to)
+                .text("Hi " + stud_name + ",\n" + "We have received your leave request for these dates: " + leave_from + " to " +
+                        leave_to + " (" +  num_days +" days) " + ", for the reason " + reason+ ".\n" + "As of today we have rejected your leave.\n\n" + "Reject Reason: " + reject_string +"\n"+ "All the very best for your future goals.\n\n"
+                        + "Thanks,\n" + "Head Of Department, " + stud_dept + ".\n" + stud_college +",\n" + "Teerthanker Mahaveer University, Moradabad")
+                .build();
+
+        return mailgunMessagesApi.sendMessage("warden.tmuhostel.me", message);
+
+
     }
 }

@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,6 +33,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mailgun.api.v3.MailgunMessagesApi;
+import com.mailgun.client.MailgunClient;
+import com.mailgun.model.message.Message;
+import com.mailgun.model.message.MessageResponse;
 import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
@@ -46,11 +51,13 @@ import java.util.concurrent.TimeUnit;
 public class CC_Final_Verification extends AppCompatActivity {
     String stud_enroll,stud_name,stud_cont,stud_course,stud_fath,fath_con
     ,leave_from,leave_to,num_days,reason,leave_add,stud_email,room_no,finger;
-    String imageurl;
+    String imageurl,stud_college;
+    String reject_string;
     int cc, hod, hw;
     EditText stud_enroll_text,stud_name_text,stud_cont_text,stud_course_text,stud_fath_text,fath_con_text
             ,num_days_text,reason_text,leave_add_text;
     Button accept,reject;
+
     ImageView userimage;
     private FirebaseFirestore db;
     private GetLeaveData leave_data;
@@ -59,7 +66,7 @@ public class CC_Final_Verification extends AppCompatActivity {
     private static final int REQUEST_CALL = 1;
     ImageButton callfather,callstudent;
     ScrollView scrollView;
-
+    AlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +90,62 @@ public class CC_Final_Verification extends AppCompatActivity {
         callstudent=findViewById(R.id.call_stud);
         userimage= findViewById(R.id.ccuser_image);
 
+        // Dialog box for rejection
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Reject");
+        View v = getLayoutInflater().inflate(R.layout.custom_dialog,null);
+        EditText reject_reason;
+        Button reject_final,back;
+        reject_final= v.findViewById(R.id.reject_final);
+        back= v.findViewById(R.id.back);
+        reject_reason=v.findViewById(R.id.reject_reason);
+
+
+        reject_final.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(reject_reason.getText().toString().isEmpty()){
+                    Toast.makeText(CC_Final_Verification.this, "Please fill the reason", Toast.LENGTH_SHORT).show();
+                }else{
+                    reject_string= reject_reason.getText().toString();
+                    db.collection("Student_Leaves").document(leave_data.getId())
+                            .update("Verified_CC",-1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Thread t = new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            sendSimpleRejectMessage();
+                                        }
+                                    });
+                                    t.start();
+                                    Toast.makeText(CC_Final_Verification.this, "Leave Rejected", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(CC_Final_Verification.this,CC_Verify_Leave.class);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(CC_Final_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    dialog.dismiss();
+                }
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(v);
+        dialog = builder.create();
+
+
+
         leave_data = (GetLeaveData) intent.getSerializableExtra("Leave_Item");
         db=FirebaseFirestore.getInstance();
         stud_email = leave_data.getStudent_Email();
@@ -103,6 +166,7 @@ public class CC_Final_Verification extends AppCompatActivity {
         hod= leave_data.getVerified_HOD();
         hw= leave_data.getVerified_HW();
         imageurl= leave_data.getImageLink();
+        stud_college=leave_data.getStudent_College();
 
         Picasso.get().load(imageurl).into(userimage);
         stud_enroll_text.setText(stud_enroll);
@@ -144,21 +208,9 @@ public class CC_Final_Verification extends AppCompatActivity {
                         });
             });
         reject.setOnClickListener(e->{
-            db.collection("Student_Leaves").document(leave_data.getId())
-                    .update("Verified_CC",-1).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(CC_Final_Verification.this, "Leave Rejected", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(CC_Final_Verification.this,CC_Verify_Leave.class);
-                            startActivity(i);
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(CC_Final_Verification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+
+            dialog.show();
+
         });
 
         //for changing date
@@ -282,5 +334,22 @@ public class CC_Final_Verification extends AppCompatActivity {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    public MessageResponse sendSimpleRejectMessage() {
+        MailgunMessagesApi mailgunMessagesApi = MailgunClient.config("910b0661ca2d60fe37be52400140ec79-680bcd74-2a17c9ca")
+                .createApi(MailgunMessagesApi.class);
+
+        Message message = Message.builder()
+                .from("TMU-HOSTEL <hostel@warden.tmuhostel.me>")
+                .to(stud_email)
+                .subject("Leave rejected for " + leave_from + " " +"to" + " " + leave_to)
+                .text("Hi " + stud_name + ",\n" + "We have received your leave request for these dates: " + leave_from + " to " +
+                        leave_to + " (" +  num_days +" days) " + ", for the reason " + reason+ ".\n" + "As of today we have rejected your leave.\n\n" + "Reject Reason: " + reject_string +"\n"+ "All the very best for your future goals.\n\n"
+                        + "Thanks,\n" + "Program Coordinator, " + stud_course +".\n" + stud_college +",\n" +"Teerthanker Mahaveer University, Moradabad")
+                .build();
+
+        return mailgunMessagesApi.sendMessage("warden.tmuhostel.me", message);
+
+
     }
 }

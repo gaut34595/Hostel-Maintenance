@@ -34,6 +34,7 @@ public class GetLeaveData implements Serializable {
     String Gate_Validation_In_Time;
     String Student_Department;
     String Student_Hostel;
+    String Student_College;
 
     int Verified_CC, Verified_HOD, Verified_HW;
 
@@ -45,7 +46,7 @@ public class GetLeaveData implements Serializable {
                         String student_Course, String room_No, String finger_No, String father_Name, String father_Contact, String no_of_Days, String leave_Reason,
                         String leave_Address, String leave_From, String leave_to, int verified_CC, int verified_HOD, int verified_HW, String leave_in_date,String qrCode,
                         int gate_validation_out, String imagelink , int gate_Validation_In, String gate_Validation_Out_Time, String gate_Validation_In_Time
-                            ,String student_Department, String student_Hostel) {
+                            ,String student_Department, String student_Hostel,String student_College) {
         Student_Email = student_Email;
         Student_Enrollment = student_Enrollment;
         Student_Name = student_Name;
@@ -73,6 +74,7 @@ public class GetLeaveData implements Serializable {
         Gate_Validation_In_Time = gate_Validation_In_Time;
         Student_Department = student_Department;
         Student_Hostel= student_Hostel;
+        Student_College= student_College;
     }
 
 
@@ -103,6 +105,7 @@ public class GetLeaveData implements Serializable {
         Gate_Validation_In = in.readInt();
         Student_Hostel= in.readString();
         Student_Department= in.readString();
+        Student_College= in.readString();
 
     }
 
@@ -329,5 +332,13 @@ public class GetLeaveData implements Serializable {
 
     public void setGate_Validation_In_Time(String gate_Validation_In_Time) {
         Gate_Validation_In_Time = gate_Validation_In_Time;
+    }
+
+    public String getStudent_College() {
+        return Student_College;
+    }
+
+    public void setStudent_College(String student_College) {
+        Student_College = student_College;
     }
 }
