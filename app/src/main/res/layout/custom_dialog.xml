@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/reject_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Reject Reason"
+        android:ems="10"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_gravity="right"
+            android:layout_marginEnd="15dp"/>
+        <Button
+            android:id="@+id/reject_final"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reject"
+            android:layout_gravity="right"
+            android:layout_marginEnd="15dp"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
